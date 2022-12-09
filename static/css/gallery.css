@@ -22,11 +22,19 @@
   z-index: 100;
 }
 
+#gallery_button:hover{
+  background-color: black;
+  border-color: black;
+}
+
 #gallery img:first-child {
   border-radius: 10px 10px 0 0;
 }
 #gallery img:last-child {
   border-radius: 0 0 10px 10px;
+}
+.owl-stage {
+  width: fit-content!important;
 }
 
 @media (min-width: 40em) and (max-width: 59.99em) {

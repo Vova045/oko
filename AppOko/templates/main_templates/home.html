@@ -72,7 +72,7 @@
 <div class="row justify-content-md-center">
     {% for category in categories %}
     <a data-target="#carouselExampleControls" data-slide-to="{{forloop.counter0}}" href="#" style="width: auto;">
-        <div class="btn btn-danger" style="width: auto; margin: 3px">{{category.title}}</div>
+        <div id="gallery_button" class="btn btn-danger" style="width: auto; margin: 3px; ;">{{category.title}}</div>
     </a>
     {% endfor %}
 </div>
