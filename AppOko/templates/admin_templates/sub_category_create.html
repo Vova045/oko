@@ -1,0 +1,107 @@
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}
+Создание подкатегорий
+{% endblock title %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+{% block page_title %}
+Создание подкатегорий
+{% endblock page_title %}
+
+{% block page_content %}
+
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+        <h4>Создание подкатегорий</h4>
+        </div>
+        <div>
+            
+        </div>
+        <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            {% if not field.name == 'is_active' %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+
+                {% if field.field.widget.input_type != "select" %}
+                <input type="{{ field.field.widget.input_type }}", name="{{ field.name }}" id="{{ field.name }}" class="form-control">
+                {% endif %}
+
+                {% if field.field.widget.input_type == "select" %}
+                    {% if field.name == 'chapter_id' %}
+                    <select class="form-control" name="chapter_id" id="chapter_id"> 
+                        {% for chapter in chapters %}
+                            <option value="{{ chapter.id }}">{{ chapter.title }}</option>
+                        {% endfor %}
+                    </select>
+                    {% elif field.name == 'category' %}
+                    <select class="form-control" name="category" id="category"> 
+                    </select>
+                    {% else %}
+                    <select name="{{ field.name }}" id="{{ field.name }}" class="form-control">
+                        {% for id, value in field.field.choices %}
+                            <option value="{{ id }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                {% endif %}
+            </div>
+            {% endif %}
+                {% if field.errors %}
+                    <div class="alert alert-danger" style="margin:10px">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            
+            {% endfor %}
+
+            <button type="submit" class="btn btn-danger btn-block" style="margin-top: 30px;">Сохранить</button>
+        </form>
+    </div>
+    </div>
+</div>
+
+{% endblock page_content %}
+
+{% block custom_js %}
+<script>
+    document.getElementById("title").onkeyup=function(){
+      document.getElementById("url_slug").value=document.getElementById("title").value.toLowerCase().replace(/ /g,"-")
+    }
+  </script>
+  <script>
+    
+    $(document).ready(function(){
+         $('select#chapter_id').change(function () {
+             var optionSelected = $(this).find("option:selected");
+             var valueSelected  = optionSelected.val();
+             var chapter_name   = optionSelected.text();
+             data = {'chapter_ajax' : chapter_name};
+                
+                $.ajax({
+                    url: '/admindashboard/getdetails_for_sub_category_create',
+                    data : {
+                    'chapter_ajax' : chapter_name,
+                    },
+                    method : 'GET',
+                    async : false,
+                    success : function(result){                    
+                    $("#category option").remove();
+
+                    for (var i = result.length - 1; i >= 0; i--) {
+                        $("#category").append('<option value= ' + result[i].cat_id + '>'+ result[i].cat_title +'</option>');
+                    };
+
+                }
+
+                });
+         });
+    });
+</script>
+{% endblock custom_js %}

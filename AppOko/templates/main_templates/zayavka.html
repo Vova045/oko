@@ -1,0 +1,72 @@
+{% load static %}
+
+{% block content %}
+
+<div class="bg-modal">
+    <div class="modal-content">
+        <div class="modal-close"><img src="{% static 'img/home/x.svg' %}"></div>
+        <div class="modal-form">
+            <div class="modal-head">
+                <div style="background: #F6121C; width: 10px; height:78px">
+                </div>
+    
+                <div class="modal-formhead">
+                    <p style="margin-bottom: 0px;"> Форма<br><b>обратной связи</b></p>
+                </div>
+            </div>
+            <div class="modal-head2">
+                <p>Остались вопросы? <br> Спросите специалиста</p>
+            </div>
+            <form id="return_form_window" class="return_form" method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <input type="text" name="message_name" placeholder="Ваше имя"  required=True >
+                <input type="text" name="telephone" placeholder="Ваше телефон" required=True >
+                <input type="text" name="email" placeholder="Ваш e-mail" required=True pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <textarea type="text" name="message" placeholder="Ваше сообщение" required=True></textarea>                      
+            </form>
+        </div>
+        <div class="modal-social">
+            <div class="modal-logo">    
+                <img src="{% static 'img/home/лого 1.svg' %}">
+            </div>
+            <div class="modal-telephone">
+                <div>
+                    <img src="{% static 'img/home/01.svg' %}" style="margin-right: 13px;">
+                </div>
+                <p>8 (4725) <b>41-02-41</b>, 8 (910) 741-02-41</p>
+            </div>
+            <div class="modal-time">
+                <div>
+                    <img src="{% static 'img/home/02.svg' %}" style="margin-right: 13px;">
+                </div>
+                <p>с 10:00 до 17:30 выходные сб - вс </p>
+            </div>
+            <div class="modal-adress">
+                <div>
+                    <img src="{% static 'img/home/03.svg' %}" style="margin-right: 13px;">
+                </div>
+                <p>г. Старый Оскол, ул. Ленина, 78/2</p>
+            </div>
+            <div class="modal-mail">
+                <div>
+                    <img src="{% static 'img/home/04.svg' %}" style="margin-right: 13px;">
+                </div>
+                <p>reklama-oko@mail.ru</p>
+            </div>
+            <div class="modal-vk">
+                <div>
+                    <img src="{% static 'img/home/05.svg' %}" style="margin-right: 13px;">
+                </div>
+                <p>reklama_oko</p>
+            </div>
+            <div class="modal-button_box">
+                <div class="modal-logo2">    
+                    <img src="{% static 'img/home/лого красное.svg' %}">
+                </div>
+                <input type="submit" value="Отправить" form="return_form_window" class="modal-button" name="return_button"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

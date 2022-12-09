@@ -1,0 +1,436 @@
+
+
+.navbar {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    flex-wrap: nowrap;
+    visibility: visible;
+    overflow: hidden; z-index: 1000;
+}
+
+.navbar-fon {
+    width: 100%; height: 110px;
+    left: 0; right: 0; margin: auto;
+    display: flex;
+    justify-content: start;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    align-items: center;
+    filter: drop-shadow(0px 2px 30px rgba(0, 0, 0, 0.05));
+    z-index: 999;
+}
+
+@media (min-width: 1px) and (max-width: 250px) {
+    .navbar {
+        display: none;
+    }
+    .navbar-fon{
+        display: none;
+    }
+}
+@media (min-width: 251px) and (max-width: 319px) {
+    
+    .navbar {
+        height: 50px;
+    }
+
+    .navbar-fon {
+        height: 50px;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .vk {
+        display: flex; width: 22px; margin-right: 30px;
+    }
+
+    .miniphone {
+        display: flex; margin-right: 30px; width: 22px;
+    }
+
+    .miniphone2 {
+        display: none
+    }
+    
+    .phone {
+        display: none;
+    }
+    .social {
+        display: none;
+    }
+    .zayavka {
+        display: none;
+        width: 166px; height: 49px; visibility: visible; font-size: 12px;
+        background: white; justify-content: center;
+        border: 2px solid #ED1B24;
+        box-sizing: border-box;
+        border-radius: 50px;    
+        color: black; font-weight: 700;
+    }
+    .zayavka:hover { 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 0px 14.2857px rgba(247, 18, 28, 0.6);
+        border-radius: 54.0491px;
+        color: white; font-weight: 700;
+    }
+    .logo_mobile{
+        display: flex; width: 50px; margin-left: 25px;
+    }
+}
+    
+@media (min-width: 320px) and (max-width: 540px) {
+
+    .navbar {
+        height: 50px;
+    }
+
+    .navbar-fon {
+        height: 50px;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .vk {
+        display: flex; width: 20px; margin-right: 50px;
+    }
+
+    .miniphone {
+        display: flex; margin-right: 50px; width: 20px;
+    }
+
+    .miniphone2 {
+        display: none
+    }
+    
+    .phone {
+        display: none;
+    }
+    .social {
+        display: none;
+    }
+    .zayavka {
+        display: none;
+        width: 166px; height: 49px; visibility: visible; font-size: 12px;
+        background: white; justify-content: center;
+        border: 2px solid #ED1B24;
+        box-sizing: border-box;
+        border-radius: 50px;    
+        color: black; font-weight: 700;
+    }
+    .zayavka:hover { 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 0px 14.2857px rgba(247, 18, 28, 0.6);
+        border-radius: 54.0491px;
+        color: white; font-weight: 700;
+    }
+    .logo_mobile{
+        display: flex; width: 90px; margin-left: 40px;
+    }
+}
+@media (min-width: 541px) and (max-width: 768px) {
+
+    .navbar {
+        height: 100px;
+    }
+
+    .logo {
+        width: 209px;
+        height: 50px;
+        margin-left: 60px;
+    }
+
+    .vk{
+        display: flex; width: 40px; margin-right: 50px;
+    }
+
+    .miniphone {
+        display: flex; margin-right: 50px;
+    }
+
+    .miniphone2 {
+        display: none
+    }
+    
+    .phone {
+        display: none;
+    }
+    .social {
+        display: none;
+    }
+    .zayavka {
+        display: none;
+        width: 166px; height: 49px; visibility: visible; font-size: 12px;
+        background: white; justify-content: center;
+        border: 2px solid #ED1B24;
+        box-sizing: border-box;
+        border-radius: 50px;    
+        color: black; font-weight: 700;
+    }
+    .zayavka:hover { 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 0px 14.2857px rgba(247, 18, 28, 0.6);
+        border-radius: 54.0491px;
+        color: white; font-weight: 700;
+    }
+    .logo_mobile{
+        display: none;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    
+        /* Navbar-css */
+
+    .navbar {
+        width: 768px; height: 80px; left: 0px; right: 30px; margin: auto; justify-content: space-around;
+        align-items: center;
+    }
+
+    .logo {
+        width: 138px;
+        height: 35px;
+    }
+    .miniphone {
+        display: none
+    }
+
+    .miniphone2 {
+        display: none
+    }
+    
+    .phone {display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 141px;
+        height: 35px;
+        visibility: visible;
+    }
+    .font {display: flex; align-items: center; margin-bottom: 5px;
+        height: 15px;
+        font-size: 14px;
+    }
+    .phone_equal {
+        width: 115px;
+    }
+    .social {
+        display: none
+    }
+    .zayavka {
+        display: flex;
+        width: 129px; height: 35px; visibility: visible; font-size: 10px;
+        background: white; justify-content: center;
+        border: 2px solid #ED1B24;
+        box-sizing: border-box;
+        border-radius: 50px;    
+        color: black; font-weight: 700;
+    }
+    .zayavka:hover { 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 0px 14.2857px rgba(247, 18, 28, 0.6);
+        border-radius: 54.0491px;
+        color: white; font-weight: 700;
+    }
+    .vk{
+        display: flex; width: 32px;
+    }
+    .logo_mobile{
+        display: none;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .navbar-fon{
+        height: 80px;
+    }
+
+    .navbar {
+        width: 1024px; height: 80px; left: 0px; right: 30px; margin: auto; justify-content: space-around;
+        align-items: center;
+    }
+
+    .logo {
+        width: 138px;
+        height: 35px;
+    }
+    .miniphone {
+        display: none
+    }
+
+    .miniphone2 {
+        display: none
+    }
+    
+    .phone {display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 150px;
+        height: 35px;
+        visibility: visible;
+    }
+    .font {display: flex; align-items: center; margin-bottom: 5px;
+        height: 15px;
+        font-size: 14px;
+    }
+    .phone_equal {
+        width: 115px;
+    }
+    .social {display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 186px;
+        height: 35px;
+        visibility: visible;
+    }
+
+    .zayavka {
+        display: flex;
+        width: 129px; height: 35px; visibility: visible; font-size: 10px;
+        background: white; justify-content: center;
+        border: 2px solid #ED1B24;
+        box-sizing: border-box;
+        border-radius: 50px;    
+        color: black; font-weight: 700;
+    }
+    .zayavka:hover { 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 0px 14.2857px rgba(247, 18, 28, 0.6);
+        border-radius: 54.0491px;
+        color: white; font-weight: 700;
+    }
+    .vk{
+        display: none;
+    }
+    .logo_mobile{
+        display: none;
+    }
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .navbar {
+        width: 1440px; height: 120px; right: 0; left: 0; margin: auto; justify-content: space-around;
+        align-items: center;
+    }
+
+    .logo {
+        width: 198px; height: 50px; margin-bottom: 10px;
+    }
+    .miniphone {
+        display: none
+    }
+
+    .miniphone2 {
+        display: none
+    }
+    
+    .phone {display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 172px; height: 44px; visibility: visible;
+    }
+    .font {
+        display: flex; align-items: center; margin-bottom: 5px;
+        height: 18px; font-size: 16px; font-weight: 400;
+    }
+    .phone_equal {
+        width: 130px;
+    }
+    .social { display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 223px; height: 44px; visibility: visible;
+    }
+
+    .zayavka {
+        display: flex;
+        width: 180px; height: 56px; visibility: visible; font-size: 14px;
+        background: white; justify-content: center;
+        border: 2px solid #ED1B24;
+        box-sizing: border-box;
+        border-radius: 50px;    
+        color: black; font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .zayavka:hover { 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 0px 14.2857px rgba(247, 18, 28, 0.6);
+        border-radius: 54.0491px;
+        color: white; font-weight: 700;
+    }
+    .vk{
+        display: none;
+    }
+    .logo_mobile{
+        display: none;
+    }
+}
+
+@media (min-width: 1921px) {
+    .navbar {
+        width: 1440px; height: 120px; right: 0; left: 0; margin: auto; justify-content: space-around;
+        align-items: center;
+    }
+
+    .logo {
+        width: 198px; height: 50px; margin-bottom: 10px;
+    }
+    .miniphone {
+        display: none
+    }
+
+    .miniphone2 {
+        display: none
+    }
+    
+    .phone {display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 172px; height: 44px; visibility: visible;
+    }
+    .font {
+        display: flex; align-items: center; margin-bottom: 5px;
+        height: 18px; font-size: 16px; font-weight: 400;
+    }
+    .phone_equal {
+        width: 130px;
+    }
+    .social { display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 223px; height: 44px; visibility: visible;
+    }
+
+    .zayavka {
+        display: flex;
+        width: 180px; height: 56px; visibility: visible; font-size: 14px;
+        background: white; justify-content: center;
+        border: 2px solid #ED1B24;
+        box-sizing: border-box;
+        border-radius: 50px;    
+        color: black; font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .zayavka:hover { 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 0px 14.2857px rgba(247, 18, 28, 0.6);
+        border-radius: 54.0491px;
+        color: white; font-weight: 700;
+    }
+    .vk{
+        display: none;
+    }
+    .logo_mobile{
+        display: none;
+    }
+}

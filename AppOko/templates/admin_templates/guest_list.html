@@ -1,0 +1,154 @@
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}
+View List
+{% endblock title %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+{% block page_title %}
+View List
+{% endblock page_title %}
+
+{% block page_content %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="search-element">
+      <div class="card">
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Просмотры пользователей</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-md">
+                <tbody><tr>
+                  <th>IP</th>
+                  <th>Количество просмотров</th>
+                  <th>Время последнего входа</th>
+                </tr>
+                {% for guestlist in guest_page_obj %}
+                <tr>         
+                        <td>{{ guestlist.guestlist.ip}}</td>
+                        <td>{{ guestlist.guestlist.count_ip}}</td></td>
+                        <td>{{ guestlist.guestlist.last_time }}</td>
+                </tr>
+                {% endfor %}
+
+              </tbody></table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <nav aria-label="...">
+                <ul class="pagination">
+                  {% if guest_page_obj.has_previous %}
+                  <li class="page-item active">
+                    <a href="{% url 'guest_list' %}?page={{ guest_page_obj.previous_page_number }}"> Previous </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="{% url 'guest_list' %}?page={{ guest_page_obj.previous_page_number }}">{{ guest_page_obj.previous_page_number }}</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  </li>
+                  {% endif %}
+                  <li class="page-item active">
+                    <a class="page-link" href="#">{{ guest_page_obj.number }} <span class="sr-only"></span></a>
+                  </li>
+                  {% if guest_page_obj.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="{% url 'guest_list' %}?page={{ guest_page_obj.next_page_number }}">{{ guest_page_obj.next_page_number }}</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="{% url 'guest_list' %}?page={{ guest_page_obj.next_page_number }}">Next</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Next</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h4>Все просмотры главной страницы</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-md">
+                <tbody><tr>
+                  <th>#</th>
+                  <th>IP</th>
+                  <th>Время входа</th>
+                  <th>Количество просмотов</th>
+                  <th>Время последнего входа</th>
+                </tr>
+                {% for viewlist in view_page_obj %}
+                <tr>         
+                        <td>{{ viewlist.viewlist.id}}</td>
+                        <td>{{ viewlist.viewlist.ip}}</td>
+                        <td>{{ viewlist.viewlist.time}}</td></td>
+                        <td>{{ viewlist.viewlist.count_ip}}</td></td>
+                        <td>{{ viewlist.viewlist.last_time }}</td>
+                </tr>
+                {% endfor %}
+
+              </tbody></table>
+              <div class="card">
+                <div class="card-body">
+                  <nav aria-label="...">
+                    <ul class="pagination">
+                      {% if view_page_obj.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="{% url 'guest_list' %}?page={{ view_page_obj.previous_page_number }}"> Previous </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="{% url 'guest_list' %}?page={{ view_page_obj.previous_page_number }}">{{ view_page_obj.previous_page_number }}</a>
+                      </li>
+                      {% else %}
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                      </li>
+                      {% endif %}
+                      <li class="page-item active">
+                        <a class="page-link" href="#">{{ view_page_obj.number }} <span class="sr-only"></span></a>
+                      </li>
+                      {% if view_page_obj.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="{% url 'guest_list' %}?page={{ view_page_obj.next_page_number }}">{{ view_page_obj.next_page_number }}</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="{% url 'guest_list' %}?page={{ view_page_obj.next_page_number }}">Next</a>
+                      </li>
+                      {% else %}
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Next</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+{% endblock page_content %}
+
+{% block custom_js %}
+{% endblock custom_js %}

@@ -1,0 +1,16 @@
+{% load static %}
+
+
+{% block content %}
+
+<div class="bg-modal_sent">
+    <div class="mail_sent">
+        <div class="mail_sent-close"><img src="{% static 'img/home/x.svg' %}"></div>
+        <img class="okay" src="{% static 'img/home/okay.svg' %}">
+        <div class="sent_text">
+            <p> Ваша заявка<br>успешно отправлена</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

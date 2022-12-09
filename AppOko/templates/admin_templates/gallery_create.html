@@ -1,0 +1,255 @@
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}
+Добавление фото в галерею
+{% endblock title %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="//bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+<style>
+    .bootstrap-tagsinput{
+        width: 100%;
+    }
+
+</style>
+{% endblock custom_css %}
+
+{% block page_title %}
+Добавление фото в галерею
+{% endblock page_title %}
+
+{% block page_content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <form id="myform" name="myform"> 
+            {% csrf_token %}
+            <div class="card-body">
+                <h5>Добавление фото в галерею</h5>
+                <hr>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                        <label>Заголовок</label>
+                        <input class="form-control" name="title" placeholder="Заголовок" id="title" value="{{ title2 }}" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Тип изделия</label>
+                        <select class="form-control" name="type_of_product" id="type_of_product"> 
+                            {% for category in categories_for_gallery %}
+                                <option value="{{ category.id }}">{{ category.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Описание</label>
+                        <textarea class="form-control" name="description" placeholder="Описание" id="description" rows="6"></textarea>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                        <label>Заказчик</label>
+                        <input class="form-control" name="customer" placeholder="Заказчик" id="customer"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Номер заказа</label>
+                        <input class="form-control" name="order_number" placeholder="Номер заказа" id="order_number"/>
+                    </div>
+
+                </div>
+                <br>
+
+                    <h5>Галерея</h5>
+                <hr>
+                <div class="media_div">
+                    <div class="row media_div_row first_media">
+                        <div class="col-lg-4">
+                            <label>Выбор фото</label>
+                            <input type="file" name="media_content[]" class="form-control select_media" />
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Превью</label>
+                            <br>
+                            <img style="width:70%;display:none" class="img_preview">
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-danger btn-block add_media" type="button">Добавить фото</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn btn-danger btn-block remove_media" type="button">Удалить фото</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <button type="button" class="btn btn-danger btn-block submit_btn">Добавить фото на сайт</button>
+                </div>
+            </div>
+            </form>
+            <br>
+            <div class="row"> 
+                <div class="col-lg-6">
+                    <label>Cоздать новый тип изделия</label>
+                    <form id="myform2" name="myform2"> 
+                        {% csrf_token %}
+                        <div class="row"> 
+                            <div class="col-lg-6">
+                                <input class="form-control" name="title2" placeholder="Заголовок" id="title2" />
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="button" class="btn btn-danger btn-block submit_btn2">Добавить категорию</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-lg-6">
+                    <label>Удалить новый тип изделия</label>
+
+                    <select class="form-control" name="type_of_product_for_delete" id="type_of_product_for_delete"> 
+                        {% for category in categories_for_gallery %}
+                            <option value="{{ category.id }}">{{ category.title }}</option>
+                        {% endfor %}
+                    </select>
+                        <div class="col-lg-6" id="delete_category_for_gallery">
+                            <a href="{% url 'category_for_gallery_delete' id='9' %}" class="btn btn-warning" id="button_delete" style="width: 100%">Удалить </a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock page_content %}
+
+{% block custom_js %}
+<script>
+function getdata_category_for_gallery() {
+    var optionSelected = $('select#type_of_product_for_delete').find("option:selected");
+    var valueSelected  = optionSelected.val();
+    var type_of_product_for_delete_name   = optionSelected.text();
+    data = {'type_of_product_for_delete_ajax' : type_of_product_for_delete_name};
+    console.log(data)
+    $.ajax({
+        url: '/admindashboard/getdetails_for_category_gallery_create',
+        data : {
+        'type_of_product_for_delete_ajax' : type_of_product_for_delete_name,
+        },
+        method : 'GET',
+        async : false,
+        success : function(result){                    
+            $("#button_delete").remove();
+            $("#delete_category_for_gallery").append('<a href="/admindashboard/category_for_gallery_delete/'+ result +'" class="btn btn-warning"  id="button_delete" style="width: 100%">Удалить </a>');
+    }
+
+    });
+}
+    $(document).ready(getdata_category_for_gallery); 
+    $(document).ready(
+        function(){
+         $('select#type_of_product_for_delete').change(getdata_category_for_gallery);
+    });
+</script>
+
+<script>
+$('#secondaryButton').click(function(){
+    $("#primaryButton").click();
+})
+
+    $(".add_media").click(function(){
+        var media_row=$('.first_media').clone();
+        media_row.removeClass("first_media")
+        media_row.replaceAll("src","")
+        media_row.find(".select_media").val("")
+        media_row.find(".img_preview").attr("src","").css({"border":"none"}).css({"border-radius":"0px"}).hide();
+        $(".media_div").append(media_row);
+    });
+    $(".remove_media").click(function(){
+        if($(".media_div").find(".media_div_row").length>1){
+            $(".media_div").children().last().remove();
+        }
+    });
+
+
+    $(document).on("change",".select_media", function(){
+        var img_preview=$(this).parents(".media_div_row").find(".img_preview");
+        showPreviewMedia(this, img_preview)
+    });
+
+    function showPreviewMedia(input, img_preview){
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload=function(e){
+                    img_preview.attr("src",e.target.result);
+                    img_preview.show();
+                    img_preview.css({"border":"5px solid orange"})
+                    img_preview.css({"border-radius":"10px"})
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".submit_btn").click(function(){
+        var form=new FormData($("#myform")[0]);
+        //AJAX CODE
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+            if(xhr.status==200){
+                console.log(xhr.responseText);
+            }
+        }
+        xhr.open("POST","{% url 'gallery_create' %}",true);
+        $("#progressbar").show();
+
+        //UPDATING PROGRESS BAR
+        xhr.upload.addEventListener("progress",function(ev){
+            if(ev.lengthComputable){
+                var percentage=(ev.loaded/ev.total*100|0);
+                $("#progressbar").css({"width":""+percentage+"%"}).text("Uploading .."+percentage+"%");
+                console.log(percentage);
+            }
+        });
+        
+        xhr.send(form);
+
+        function sayHi() {
+            window.location.href ="{% url 'gallery_list' %}"
+            }
+
+        setTimeout(sayHi, 1000);
+        
+    })
+</script>
+<script>
+    $(".submit_btn2").click(function(){
+
+        var form=new FormData($("#myform2")[0]);
+        //AJAX CODE
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+            if(xhr.status==200){
+                console.log(xhr.responseText);
+            }
+        }
+        xhr.open("POST","{% url 'category_for_gallery_create' %}",true);
+
+        xhr.send(form);
+
+
+        function sayHi() {
+            window.location.href ="{% url 'gallery_create' %}"
+            }
+
+        setTimeout(sayHi, 1000);
+    })
+</script>
+
+<script src="//bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+{% endblock custom_js %}

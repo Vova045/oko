@@ -1,0 +1,383 @@
+{% extends 'main_templates/main_template.html' %}
+{% load static %}
+
+{% block custom_css %}
+<link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/main.css' %}">
+<link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/gallery.css' %}">
+
+
+{% endblock custom_css %}
+
+{% block content %}
+<div class="topcontent_fon">
+    <div class="topcontent_subfon"></div>
+    <div class="topcontent">
+        <div class="topcontent1">
+            <div class="topcontent_font_xl">
+            <p>Производство<br>наружной и<br>интерьерной<br>рекламы</p>
+            </div>
+            <div class="topcontent_font_m">
+                <p>Качественно<br>и в срок</p>
+            </div>
+            <div class="topcontent_font_s">
+                <p>Выполняем широкий спектр работ<br>на собственном оборудовании.</p>
+            </div>
+            <div>
+                <div class="topcontent_zayavka">
+                <p style="
+                margin: auto;">Оставить заявку</p>
+                </div>
+            </div>
+        </div>
+        <div class="topcontent2">
+            <div class="vyveska1">
+                <img src="{% static 'img/home/Вывески 1.png' %}">
+            </div>
+            <div class='topcontent2_icon'>
+                <img src="{% static 'img/home/Group 1.png' %}">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="headtext">
+        <p>Наша галерея</p>
+    </div>
+    <div class="carousel-inner">
+      {% for category in categories %}
+      <div class="carousel-item {% if category.id == categories.0.id %} active {% endif %}">
+
+        <div id="gallery" class="gallery_div">
+            <div id="gallery" class="gallery owl-carousel">
+                {% for photo in photos %}
+                    {% if photo.type_of_product.id == category.id %}
+                        <img class="item" src="{{ photo.media_content }}" alt="{{ photo.title }}"/>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+    <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide-to="0">
+      <span class="sr-only" style="color: black;">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide-to="1">
+      <span class="sr-only" style="color: black;">Next</span>
+    </a> -->
+  </div>
+<div class="row justify-content-md-center">
+    {% for category in categories %}
+    <a data-target="#carouselExampleControls" data-slide-to="{{forloop.counter0}}" href="#" style="width: auto;">
+        <div class="btn btn-danger" style="width: auto; margin: 3px">{{category.title}}</div>
+    </a>
+    {% endfor %}
+</div>
+  
+<div class="nashiuslugi">
+    <div class="headtext">
+        <p>Наши услуги</p>
+    </div>
+    <div class="vseuslugi">
+        <div id="bukvy" class="uslugi"  style="cursor: pointer;">
+            <div class="uslugi_text">
+                <div class="uslugi_head"  style="word-break:keep-all;">
+                    <p>Объёмные<br>буквы</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/объемные_буквы_красноярск 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi">
+            <div class="uslugi_text">
+                <div class="uslugi_head">
+                    <p>Вывески</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/Вывески-наружная-реклама-красноярск 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi">
+            <div class="uslugi_text">
+                <div class="uslugi_head" style="z-index: 1;">
+                    <p>Широкоформатная<br>печать</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img_pechat">
+                <img src="{% static 'img/home/jv5-removebg-preview 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi">
+            <div class="uslugi_text">
+                <div class="uslugi_head">
+                    <p>Интерьерная<br>реклама</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/Интерьерное оформление 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi" onClick="window.location='detsad/'" style="cursor:pointer">
+            <div class="uslugi_text">
+                <div class="uslugi_head">
+                    <p>Стенды</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/Информационные стенды 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi">
+            <div class="uslugi_text">
+                <div class="uslugi_head"  style="word-break:keep-all;">
+                    <p>Таблички</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/Таблички-изготовление-в-Красноярске 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi">
+            <div class="uslugi_text">
+                <div class="uslugi_head"  style="word-break:keep-all;">
+                    <p>Полиграфия</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/Визитки 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi">
+            <div class="uslugi_text">
+                <div class="uslugi_head" style="word-break:keep-all;">
+                    <p>Брендирование<br>авто</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготов<br>ление объёмных 3D<br>букв по выгодным<br>ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/Брендирование транспорта 1.png' %}">
+            </div>
+        </div>
+        <div class="uslugi">
+            <div class="uslugi_text">
+                <div class="uslugi_head"  style="word-break:keep-all;">
+                    <p>Мобильные<br>системы</p>
+                </div>
+                <div class="uslugi_body">
+                    <p>Заказать изготовление объёмных 3D букв по выгодным ценам.</p>
+                </div>
+            </div>
+            <div class="uslugi_img">
+                <img src="{% static 'img/home/Мобильные системы 1.png' %}">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="shemaraboty"  style="background: linear-gradient(180deg, #EFEFEF 0%, rgba(239, 239, 239, 0) 100%);">
+    <div class="shema_headtext">
+        <p>Схема работы</p>
+    </div>
+    <div class="shema_items">
+
+        <div class="shema_item">
+            <div class="shema_text">
+                <div class="shema_img">
+                    <img src="{% static 'img/home/заявка 2.svg' %}">
+                </div>
+                <p class="shema_head">Заявка</p>
+                <p class="shema_body">Вы оставляете
+                    заявку и наш
+                    менеджер
+                    свяжется с вами</p>
+            </div>
+            <div class="shema_number">
+                <p>1</p>
+            </div>
+        </div>
+
+        <div class="shema_item">
+            <div class="shema_text">
+                <div class="shema_img">
+                    <img src="{% static 'img/home/замер 2.svg' %}">
+                </div>
+                <p class="shema_head">Замер</p>
+                <p class="shema_body">Специалист
+                    выезжает на замер,
+                    и это совершенно
+                    бесплатно.</p>
+            </div>
+            <div class="shema_number">
+                <p>2</p>
+            </div>
+        </div>
+
+        <div class="shema_item">
+            <div class="shema_text">
+                <div class="shema_img">
+                    <img src="{% static 'img/home/дизайн 2.svg' %}">
+                </div>
+                <p class="shema_head">Дизайн</p>
+                <p class="shema_body">Разрабатываем
+                    макет рекламы
+                     или адаптируем
+                     ваш, если имеется.</p>
+            </div>
+            <div class="shema_number">
+                <p>3</p>
+            </div>
+        </div>
+
+        <div class="shema_item">
+            <div class="shema_text">
+                <div class="shema_img">
+                    <img src="{% static 'img/home/производство 2.svg' %}">
+                </div>
+                <p class="shema_head">Производство</p>
+                <p class="shema_body">После согласования макетов и сметы, менеджер отдает проект в цех.</p>
+            </div>
+            <div class="shema_number">
+                <p>4</p>
+            </div>
+        </div>
+
+        <div class="shema_item">
+            <div class="shema_text">
+                <div class="shema_img">
+                    <img src="{% static 'img/home/монтаж 2.svg' %}">
+                </div>
+                <p class="shema_head">Монтаж</p>
+                <p class="shema_body">Бригада монтажников приступает к монтажу рекламы.</p>
+            </div>
+            <div class="shema_number">
+                <p>5</p>
+            </div>
+        </div>
+
+        <div class="shema_last">
+            <div class="shema_item" style="box-shadow: none; align-items: center;">
+                <p>качественное оказание услуги <br>
+                    и быстрая реакция на возникшие потребности клиента</p>
+            </div>
+        </div>
+    </div>
+    <div class="shema_head2text">
+        <p>качественное оказание услуги <br>
+            и быстрая реакция на возникшие потребности клиента</p>
+    </div>
+    <div class="redline">
+    </div>
+</div>
+
+
+<div class="dopolnenie">
+    <div class="dopolnenie_headtext" style="color: white;">
+        <p>А также</p>
+    </div>
+    <div class="head2text" style="color: white;">
+        <p>Мы подготовили товары чтобы облегчить вам поиски <br>
+            зайдите в каталог и выберите то что вас интересует </p>
+    </div>
+    <div class="dopolnenie_items">
+        <div class="dopolnenie_item">
+            <div class="dopolnenie_img">
+                <img src="{% static 'img/home/Prom-marker_znaki-bezopasnosti-removebg-preview 1.png' %}">
+            </div>
+            <div style="display: flex; flex-direction: column; position: absolute; margin-top: 65px;">
+                <div class="dopolnenie_headtext" style="color: #52C41A; font-size: 18px; margin-top: 40px; ">
+                    <p>Знаки безопасности</p>
+                </div>
+                <div class="head2text" style="font-size: 12px; margin-top: -10px;">
+                    <p>Эвакуационные, запрещающие, <br>
+                        предупреждающие знаки и другие  </p>
+                </div>
+            </div>
+            <div class="dopolnenie_button"> 
+                <p>Перейти в каталог</p>
+            </div>
+            <div class="dopolnenie_social">
+                <img src="{% static 'img/navbar/05.svg' %}" style="width: 22px; height: 22px; margin-right: 13px;">
+                <p>reklama_oko</p>
+            </div>
+        </div>        
+        <div class="dopolnenie_item">
+            <div class="dopolnenie_img">
+                <img src="{% static 'img/home/Lovepik_com-401704216-school-building 1.png' %}">                
+            </div>
+            <div style="display: flex; flex-direction: column; position: absolute; margin-top: 65px;">
+                <div class="dopolnenie_headtext" style="color: #0088FE; font-size: 18px; margin-top: 40px;">
+                    <p>Школьное оформление</p>
+                </div>
+                <div class="head2text" style="font-size: 12px; margin-top: -10px;">
+                    <p>Стенды, таблички, навигация<br>
+                        и многое другое   </p>
+                </div>
+            </div>
+            <div class="dopolnenie_button" style="background: linear-gradient(180deg, #2198FF 0%, #0088FE 100%);"> 
+                <p>Перейти в каталог</p>
+            </div>
+            <div class="dopolnenie_social">
+                <img src="{% static 'img/navbar/05.svg' %} " style="width: 22px; height: 22px; margin-right: 13px;">
+                <p>shkola_oko</p>
+            </div>
+        </div>
+        <div class="dopolnenie_item">
+            <div class="dopolnenie_img">
+                <img src="{% static 'img/home/pngwing 1.png' %}">                
+            </div>
+            <div style="display: flex; flex-direction: column; position: absolute; margin-top: 65px;">
+                <div class="dopolnenie_headtext" style="color: #EA003D; font-size: 18px; margin-top: 40px;">
+                    <p>Детские сад</p>
+                </div>
+                <div class="head2text" style="font-size: 12px; margin-top: -10px;">
+                    <p>Стенды, таблички, навигация<br>
+                        и многое другое   </p>
+                </div>
+            </div>
+            <div class="dopolnenie_button" style="background: linear-gradient(180deg, #FF0042 0%, #EA003D 100%);;"> 
+                <p>Перейти в каталог</p>
+            </div>
+            <div class="dopolnenie_social">
+                <img src="{% static 'img/navbar/05.svg' %}" style="width: 22px; height: 22px; margin-right: 13px;">
+                <p>detsad_oko</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+

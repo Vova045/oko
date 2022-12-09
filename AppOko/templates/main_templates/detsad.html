@@ -1,0 +1,154 @@
+{% extends 'main_templates/main_template.html' %}
+
+{% block custom_css %}
+{% load static %}
+  <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/components.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/main.css' %}">
+
+  <style>
+    .navbar-dark{
+      background-color: #DE1A22;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+    color:rgb(233, 233, 233)
+}
+  </style>
+{% endblock custom_css %}
+
+{% block content %}
+<div style="padding-top: 120px;">
+  <nav class="navbar navbar-expand-md w-100 p-3 navbar-dark" style="height: 50px; z-index: 1; overflow: visible;">
+    <div class="container-fluid">
+     <div class="collapse navbar-collapse" id="main_nav" style="display: flex;">
+      <ul class="navbar-nav" style="display: flex;">
+        {% for chapter in chapters %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown" href="{% url 'products' chapter.id %}" >  {{ chapter.title }} </a>
+
+            <ul class="dropdown-menu fade-up">
+              {% for category in categories %}
+                {% if category.chapter_id == chapter %}
+                  <p style="font-size: 14px; padding-left: 12px; color: #DE1A22;  margin-bottom: -6px;">{{ category.title }}</p>
+                    {% for subcategory in subcategories %}
+                      {% if subcategory.category == category %}
+                          {% if subcategory.chapter_id == chapter %}
+                              <li><a class="dropdown-item" style="font-size: 13px;" href="{% url 'products_of_sub' subcategory.url_slug %}"> {{ subcategory.title }}</a></li>
+                          {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                    <hr style="margin-top: -2px;">
+                {% endif %}
+              
+              {% endfor %}
+              {% for subcategory in subcategories %}
+                  {% if subcategory.chapter_id == chapter %}
+                    {% if not subcategory.category %}
+                     <li><a class="dropdown-item" style="margin-bottom: -6px; font-size: 13px;" href="{% url 'products_of_sub' subcategory.url_slug %}"> {{ subcategory.title }}</a></li>
+                    {% endif %}
+                    {% endif %}
+              {% endfor %}
+            </ul>
+
+        </li>
+        {% endfor %}
+      </ul>
+     </div> 
+    </div>
+  </nav>
+<div class="main-wrapper main-wrapper-1" style="margin-top: 150px;">
+  <div class="container">
+  <div class="row">
+  {% for chapter in chapters %}
+    {% if chapter.id == chapter_kwards %}
+    <div class="section" style="z-index: 0;">
+      <h2 class="section-title">{{ chapter.title }}</h2> 
+    </div>
+    {% elif chapter_kwards == None %}
+      {% if chapter.id == chapters_with_sub.id %}
+      <div class="section" style="z-index: 0;">
+        <h2 class="section-title">{{ chapter.title }}</h2>
+      </div>
+      {% endif %}
+    {% endif %}
+    {% for subcategory in subcategories %}
+      {% if subcategory.url_slug == subcategory_kwards and chapter.id == chapters_with_sub.id %}
+      <div class="section" style="z-index: 0;">
+        <h6 style="color:black">{{ subcategory.title }}</h6>
+      </div>
+      {% endif%}
+      {% for product in products %}
+        {% if product.product.chapters_id.id == chapter.id %}
+        {% if product.product.subcategories_id.id == subcategory.id %}
+        <div class="col-12 col-md-4 col-lg-4" style="text-decoration: none; display: flex;
+        align-items: flex-end;">
+          <article class="article article-style-c">
+            <div class="article-header" style="height: auto;">
+              <div class="article-image" style="background-size: contain;" data-background="{{ product.media.media_content }}">
+                <img src="{{ product.media.media_content }}" style="visibility: hidden; height: auto-content;" />
+              </div>
+            </div>
+            <div class="article-details">
+              <div style="padding-bottom: 15px; padding-left: 23px;">
+                <a style="color: black;" href="#">{{ product.product.chapters_id.title }}</a> <div class="bullet"></div> <a style="color: black;" href ="#" >{{ product.product.article }}</a>
+              </div>
+              <div class="row" style="display: flex; justify-content: space-around;" >
+                <div style=" border-left: 4px solid black; padding-left: 20px; width: auto;">
+                  <h3>
+                    <a style="color: black; font-weight: 800; font-size: large; line-height: 0,5;" href="#">{{ product.product.product_name }}</a><br>
+                    <a style="color: #DF1C3F; font-weight: 600; font-size: large; line-height: 1;" href="#">артикул: {{ product.product.article }}</a>
+                  </h3>  
+                </div>
+                <div style="display: flex; height: 6em; align-items: center; width: auto;">
+                  <p style="margin:0; text-align: end; font-size: 14px; font-weight: 300;">Размер:<br>{{ product.product.size }}</p>
+                </div> 
+              </div>
+            </div>
+            
+          </article>
+        </div>
+        
+        {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+{% if count_product > paginate_by %}
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if page.obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="{% url 'detsad' %}?filter={{ filter }}&orderby={{ orderby }}&page={{ page.obj.previous_page_number }}">Предыдущая</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">Предыдущая</a></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+              <li class="page-item"><a class="page-link" href="{% url 'detsad' %}?filter={{ filter }}&orderby={{ orderby }}&page={{ i }}">{{ i }}</a></li>
+            {% endfor %}
+            {% if page.obj.has_next %}
+              <li class="page-item"><a class="page-link" href="{% url 'detsad' %}?filter={{ filter }}&orderby={{ orderby }}&page={{ page.obj.next_page_number }}">Следующая</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">Следующая</a></li>
+            {% endif %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block custom_js %}
+
+{% endblock custom_js %}

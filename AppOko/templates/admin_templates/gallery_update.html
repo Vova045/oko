@@ -1,0 +1,142 @@
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}
+Изменение фото в галерее
+{% endblock title %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="//bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+<style>
+    .bootstrap-tagsinput{
+        width: 100%;
+    }
+
+</style>
+{% endblock custom_css %}
+
+{% block page_title %}
+Изменение фото в галерее
+{% endblock page_title %}
+
+{% block page_content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <form id="myform" name="myform"> 
+            {% csrf_token %}
+            <div class="card-body">
+                <h5>Изменение фото в галерее "<b>{{ photo.title }}</b>"</h5>
+                <div class="col-lg-6">
+                    <div class="card">
+                    <div class="card-body">
+                        <img src="{{ photo.media_content }}" style='width:100%;height:300px;object-fit:contain'/>
+                        <br>
+                        <br>
+                    </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                        <label>Заголовок</label>
+                        <input class="form-control" name="title" placeholder="Заголовок" id="title" value="{{ photo.title }}"/>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <label>Тип изделия</label>
+                        <select class="form-control" name="type_of_product" id="type_of_product" value="{{ photo.type_of_product }}"> 
+                            {% for category in categories_for_gallery %}
+                                {% if not category.id == photo.type_of_product.id %}
+                                <option value="{{ category.id }}">{{ category.title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                            <option selected="selected" value="{{ photo.type_of_product.id }}">{{ photo.type_of_product.title }}</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Описание</label>
+                        <textarea class="form-control" name="description" placeholder="Описание" id="description" rows="6" value="{{ photo.description }}"></textarea>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                        <label>Заказчик</label>
+                        <input class="form-control" name="customer" placeholder="Заказчик" id="customer" value="{{ photo.customer }}"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Номер заказа</label>
+                        <input class="form-control" name="order_number" placeholder="Номер заказа" id="order_number" value="{{ photo.order_number }}"/>
+                    </div>
+                </div>
+                <br>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                        <label>Отражение на сайте</label>
+                        <input class="form-control" name="is_active" placeholder="Отражение на сайте" id="is_active" value="{{ photo.is_active }}"/>
+                    </div>
+                </div>
+                <br>
+
+                <hr>
+                <br>
+                <div class="row">
+                    <button type="button" class="btn btn-primary btn-block submit_btn">Изменить данные о фото на сайте</button>
+                </div>
+            </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock page_content %}
+
+{% block custom_js %}
+
+<script>
+    
+    $(".submit_btn").click(function(){
+        var form=new FormData($("#myform")[0]);
+        //AJAX CODE
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+            if(xhr.status==200){
+                console.log(xhr.responseText);
+            }
+        }
+        xhr.open("POST","{% url 'gallery_update' id=photo.id %}",true);
+        $("#progressbar").show();
+
+        //UPDATING PROGRESS BAR
+        xhr.upload.addEventListener("progress",function(ev){
+            if(ev.lengthComputable){
+                var percentage=(ev.loaded/ev.total*100|0);
+                $("#progressbar").css({"width":""+percentage+"%"}).text("Uploading .."+percentage+"%");
+                console.log(percentage);
+            }
+        });
+        
+        xhr.send(form);
+
+        function sayHi() {
+            window.location.href ="{% url 'gallery_list' %}"
+            }
+
+        setTimeout(sayHi, 1000);
+        
+    })
+</script>
+<script>
+    $(".delete_product").click(function(){
+        var id=$(this).data("location");
+        console.log(id);
+        var cnf=confirm("Вы точно хотите удалить?");
+        if(cnf){
+            location=id;
+        }
+    });
+  </script>
+<script src="//bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+{% endblock custom_js %}

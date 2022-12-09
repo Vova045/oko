@@ -1,0 +1,120 @@
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}
+Обновление подкатегории
+{% endblock title %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+{% block page_title %}
+Обновление подкатегории
+{% endblock page_title %}
+
+{% block page_content %}
+
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+        <h4>Подкатегории</h4>
+        </div>
+        <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {% if field.field.widget.input_type != "select" %}
+                <input type="{{ field.field.widget.input_type }}", name="{{ field.name }}" id="{{ field.name }}" class="form-control" value="{{ field.value }}">
+                {% endif %}
+
+                {% if field.field.widget.input_type == "select" %}
+                    {% if field.name == 'chapter_id' %}
+                    <select class="form-control" name="chapter_id" id="chapter_id"> 
+                        {% for chapter in chapters %}
+                            {% if not chapter.title  == chapter_selected.title %}
+                            <option value="{{ chapter.id }}">{{ chapter.title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        <option selected="selected" value="{{ chapter_selected.id }}">{{ chapter_selected.title }}</option>
+                    </select>
+                    {% elif field.name == 'category' %}
+                    <select class="form-control" name="category" id="category"> 
+                        {% for category in categories %}
+                            {% if not category.title == category_selected.title %}
+                            <option value="{{ category.id }}">{{ category.title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        <option selected="selected" value="{{ category_selected.id }}">{{ category_selected.title }}</option>
+                    </select>
+                    {% else %}
+                    <select name="{{ field.name }}" id="{{ field.name }}" class="form-control">
+                        {% for id, value in field.field.choices %}
+                            <option value="{{ id }}" {% if id == field.value %}selected{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                {% endif %}
+
+                {% if field.errors %}
+                <div class="alert alert-danger" style="margin:10px">
+                    {{ field.errors }}
+                </div>
+                {% endif %}
+            </div>
+            {% if field.field.widget.input_type == "file" %}
+                <div class="form-group">
+                <label>Текущее {{ field.label }}</label><br>
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="/media/{{ field.value }}" style="height:250px"/>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn btn-danger btn-block">Сохранить подкатегорию</button>
+        </form>
+    </div>
+    </div>
+</div>
+
+{% endblock page_content %}
+
+{% block custom_js %}
+<script>
+    document.getElementById("title").onkeyup=function(){
+      document.getElementById("url_slug").value=document.getElementById("title").value.toLowerCase().replace(/ /g,"-")
+    }
+  </script>
+  <script>
+    function getdata() {
+             var optionSelected = $('select#chapter_id').find("option:selected");
+             var valueSelected  = optionSelected.val();
+             var chapter_name   = optionSelected.text();
+             data = {'chapter_ajax' : chapter_name};
+                
+                $.ajax({
+                    url: '/admindashboard/getdetails_for_sub_category_create',
+                    data : {
+                    'chapter_ajax' : chapter_name,
+                    },
+                    method : 'GET',
+                    async : false,
+                    success : function(result){                    
+                    $("#category option").remove();
+
+                    for (var i = result.length - 1; i >= 0; i--) {
+                        $("#category").append('<option value= ' + result[i].cat_id + '>'+ result[i].cat_title +'</option>');
+                    };
+
+                }
+
+                });
+         }
+    $(document).ready(getdata);
+    $(document).ready(function(){
+         $('select#chapter_id').change(getdata);
+    });
+</script>
+{% endblock custom_js %}

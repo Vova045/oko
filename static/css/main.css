@@ -1,0 +1,2965 @@
+
+body {
+    background-color:rgb(255, 255, 255);
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    width: 100%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+img {
+    max-width:100%;
+    height:auto;
+}
+
+form input {
+    padding-left: 20px;
+}
+
+form textarea {
+    padding-left: 20px;
+}
+
+.topcontent_fon {
+    width: 100%; display: flex;
+    flex-wrap: wrap; justify-content: center;
+}
+
+.navbar .dropdown-menu-end{ right:0; left: auto;  }
+.navbar .nav-item .dropdown-menu{  display:block; background-color: white; opacity: 0;  visibility: hidden; transition:.8s; margin-top:0;  }
+.navbar .nav-item:hover .nav-link{ color: #fff;  }
+.navbar .dropdown-menu.fade-down{ top:80%; transform: rotateX(-75deg); transform-origin: 0% 0%; }
+.navbar .dropdown-menu.fade-up{ top:180%; margin-top: 12px;}
+.navbar .nav-item:hover .dropdown-menu{ transition: .3s; opacity:1; visibility:visible; top:100%; transform: rotateX(0deg);}
+.navbar .dropdown-item { background-color: white;}
+.navbar .dropdown-item:active { background-color: white;}
+
+
+
+ 
+
+@media (min-width: 1px) and (max-width: 250px) {
+    body {
+        width: 100%;
+    }
+    .dopolnenie {
+        display: none;
+    }
+    .shemaraboty {
+        display: none;
+    }
+    .nashiuslugi {
+        display: none;
+    }
+    .bg-modal {
+        display: none;
+    }
+    .modal-content {
+        display: none;
+    }
+    .bg-modal_sent {
+        display: none;
+    }
+    .bukvy_fon {
+        display: none;
+    }
+    .topcontent {
+        display: none;
+    }
+}
+@media (min-width: 251px) and (max-width: 319px) {
+    .topcontent_fon {
+        width: 100%; height: 500px; padding-top: 130px; margin-bottom: 200px;
+    }
+
+    .topcontent_subfon {
+        width: 100%; height: 350px; background-color: rgb(255, 0, 0); margin-top: 200px;
+    }
+
+    .topcontent {
+        width: 240px; position: relative; margin-top: -650px; flex-direction: row;
+        display: flex; justify-content: space-between; margin-left: 0px;
+    }
+
+    .topcontent1 {
+        height: 250px; display: flex; flex-direction: column; 
+    }
+
+    .topcontent_font_xl{
+        font-size: 28px; font-weight: 800; line-height: 38px; width: 240px; padding-top: 40px;
+    }
+
+    .topcontent_font_m {
+        font-size: 28px; font-weight: 800; line-height: 44px; color: #ffffff; padding-top: 150px;
+        text-align: center;
+    }
+    
+    .topcontent_font_s {
+        font-size: 18px; font-weight: 400; line-height: 22px;padding-bottom: 5px; color: #ffffff;
+        text-align: center;
+    }
+
+    .topcontent_zayavka {
+        display: flex;
+        justify-content: baseline;
+        background: #000000; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 180px; height: 47px; visibility: visible; font-size: 16px;
+        color: rgb(255, 255, 255); font-weight: 500;
+        cursor: pointer; margin:auto
+    }
+
+    .topcontent_zayavka:hover {
+        background: #ffffff; color: rgb(0, 0, 0);
+    }
+
+    .topcontent2 {
+        width: 390px; display: flex; flex-direction: column; align-items: flex-end;
+        position: relative; right: 240px
+    }
+    .vyveska1 {
+        display: flex; width: 230px; height: auto; margin-top: 200px;
+    }
+
+    .topcontent2_icon {
+        display: none;
+    }
+
+    .shemaraboty {
+        margin-top: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 20px;
+    }
+    .shema_headtext{
+        font-size: 25px; font-weight: 700; text-align: center; padding-top: 20px;
+    }
+
+    .shema_items {
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; width: 250px; justify-content: center; margin: auto;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:100px; height: 130px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 10px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 80px; overflow: hidden;
+        font-weight: 200; font-size: 70px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 55px;
+        font-size: 10px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 90px; max-height: 60px; overflow: hidden;
+        font-size: 6px; font-weight: 400; line-height: 12px; color: #959595;
+        margin-top: 70px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 40px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: flex; font-size: 9px;
+    }
+    .shema_head2text {
+        display: none;
+    }
+
+    /* nashiuslugi css */
+    .headtext{
+        font-size: 30px; font-weight: 700; text-align: center; margin-top: 200px;
+    }
+    .vseuslugi {
+        width: 100%; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center;
+    }
+    
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:245px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column; 
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 14px; font-weight: 700; line-height: 22px; width:70px; word-break: break-all;
+
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px;
+    }
+    .uslugi_img {
+        display: flex; align-items: center; width: 150px; height: auto; justify-content: center; margin-top: 30px; margin-left: 0;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 50px;
+    }
+    /* dopolnenie css */
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+    .dopolnenie {
+        display: flex; width: 100%; flex-direction: column; background-color: #3F3939;
+        padding-top: 20px; text-align: center;
+    }
+
+    .dopolnenie_items {
+        display: flex; width: 240px; flex-direction: row;
+        justify-content: center; flex-wrap: wrap; margin: auto;
+        }
+
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:240px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin-bottom: 120px;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -150px; display: flex; width: 250px; height: 250px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 240px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 240px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+    .head2text {
+        margin-bottom: 60px;
+    }
+
+   /* Return_form */
+    
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+    .modal-content {
+        width: 100%; height: 100%; overflow: scroll;
+        background-color: #1C1919; flex-direction: column;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 92%; margin-top: 30px
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+        display: none;
+    }
+    .modal-formhead {
+        margin-left: 33px; position: relative; display: flex; color: white; font-size: 25px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 25px; margin-top: 50px;
+    }
+    .return_form {
+        width:240px;
+        display: flex;
+        padding-left: 25px;
+        flex-direction: column;
+        line-height: 2; margin: auto; align-items: center;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        border-radius: 10px; height: 120px; border: 0;
+    }
+    .modal-social {
+        display: flex; padding-left: 25px;
+        flex-direction: column; line-height: 1.6;
+        color: #ffffff;
+    }
+    .modal-telephone {
+        margin-top: 50px; display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 120px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 20px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; 
+    }
+    .modal-close{
+        width: 40px;
+        font-size: 40px;
+        color: white;
+        position: absolute;
+        top: 10px; 
+        right: 20px;
+        cursor: pointer;
+    }   
+    .modal-button_box {
+        display: flex; flex-direction: row; justify-content: space-evenly; align-items: center; margin-top: 30px; margin-right: 30px;
+    }
+    /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 240px; height: 240px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 3px; padding-top: 40px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 15px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+    .okay {
+        width: 100px; height: auto;
+    }
+    /* Bukvy */
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_box {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_main {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+
+}
+    
+@media (min-width: 320px) and (max-width: 540px) {
+    .topcontent_fon {
+        width: 100%;padding-top: 70px;
+    }
+
+    .topcontent_subfon {
+        width: 100%; height: 380px; background-color: rgb(255, 0, 0); margin-top: 320px;
+    }
+
+    .topcontent {
+        width: 310px; position: relative; margin-top: -786px; flex-direction: row;
+        display: flex; justify-content: space-between; margin-left: 0px;
+    }
+
+    .topcontent1 {
+        width: 310px; height: 393px; display: flex; flex-direction: column; 
+    }
+
+    .topcontent_font_xl{
+        font-size: 35px; font-weight: 700; line-height: 38px; width: 300px; padding-top: 100px;
+    }
+
+    .topcontent_font_m {
+        font-size: 36px; font-weight: 700; line-height: 44px; color: #ffffff; padding-top: 210px;
+        text-align: center;
+    }
+    
+    .topcontent_font_s {
+        font-size: 18px; font-weight: 400; line-height: 22px;padding-bottom: 30px; color: #ffffff;
+        text-align: center;
+    }
+
+    .topcontent_zayavka {
+        display: flex;
+        justify-content: baseline;
+        background: #000000; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 280px; height: 52px; visibility: visible; font-size: 16px;
+        color: rgb(255, 255, 255); font-weight: 600;
+        cursor: pointer; margin:auto
+    }
+
+    .topcontent_zayavka:hover {
+        background: #ffffff; color: rgb(0, 0, 0);
+    }
+
+    .topcontent2 {
+        width: 390px; display: flex; flex-direction: column; align-items: flex-end;
+        margin-right: 20px; position: relative; right: 310px
+    }
+    .vyveska1 {
+        display: flex; width: 300px; height: auto; margin-top: 250px; margin-left: 15px;
+    }
+
+    .topcontent2_icon {
+        display: none;
+    }
+/* nashiuslugi css */
+    .headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 20px;
+    }
+    .vseuslugi {
+        padding-top: 10px; width: 100%; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center;
+    }
+
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:320px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column;
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 18px; font-weight: 700; line-height: 22px;width:132px; word-break: break-all;
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px;
+    }
+    .uslugi_img {
+        display: flex; align-items: center; width: 175px; height: auto; justify-content: center; margin-top: 30px;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 100px; z-index: 0;
+    }
+    .shemaraboty {
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .shema_headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 20px;
+    }
+
+    .head2text {
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+
+    .shema_items {
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; width: 315px; justify-content: center; margin: auto;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:130px; height: 153px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 10px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 90px; overflow: hidden;
+        font-weight: 200; font-size: 100px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 70px;
+        font-size: 15px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 120px; max-height: 60px; overflow: hidden;
+        font-size: 9px; font-weight: 400; line-height: 12px; color: #959595;
+        margin-top: 90px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 50px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: flex; font-size: 9px;
+    }
+    .shema_head2text {
+        display: none;
+    }
+    
+
+    /* dopolnenie css */
+    .dopolnenie {
+        display: flex; width: 100%; flex-direction: column; background-color: #3F3939; height: 1280px; margin-top: 50px; 
+        padding-top: 30px;
+    }
+
+    .dopolnenie_items {
+        display: flex; width: 280px; flex-direction: row;
+        justify-content: center; flex-wrap: wrap; margin: auto; padding-top: 50px;
+        }
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:280px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin-bottom: 120px;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -150px; display: flex; width: 250px; height: 250px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 280px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 280px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+
+    /* Return_form */
+        
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+    .modal-content {
+        width: 100%; height: 100%; overflow: scroll;
+        background-color: #1C1919; flex-direction: column;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 92%; margin-top: 30px
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+        display: none;
+    }
+    .modal-formhead {
+        margin-left: 33px; position: relative; display: flex; color: white; font-size: 25px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 25px; margin-top: 50px;
+    }
+    .return_form {
+        width:240px;
+        display: flex;
+        padding-left: 25px;
+        flex-direction: column;
+        line-height: 2; margin: auto; align-items: center;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        border-radius: 10px; height: 120px; border: 0;
+    }
+    .modal-social {
+        display: flex; padding-left: 25px;
+        flex-direction: column; line-height: 1.6;
+        color: #ffffff;
+    }
+    .modal-telephone {
+        margin-top: 50px; display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 120px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 20px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; 
+    }
+    .modal-close{
+        width: 40px;
+        font-size: 40px;
+        color: white;
+        position: absolute;
+        top: 10px; 
+        right: 20px;
+        cursor: pointer;
+    }   
+    .modal-button_box {
+        display: flex; flex-direction: row; justify-content: space-evenly; align-items: center; margin-top: 30px; margin-right: 30px; margin-bottom: 30px;
+    }
+    /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 240px; height: 240px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 3px; padding-top: 40px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 15px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+    .okay {
+        width: 100px; height: auto;
+    }
+}
+@media (min-width: 541px) and (max-width: 768px) {
+
+    .topcontent_fon {
+        width: 100%; height: 786px; padding-top: 120px;
+    }
+
+    .topcontent_subfon {
+        width: 100%; height: 393px; background-color: rgb(255, 0, 0); margin-top: 393px;
+    }
+
+    .topcontent {
+        width: 520px; position: relative; margin-top: -786px; flex-direction: row;
+        display: flex; justify-content: space-between; margin-left: 0px;
+    }
+
+    .topcontent1 {
+        width: 543px; height: 393px; display: flex; flex-direction: column;
+    }
+
+    .topcontent_font_xl{
+        font-size: 48px; font-weight: 700; line-height: 55px; width: 550px; padding-top: 50px;
+    }
+
+    .topcontent_font_m {
+        font-size: 36px; font-weight: 700; line-height: 44px; color: #ffffff; padding-top: 220px;
+        text-align: center;
+    }
+    
+    .topcontent_font_s {
+        font-size: 18px; font-weight: 400; line-height: 22px;padding-bottom: 30px; color: #ffffff;
+        text-align: center;
+    }
+
+    .topcontent_zayavka {
+        display: flex;
+        justify-content: baseline;
+        background: #000000; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 280px; height: 52px; visibility: visible; font-size: 16px;
+        color: rgb(255, 255, 255); font-weight: 600;
+        cursor: pointer; margin:auto; z-index: 900;
+    }
+
+    .topcontent_zayavka:hover {
+        background: #ffffff; color: rgb(0, 0, 0);
+    }
+
+    .topcontent2 {
+        width: 390px; display: flex; flex-direction: column; align-items: flex-end;
+        margin-right: 20px; position: relative; right: 410px
+    }
+    .vyveska1 {
+        display: flex; width: 480px; height: auto; margin-top: 170px;
+    }
+
+    .topcontent2_icon {
+        display: none;
+    }
+
+    .shemaraboty {
+        margin-top: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .shema_headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 50px;
+    }
+
+    .head2text {
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+
+    .shema_items {
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; width: 315px; justify-content: center; margin: auto;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:130px; height: 153px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 10px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 90px; overflow: hidden;
+        font-weight: 200; font-size: 100px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 70px;
+        font-size: 15px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 120px; max-height: 60px; overflow: hidden;
+        font-size: 9px; font-weight: 400; line-height: 12px; color: #959595;
+        margin-top: 90px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 50px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: flex; font-size: 9px;
+    }
+    .shema_head2text {
+        display: none;
+    }
+    /* nashiuslugi css */
+    .headtext{
+        font-size: 30px; font-weight: 700; text-align: center; margin-top: 160px;
+    }
+    .vseuslugi {
+        padding-top: 30px; width: 100%; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center;
+    }
+
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:320px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column;
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 18px; font-weight: 700; line-height: 22px;width:132px; word-break: break-all;
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px;
+    }
+    .uslugi_img {
+        display: flex; align-items: center; width: 175px; height: auto; justify-content: center; margin-top: 30px;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 100px; z-index: 0;
+    }
+        /* Return_form */
+        
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+    .modal-content {
+        width: 100%; height: 100%; overflow: scroll;
+        background-color: #1C1919; flex-direction: column;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 92%; margin-top: 30px
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+        display: none;
+    }
+    .modal-formhead {
+        margin-left: 33px; position: relative; display: flex; color: white; font-size: 25px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 25px; margin-top: 50px;
+    }
+    .return_form {
+        width:100%;
+        display: flex;
+        padding-left: 25px;
+        flex-direction: column;
+        line-height: 2; align-items: center; margin: auto;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; width: 300px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        border-radius: 10px; height: 120px; width: 300px; border: 0;
+    }
+    .modal-social {
+        display: flex; padding-left: 25px;
+        flex-direction: column; line-height: 1.6;
+        color: #ffffff;
+    }
+    .modal-telephone {
+        margin-top: 50px; display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 150px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 20px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; 
+    }
+    .modal-close{
+        width: 40px;
+        font-size: 40px;
+        color: white;
+        position: absolute;
+        top: 10px; 
+        right: 20px;
+        cursor: pointer;
+    }   
+    .modal-button_box {
+        display: flex; flex-direction: row; justify-content: space-around; align-items: center; margin-top: 30px; margin-right: 30px;
+    }
+
+    /* dopolnenie css */
+    .dopolnenie {
+        display: flex; width: 100%; flex-direction: column; background-color: #3F3939; height: 1450px; margin-top: 50px; 
+        padding-top: 200px; margin-bottom: 200px;
+    }
+
+    .dopolnenie_items {
+        display: flex; width: 280px; flex-direction: row;
+        justify-content: center; flex-wrap: wrap; margin: auto; padding-top: 50px;
+        }
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:280px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin-bottom: 120px;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -150px; display: flex; width: 250px; height: 250px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 280px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 280px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+
+    /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 300px; height: 300px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 8px; padding-top: 50px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 20px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+    .okay {
+        width: 120px; height: auto;
+    }
+    /* Bukvy */
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_box {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_main {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+}
+@media (min-width: 541px) and (max-width: 768px) {
+    .shemaraboty {
+        margin-top: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .shema_headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 50px;
+    }
+    .head2text {
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+    .shema_head2text {
+        display: none;
+    }
+    .shema_items {
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; width: 580px; justify-content: center; margin: auto;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:165px; height: 223px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 100px; overflow: hidden;
+        font-weight: 200; font-size: 120px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 80px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 134px; max-height: 70px; overflow: hidden;
+        font-size: 12px; font-weight: 400; line-height: 18px; color: #959595;
+        margin-top: 120px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 65px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: flex;
+    }
+
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+    .modal-content {
+        width: 100%; height: 100%; overflow: scroll;
+        background-color: #1C1919; flex-direction: column;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 92%; margin-top: 30px
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 40px;
+        display: none;
+    }
+    .modal-formhead {
+        margin-left: 33px; position: relative; display: flex; color: white; font-size: 25px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 25px; margin-top: 50px;
+    }
+    .return_form {
+        width:100%;
+        display: flex;
+        padding-left: 25px;
+        flex-direction: column;
+        line-height: 2; align-items: center; margin: auto;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; width: 530px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        border-radius: 10px; height: 120px; width: 530px; border: 0;
+    }
+    .modal-social {
+        display: flex; padding-left: 25px;
+        flex-direction: column; line-height: 1.6;
+        color: #ffffff;
+    }
+    .modal-telephone {
+        margin-top: 50px; display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline; font-size: 12px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 150px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 20px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; 
+    }
+    .modal-close{
+        width: 40px;
+        font-size: 40px;
+        color: white;
+        position: absolute;
+        top: 10px; 
+        right: 20px;
+        cursor: pointer;
+    }   
+    .modal-button_box {
+        display: flex; flex-direction: row; justify-content: space-around; align-items: center; margin-top: 30px; margin-right: 30px;
+    }
+       /* nashiuslugi css */
+       .headtext{
+        font-size: 30px; font-weight: 700; text-align: center; margin-top: 170px;
+    }
+    .vseuslugi {
+        padding-top: 30px; width: 100%; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center;
+    }
+    
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:380px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column;
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px;
+    }
+    .uslugi_img {
+        display: flex; align-items: center;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 180px; z-index: 0;
+    }
+
+    /* dopolnenie css */
+    
+    .dopolnenie {
+        display: flex; flex-direction: column; background-color: #3F3939; margin-top: 50px;
+        align-items: center; padding-top: 50px; margin-bottom: 0px;
+    }
+    .dopolnenie_items {
+        display: flex; width: 541px; flex-direction: row; margin-top: 80px;padding-top: 100px;
+        justify-content: center; flex-wrap: wrap; margin: auto;
+        }
+
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:322px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 10px; margin-bottom: 150px;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -200px; display: flex; width: 300px; height: 300px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 322px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 322px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+
+    /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 450px; height: 450px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 25px; padding-top: 100px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+    /* Bukvy */
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_box {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_main {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .topcontent_fon {
+        width: 100%; height: 786px; padding-top: 120px;
+    }
+
+    .topcontent_subfon {
+        width: 100%; height: 393px; background-color: rgb(255, 0, 0); margin-top: 393px;
+    }
+
+    .topcontent {
+        width: 740px; position: relative; margin-top: -786px; flex-direction: row;
+        display: flex; justify-content: space-between; margin-left: 40px;
+    }
+
+    .topcontent1 {
+        width: 543px; height: 393px; display: flex; flex-direction: column;
+    }
+
+    .topcontent_font_xl{
+        font-size: 52px; font-weight: 700; line-height: 70px; width: 550px; padding-top: 50px;
+    }
+
+    .topcontent_font_m {
+        font-size: 36px; font-weight: 700; line-height: 44px; color: #ffffff; padding-top: 110px;
+    }
+    
+    .topcontent_font_s {
+        font-size: 18px; font-weight: 400; line-height: 22px;padding-bottom: 30px; color: #ffffff;
+    }
+
+    .topcontent_zayavka {
+        display: flex;
+        justify-content: baseline;
+        background: #000000; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 280px; height: 52px; visibility: visible; font-size: 16px;
+        color: rgb(255, 255, 255); font-weight: 600;
+        cursor: pointer; 
+    }
+
+    .topcontent_zayavka:hover {
+        background: #ffffff; color: rgb(0, 0, 0);
+    }
+
+    .topcontent2 {
+        width: 390px; display: flex; flex-direction: column; align-items: flex-end;
+        margin-right: 20px; position: relative; right: 220px
+    }
+    .vyveska1 {
+        display: flex; width: 480px; height: auto; margin-top: 170px;
+    }
+
+    .topcontent2_icon {
+        width:250px; position: relative; margin-top: 0px;
+    }
+
+    .shemaraboty {
+        margin-top: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+
+    .shema_headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 50px;
+    }
+    
+    .head2text {
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+    .shema_head2text{
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+
+    .shema_items {
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; width: 760px; justify-content: center; margin: auto;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:165px; height: 223px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 100px; overflow: hidden;
+        font-weight: 200; font-size: 120px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 80px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 134px; max-height: 70px; overflow: hidden;
+        font-size: 12px; font-weight: 400; line-height: 18px; color: #959595;
+        margin-top: 120px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 65px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: none;
+    }
+
+    /* Return_form */
+    
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+    .modal-content {
+        width: 733px; height: 600px; position: relative;
+        background-color: #1C1919; flex-direction: row;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 50%; margin-top: 0px;
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-formhead {
+        margin-left: 40px; position: relative; display: flex; color: white; font-size: 32px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 50px; margin-top: 50px;
+    }
+    .return_form {
+        width:100%;
+        display: flex;
+        padding-left: 20px;
+        flex-direction: column;
+        line-height: 2;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; width: 280px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; height: 120px; width: 280px; border: 0;
+    }
+    .modal-social {
+        display: flex;
+        flex-direction: column; line-height: 1.6; 
+        color: #ffffff;
+    }
+    .modal-telephone {
+        margin-top: 110px; display: flex; align-items: baseline; font-size: 15px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 15px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline; font-size: 15px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline; font-size: 15px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline; font-size: 15px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 10px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; margin-top: 29px;
+    }
+    .modal-close{
+        width: 40px;
+        font-size: 40px;
+        color: white;
+        position: absolute;
+        top: 10px; 
+        right: 20px;
+        cursor: pointer;
+    }
+    .modal-logo2 {
+        display: none;
+    }
+       /* nashiuslugi css */
+       .headtext{
+        font-size: 30px; font-weight: 700; text-align: center; margin-top: 170px;
+    }
+    .vseuslugi {
+        padding-top: 30px; width: 100%; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center;
+    }
+    
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:380px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column;
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px; 
+    }
+    .uslugi_img {
+        display: flex; align-items: center;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 180px; z-index: 0;
+    }
+
+    /* dopolnenie css */
+    .dopolnenie {
+        display: flex; flex-direction: column; background-color: #3F3939; margin-top: 50px;
+        align-items: center; padding-top: 175px;
+    }
+
+    .dopolnenie_items {
+        display: flex; width: 750px; flex-direction: row; margin-top: 100px;
+        justify-content: space-around; flex-wrap: wrap;
+        }
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:322px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 10px; margin-bottom: 100px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -200px; display: flex; width: 300px; height: 300px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 322px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 322px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+    /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 450px; height: 450px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 25px; padding-top: 100px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+    /* Bukvy */
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_box {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_main {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .topcontent_fon {
+        width: 100%; height: 786px; padding-top: 120px;
+    }
+
+    .topcontent_subfon {
+        width: 100%; height: 393px; background-color: rgb(255, 0, 0); margin-top: 393px;
+    }
+
+    .topcontent {
+        width: 980px; position: relative; margin-top: -786px; flex-direction: row;
+        display: flex; justify-content: space-between;
+    }
+
+    .topcontent1 {
+        width: 543px; height: 393px; display: flex; flex-direction: column;
+    }
+
+    .topcontent_font_xl{
+        font-size: 52px; font-weight: 700; line-height: 70px; width: 550px; padding-top: 50px;
+    }
+
+    .topcontent_font_m {
+        font-size: 36px; font-weight: 700; line-height: 44px; color: #ffffff; padding-top: 110px;
+    }
+    
+    .topcontent_font_s {
+        font-size: 18px; font-weight: 400; line-height: 22px;padding-bottom: 30px; color: #ffffff;
+    }
+
+    .topcontent_zayavka {
+        display: flex;
+        justify-content: baseline;
+        background: #000000; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 280px; height: 52px; visibility: visible; font-size: 16px;
+        color: rgb(255, 255, 255); font-weight: 600;
+        cursor: pointer; 
+    }
+
+    .topcontent_zayavka:hover {
+        background: #ffffff; color: rgb(0, 0, 0);
+    }
+
+    .topcontent2 {
+        width: 390px; display: flex; flex-direction: column; align-items: flex-end;
+    }
+    .vyveska1 {
+        display: flex; width: 681px; height: auto; margin-top: 70px;
+    }
+
+    .topcontent2_icon {
+        width:250px; position: relative; margin-top: -70px;
+    }
+
+   .shemaraboty {
+        margin-top: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+
+    .shema_headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 50px;
+    }
+    .shema_head2text{
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+    .head2text {
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+
+    .redline {
+        background: #F6121C; width: 853px; height:10px; position: relative; margin-top: -270px; margin-bottom: 250px;
+    }
+
+    .shema_items {
+        display: flex; flex-direction: row; z-index: 500;
+        flex-wrap: wrap; width: 100%; justify-content: center;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:165px; height: 223px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 100px; overflow: hidden;
+        font-weight: 200; font-size: 120px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 80px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 134px; max-height: 70px; overflow: hidden;
+        font-size: 12px; font-weight: 400; line-height: 18px; color: #959595;
+        margin-top: 120px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 65px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: none;
+    }
+    /* nashiuslugi css */
+    .headtext{
+    font-size: 30px; font-weight: 700; text-align: center; margin-top: 170px;
+    }
+    .vseuslugi {
+        padding-top: 30px; width: 100%; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center;
+    }
+    
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:380px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column;
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px;
+    }
+    .uslugi_img {
+        display: flex; align-items: center;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 180px; z-index: 0;
+    }
+
+    /* dopolnenie css */
+    .dopolnenie {
+        display: flex; flex-direction: column; background-color: #3F3939;
+        margin-top: 50px; flex-wrap: wrap; align-items: center; padding-top: 175px;
+    }
+
+    .dopolnenie_items {
+        display: flex; width: 100%; flex-direction: row; margin-top: 100px;
+        justify-content: center;
+        }
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:322px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 10px; margin-left: 15px; margin-right: 15px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -200px; display: flex; width: 300px; height: 300px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 322px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 322px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+    /* Return_form */
+    
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+    .modal-content {
+        width: 753px; height: 600px; position: relative;
+        background-color: #1C1919; flex-direction: row;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 46%; margin-top: 0px;
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-formhead {
+        margin-left: 40px; position: relative; display: flex; color: white; font-size: 32px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 50px; margin-top: 50px;
+    }
+    .return_form {
+        width:100%;
+        display: flex;
+        padding-left: 40px;
+        flex-direction: column;
+        line-height: 2;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; width: 300px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; height: 120px; width: 300px; border: 0;
+    }
+    .modal-social {
+        display: flex; padding-left: 40px;
+        flex-direction: column; line-height: 1.6;
+        color: #ffffff;
+    }
+    .modal-telephone {
+        margin-top: 50px; display: flex; align-items: baseline;font-size: 15px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 15px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline;font-size: 15px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline;font-size: 15px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline;font-size: 15px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 10px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; margin-top: 49px;
+    }
+    .modal-close{
+        width: 40px;
+        font-size: 50px;
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        cursor: pointer;
+    }
+    .modal-logo2 {
+        display: none;
+    }
+    .modal-formhead {
+        width: 200px; white-space: nowrap;
+    }
+    /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 450px; height: 450px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 25px; padding-top: 100px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+    /* Bukvy */
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_box {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_main {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+    .bukvy_sent-close{
+        position: absolute;
+        font-size: 50px;
+        color: white;
+        top: 0; z-index: 1000;
+        right: 20px;
+        cursor: pointer;
+        width: 40px;
+    }
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .topcontent_fon {
+        width: 100%; height: 786px; padding-top: 120px;
+    }
+
+    .topcontent_subfon {
+        width: 100%; height: 393px; background-color: rgb(255, 0, 0); margin-top: 393px;
+    }
+
+    .topcontent {
+        width: 1200px; position: relative; margin-top: -786px; flex-direction: row;
+        display: flex; justify-content: space-between;
+    }
+
+    .topcontent1 {
+        width: 543px; height: 393px; display: flex; flex-direction: column;
+    }
+
+    .topcontent_font_xl{
+        font-size: 52px; font-weight: 700; line-height: 70px; width: 550px; padding-top: 50px;
+    }
+
+    .topcontent_font_m {
+        font-size: 36px; font-weight: 700; line-height: 44px; color: #ffffff; padding-top: 110px;
+    }
+    
+    .topcontent_font_s {
+        font-size: 18px; font-weight: 400; line-height: 22px;padding-bottom: 30px; color: #ffffff;
+    }
+
+    .topcontent_zayavka {
+        display: flex;
+        justify-content: baseline;
+        background: #000000; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 280px; height: 52px; visibility: visible; font-size: 16px;
+        color: rgb(255, 255, 255); font-weight: 600;
+        cursor: pointer; 
+    }
+
+    .topcontent_zayavka:hover {
+        background: #ffffff; color: rgb(0, 0, 0);
+    }
+
+    .topcontent2 {
+        width: 800px; display: flex; flex-direction: column; align-items: flex-end;
+    }
+    .vyveska1 {
+        display: flex; width: 681px; height: auto; margin-top: 70px;
+    }
+
+    .topcontent2_icon {
+        width:250px; position: relative; margin-top: -70px;
+    }
+
+    .shemaraboty {
+        margin-top: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .shema_headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 50px;
+    }
+    .shema_head2text{
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+    .head2text {
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+    .redline {
+        background: #F6121C; width: 853px; height:10px; position: relative; margin-top: -270px; margin-bottom: 250px;
+    }
+    .shema_items {
+        position: relative; z-index: 2;
+        display: flex; flex-direction: row; justify-items: center; margin: auto;
+        flex-wrap: wrap; width: 1100px; justify-content: space-around;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:180px; height: 223px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 100px; overflow: hidden;
+        font-weight: 100; font-size: 120px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 80px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 134px; max-height: 80px; overflow: hidden;
+        font-size: 12px; font-weight: 400; line-height: 18px; color: #000000;
+        margin-top: 120px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 70px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: none;
+    }
+
+    .headtext{
+        font-size: 30px; font-weight: 700; text-align: center; margin-top: 180px;
+    }
+    .vseuslugi {
+        width: 1440px; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center; margin: auto;
+        
+    }
+    
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:380px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column;
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px;
+    }
+    .uslugi_img {
+        display: flex; align-items: center;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 180px; z-index: 0;
+    }
+
+    .dopolnenie {
+        flex-wrap: wrap; justify-content: flex-start; margin: auto; align-items: center;
+        display: flex; flex-direction: column; background-color: #3F3939;
+        width: 100%; margin-top: 50px; padding-top: 200px;
+    }
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+    .dopolnenie_items {
+        display: flex; flex-direction: row;  margin-left: auto; margin-right: auto;
+        flex-wrap: wrap; width: 1200px; justify-content: space-around; padding-top: 70px;
+        }
+
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:322px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 30px; 
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -200px; display: flex; width: 300px; height: 300px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 322px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 322px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+
+    /* Return_form */
+
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .modal-content {
+        width: 942px; height: 600px; position: relative;
+        background-color: #1C1919; flex-direction: row;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 50%; margin-top: 0px;
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-formhead {
+        margin-left: 73px; position: relative; display: flex; color: white; font-size: 32px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 50px; margin-top: 50px;
+    }
+    .return_form {
+        width:100%;
+        display: flex;
+        padding-left: 50px;
+        flex-direction: column;
+        line-height: 2;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; height: 120px; border: 0;
+    }
+    .modal-social {
+        display: flex; padding-left: 90px;
+        flex-direction: column; line-height: 1.6;
+        color: #ffffff;
+    }
+    .modal-telephone {
+        padding-top: 105px; display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 18px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 10px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; margin-top: 20px; 
+    }
+    .modal-close{
+        font-size: 50px;
+        color: white;
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        cursor: pointer;
+        width: 40px;
+    }
+    .modal-logo2 {
+        display: none;
+    }
+
+    .modal-button_box {
+        display: flex; flex-direction: row; justify-content: start; align-items: center; margin-top: 15px;
+    }
+
+        /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 450px; height: 450px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 25px; padding-top: 100px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+   /* Bukvy */
+   .bukvy_fon {
+    width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+    display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_box {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_main {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;    
+    }
+    .bukvy_button:hover {
+        background-color: #ED1B24;
+    }
+    .bukvy_sent-close{
+        position: absolute;
+        font-size: 50px;
+        color: white;
+        top: 0; z-index: 1000;
+        right: 20px;
+        cursor: pointer;
+        width: 40px;
+    }
+}
+
+@media (min-width: 1921px) {
+    .topcontent_fon {
+        width: 100%; height: 786px; padding-top: 120px;
+    }
+
+    .topcontent_subfon {
+        width: 100%; height: 393px; background-color: rgb(255, 0, 0); margin-top: 393px;
+    }
+
+    .topcontent {
+        width: 1200px; position: relative; margin-top: -786px; flex-direction: row;
+        display: flex; justify-content: space-between;
+    }
+
+    .topcontent1 {
+        width: 543px; height: 393px; display: flex; flex-direction: column;
+    }
+
+    .topcontent_font_xl{
+        font-size: 52px; font-weight: 700; line-height: 70px; width: 550px; padding-top: 50px;
+    }
+
+    .topcontent_font_m {
+        font-size: 36px; font-weight: 700; line-height: 44px; color: #ffffff; padding-top: 110px;
+    }
+    
+    .topcontent_font_s {
+        font-size: 18px; font-weight: 400; line-height: 22px;padding-bottom: 30px; color: #ffffff;
+    }
+
+    .topcontent_zayavka {
+        display: flex;
+        justify-content: baseline;
+        background: #000000; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 280px; height: 52px; visibility: visible; font-size: 16px;
+        color: rgb(255, 255, 255); font-weight: 600;
+        cursor: pointer; 
+    }
+    .topcontent_zayavka:hover {
+        display: flex;
+        justify-content: baseline;
+        background: #ffffff; box-shadow: 0px 0px 40px 3px rgba(255, 106, 41, 0.5); border-radius: 10px;
+        width: 280px; height: 52px; visibility: visible; font-size: 16px;
+        color: rgb(0, 0, 0); font-weight: 600;
+        cursor: pointer; 
+    }
+
+    .topcontent2 {
+        width: 800px; display: flex; flex-direction: column; align-items: flex-end;
+    }
+    .vyveska1 {
+        display: flex; width: 681px; height: auto; margin-top: 70px;
+    }
+
+    .topcontent2_icon {
+        width:250px; position: relative; margin-top: -70px;
+    }
+    /* footer css */
+    .footer_phone {
+        display: flex; width: fit-content; margin: auto;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-end;
+        
+    }
+    .footer_phone2 {
+        display: flex; align-items: center; margin-bottom: 5px;
+        height: 18px; font-size: 17px;
+    }
+    .footer_mail {
+        display: flex; margin: auto;  align-items: center; 
+    }
+    .footer_vk {
+        display: flex; justify-content: center; width: 185px; height: 30px;
+        border-radius: 20px; border: 2px solid #FFFFFF; align-content: center; 
+    }
+    .footer_socials{
+        display: flex; flex-direction: row; width: 600px; justify-content: space-between; margin: auto; margin-bottom: 0; 
+    }
+    .footer_social{
+        display: flex; flex-direction: column; color: white; justify-content: center; align-items: center; margin: auto;
+    }
+    .footer_logo {
+        display: flex; justify-content: center; padding-bottom: 30px; margin-top: 10px;
+    }
+    .footer {
+        display: flex; flex-direction: column; margin-top: -165px;
+        width:1440px; height: 482px;
+        background-image: url('../media/home/Ellipse 2.png');
+        background-position: center;
+        flex-wrap: nowrap;
+    }
+    .dopolnenie {
+        flex-wrap: wrap; justify-content: flex-start; margin: auto; align-items: center;
+        display: flex; flex-direction: column; background-color: #3F3939;
+        width: 100%; margin-top: 50px; padding-top: 50px;
+    }
+    .dopolnenie_headtext{
+        font-size: 30px; font-weight: 700; text-align: center;
+    }
+    .dopolnenie_items {
+        display: flex; flex-direction: row;  margin-left: auto; margin-right: auto;
+        flex-wrap: wrap; width: 1200px; justify-content: space-around; padding-top: 70px;
+        }
+
+    .dopolnenie_item {
+        display: flex; flex-direction: column;
+        width:322px; height: 233px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 30px; 
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    .dopolnenie_img {
+        position:absolute; margin-top: -200px; display: flex; width: 300px; height: 300px; justify-content: center; align-items: flex-end;
+    }
+    .dopolnenie_button {
+        display: flex; justify-content: center; position: absolute; line-height: 35px;
+        background: linear-gradient(180deg, #5DD820 0%, #52C41A 100%);
+        border-radius: 20px; color: white; font-weight: 700;
+        width: 322px; height: 40px; font-size: 15px; margin-top: 193px; 
+    }
+    .dopolnenie_social {
+        display: flex; position: relative; width: 322px;
+        font-size: 16px; color: rgb(255, 255, 255); margin-top: 250px;
+    }
+
+    /* Return_form */
+
+    .bg-modal {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .modal-content {
+        width: 942px; height: 600px; position: relative;
+        background-color: #1C1919; flex-direction: row;
+    }
+    .modal-form {
+        display: flex; flex-direction: column; width: 50%; margin-top: 0px;
+    }
+    .modal-head {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-logo {
+        position: absolute; display: flex; height: 78px; flex-direction: row; position: relative; align-items: center; margin-top: 73px;
+    }
+    .modal-formhead {
+        margin-left: 73px; position: relative; display: flex; color: white; font-size: 32px;
+    }
+    .modal-head2 {
+        position: relative; display: flex; color: white; margin-left: 50px; margin-top: 50px;
+    }
+    .return_form {
+        width:100%;
+        display: flex;
+        padding-left: 50px;
+        flex-direction: column;
+        line-height: 2;
+    }
+    .return_form input[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; border: 0;
+    }
+    .return_form textarea[type="text"]{
+        margin-bottom: 20px; border-radius: 10px; height: 120px; border: 0;
+    }
+    .modal-social {
+        display: flex; padding-left: 90px;
+        flex-direction: column; line-height: 1.6;
+        color: #ffffff;
+    }
+    .modal-telephone {
+        padding-top: 105px; display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-time {
+        display: flex; align-items: baseline; font-size: 18px;
+    }
+    .modal-adress {
+        display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-mail {
+        display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-vk {
+        display: flex; align-items: baseline;font-size: 18px;
+    }
+    .modal-button{
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 46px; justify-content: center; 
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 30px 1px rgba(255, 46, 0, 0.5);
+        border-radius: 10px; color: white; font-weight: 600;
+        line-height: 16px; color: rgb(255, 255, 255); font-size: 16px; font-weight: 600;
+        border: 0; margin-top: 20px; 
+    }
+    .modal-close{
+        font-size: 50px;
+        color: white;
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        cursor: pointer;
+        width: 40px;
+    }
+    .modal-logo2 {
+        display: none;
+    }
+
+    .modal-button_box {
+        display: flex; flex-direction: row; justify-content: start; align-items: center; margin-top: 15px;
+    }
+
+        /* Return_form_sent */
+    .bg-modal_sent {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: flex; justify-content: center; align-items: center; border-radius: 4px; z-index: 999;
+    }
+
+    .mail_sent{
+        width: 450px; height: 450px; position: relative; background-color: #FFFFFF;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); border-radius: 30px;
+        flex-direction: column;  text-align: center; justify-content: center; vertical-align: middle;
+        font-size: 25px; padding-top: 100px;
+    }
+    .mail_sent-close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    .sent_text {
+        position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
+    }
+
+    /* Bukvy */
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_box {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_main {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;    
+    }
+    .bukvy_button:hover {
+        background-color: #ED1B24;
+    }
+    .bukvy_sent-close{
+        position: absolute;
+        font-size: 50px;
+        color: white;
+        top: 0; z-index: 1000;
+        right: 20px;
+        cursor: pointer;
+        width: 40px;
+    }
+    .headtext{
+        font-size: 30px; font-weight: 700; text-align: center; margin-top: 180px;
+    }
+    .vseuslugi {
+        width: 1440px; 
+        display: flex; flex-direction: row;
+        flex-wrap: wrap; justify-content: center; margin: auto;
+        
+    }
+    
+    .uslugi {
+        display: flex; flex-direction: row;
+        width:380px; height: 179px;
+        background: url('../media/home/Подложка.svg');
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-position: center;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .uslugi:hover {
+        box-shadow: 0px 4px 30px rgba(255, 0, 0, 0.402);
+    }
+
+    .uslugi_text {
+        display: flex; flex-direction: column;
+        padding-left: 8%;
+    }
+
+    .uslugi_head {
+        position: absolute;
+        margin-top: 20px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+
+    }
+    .uslugi_body {
+        position: absolute;
+        display: flex; width: 160px; max-height: 55px; overflow: hidden;
+        font-size: 10px; font-weight: 600; line-height: 12px; color: #959595;
+        margin-top: 110px;
+    }
+
+    .uslugi_img {
+        display: flex; align-items: center;
+    }
+    .uslugi_img_pechat {
+        display: flex; align-items: center;
+        position: absolute; margin-left: 180px; z-index: 0;
+    }
+    .shemaraboty {
+        margin-top: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .shema_headtext{
+        font-size: 30px; font-weight: 700; text-align: center; padding-top: 50px;
+    }
+    .shema_head2text{
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+    .head2text {
+        font-size: 18px; font-weight: 400; line-height: 22px; text-align: center; margin-top: 10px;
+    }
+    .redline {
+        background: #F6121C; width: 853px; height:10px; position: relative; margin-top: -270px; margin-bottom: 250px;
+    }
+    .shema_items {
+        position: relative; z-index: 2;
+        display: flex; flex-direction: row; justify-items: center; margin: auto;
+        flex-wrap: wrap; width: 1100px; justify-content: space-around;
+        }
+    .shema_item {
+        display: flex; flex-direction: row;
+        width:180px; height: 223px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        margin: 20px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .shema_number {
+        display: flex; align-items: center; height: 100px; overflow: hidden;
+        font-weight: 100; font-size: 120px; color: #EA003D; padding-right: 10px; padding-top: 13px; justify-content: flex-start;
+    }
+    .shema_text {
+        display: flex; flex-direction: column; padding-left: 8%; padding-top: 10px;
+    }
+    
+    .shema_head {
+        position: absolute;
+        margin-top: 80px;
+        font-size: 18px; font-weight: 700; line-height: 22px;
+        text-shadow: 2px 2px 0px white, 1px 1px 0px white;
+    }
+    .shema_body {
+        position: absolute;
+        display: flex; width: 134px; max-height: 80px; overflow: hidden;
+        font-size: 12px; font-weight: 400; line-height: 18px; color: #000000;
+        margin-top: 120px; text-shadow: 0.75px 0.75px 0px white, 1.5px 1.5px 0px white;
+    }
+    .shema_img {
+        display: flex; width: 70px; height: auto; justify-content: center;
+    }
+    .shema_last {
+        display: none;
+    }
+}

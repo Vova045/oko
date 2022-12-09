@@ -1,0 +1,118 @@
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}
+Список продуктов
+{% endblock title %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+{% block page_title %}
+Список продуктов
+{% endblock page_title %}
+
+{% block page_content %}
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <div class="search-element">
+      <div class="card">
+
+        <div class="card-body">
+        <form method="get">
+          <button class="btn btn-primary" type="submit" style="float:right"><i class="fas fa-search"></i>Search</button>    
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" style="width: 250px;float:right" name="filter" value="{{ filter }}">
+        </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <div class="search-element">
+      <div class="card">
+
+        <div class="card-body">
+          <b>Sort By: -</b>
+          <a href="{% url 'product_list' %}?filter={{ filter }}&orderby=id">ID</a> |
+          <a href="{% url 'product_list' %}?filter={{ filter }}&orderby=product_name">Title</a> |
+          <a href="{% url 'product_list' %}?filter={{ filter }}&orderby=product_description">Description</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="row">
+{% for product in object_list %}
+    <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+        <article class="article article-style-b">
+          <div class="article-header">
+            <div class="article-image" data-background="{{ product.media.media_content }}" style="background-size: contain;">
+            </div>
+            <div class="article-badge">
+              <div class="article-badge-item bg-danger"> {{ product.product.product_name }}</div>
+            </div>
+          </div>
+          <div class="article-details">
+            <p><span class="badge badge-primary">Подкатегория {{ product.product.subcategories_id.title }}</span></p>
+            <p><span class="badge badge-primary">Категория  {{ product.product.categories_id.title }}</span></p>
+            <div class="article-cta">
+                <!-- <label class="custom-switch mt-2" style="float:left">
+                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" {% if product.product.is_active == 1 %}checked{% endif %}>
+                    <span class="custom-switch-indicator"></span>
+                    <span class="custom-switch-description">ACTIVE</span>
+                </label> -->
+                <a href="{% url 'product_edit' product_id=product.product.id %}" class="btn btn-warning">Изменить <i class="fas fa-chevron-right"></i></a>
+                <div><br></div>
+                <a href="{% url 'product_add_media' product_id=product.product.id %}" class="btn btn-info btn-block">Добавить картинку <i class="fas fa-chevron-right"></i></a>
+                <a href="{% url 'product_edit_media' product_id=product.product.id %}" class="btn btn-success btn-block">Удалить картинку <i class="fas fa-chevron-right"></i></a>
+                <!-- <a href="{% url 'product_add_stocks' product_id=product.product.id %}" class="btn btn-primary btn-block">ADD Stocks <i class="fas fa-chevron-right"></i></a> -->
+                <button type="button" class="btn btn-danger btn-block delete_product"  data-location="{% url 'product_delete' id=product.product.id %}">Удалить</button>
+                <a href="{% url 'product_dublicate' product.product.id %}" class="btn btn-info" style="width: 100%; margin-top: 10px;">Дублировать </a>
+            </div>
+          </div>
+        </article>
+      </div>
+{% endfor %}
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+          {% if page.obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="{% url 'product_list' %}?filter={{ filter }}&orderby={{ orderby }}&page={{ page.obj.previous_page_number }}">Предыдущая</a></li>
+          {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">Предыдущая</a></li>
+          {% endif %}
+          {% for i in paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="{% url 'product_list' %}?filter={{ filter }}&orderby={{ orderby }}&page={{ i }}">{{ i }}</a></li>
+          {% endfor %}
+          {% if page.obj.has_next %}
+            <li class="page-item"><a class="page-link" href="{% url 'product_list' %}?filter={{ filter }}&orderby={{ orderby }}&page={{ page.obj.next_page_number }}">Следующая</a></li>
+          {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">Следующая</a></li>
+          {% endif %}
+          </ul>
+        </nav>
+      </div>
+  </div>
+</div>
+</div>
+{% endblock page_content %}
+
+{% block custom_js %}
+<script>
+  $(".delete_product").click(function(){
+      var id=$(this).data("location");
+      console.log(id);
+      var cnf=confirm("Are you Sure You want to Delete?");
+      if(cnf){
+          location=id;
+      }
+  });
+</script>
+
+{% endblock custom_js %}
