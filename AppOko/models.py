@@ -223,6 +223,9 @@ class CategoryGallery(models.Model):
     id=models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     is_active=models.IntegerField(default=1)
+    
+
+
 
 class Gallery(models.Model):
     id=models.AutoField(primary_key=True)

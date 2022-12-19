@@ -912,12 +912,21 @@ class GalleryListView(LoginRequiredMixin, ListView):
     paginate_by=21
 
     def get_queryset(self):
-        filter_val=self.request.GET.get("filter","")
-        order_by=self.request.GET.get("orderby","id")
-        if filter_val!="":
-            photos=Gallery.objects.filter(Q(photo_title__contains=filter_val) | Q(photo_description__contains=filter_val)).order_by(order_by)
+        filter_val_photo=self.request.GET.get("filter_photo")
+        order_by_photo=self.request.GET.get("orderby_photo","id")
+        filter_val_category_photo=self.request.GET.get("filter_category_photo")
+        if filter_val_category_photo =="":
+            photos=Gallery.objects.all().order_by(order_by_photo)
+        elif filter_val_category_photo != None:
+            filter_val_category_photo=CategoryGallery.objects.filter(title=filter_val_category_photo)
+            photos=Gallery.objects.filter(type_of_product=filter_val_category_photo[0].id).order_by(order_by_photo)
         else:
-            photos=Gallery.objects.all().order_by(order_by)
+            if filter_val_photo!=None:
+                photos=Gallery.objects.filter(Q(title__iregex=filter_val_photo) | Q(customer__iregex=filter_val_photo ) | Q(description__iregex=filter_val_photo)).order_by(order_by_photo)
+            else:
+                photos=Gallery.objects.all().order_by(order_by_photo)
+
+
 
         photo_list=[]
         for photo in photos:
@@ -926,9 +935,11 @@ class GalleryListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self,**kwargs):
         context=super(GalleryListView,self).get_context_data(**kwargs)
-        context["filter"]=self.request.GET.get("filter","")
-        context["orderby"]=self.request.GET.get("orderby","id")
+        context["filter_photo"]=self.request.GET.get("filter_photo","")
+        context["orderby_photo"]=self.request.GET.get("orderby_photo","id")
         context["all_table_fields"]=Gallery._meta.get_fields()
+        context["categories"]=CategoryGallery.objects.all()
+        context["filter_val_category_photo"]=self.request.GET.get("filter_val_category_photo","")
         return context
 
 class CategoryGalleryCreate(LoginRequiredMixin, View):
