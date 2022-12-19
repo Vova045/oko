@@ -50,21 +50,26 @@
           <div class="article-header">
             <div class="article-image" data-background="{{ photo.photo.media_content }}" style="background-size: contain;">
             </div>
-            <div class="article-badge">
+            <!-- <div class="article-badge">
               <div class="article-badge-item bg-danger"> {{ photo.photo.title }}</div>
-            </div>
+            </div> -->
           </div>
           <div class="article-details">
-            <p><span class="badge badge-primary">Тип изделия {{ photo.photo.type_of_product.title }}</span></p>
+            <!-- <p><span class="badge badge-primary">Тип изделия {{ photo.photo.type_of_product.title }}</span></p>
             <p><span class="badge badge-primary">Категория  {{ photo.photo.categories_id.title }}</span></p>
             <p><span class="badge badge-primary">Заказчик {{ photo.photo.customer }}</span></p>
-            <p><span class="badge badge-primary">Номер Заказа  {{ photo.photo.order_number }}</span></p>
-            <div class="article-cta">
+            <p><span class="badge badge-primary">Номер Заказа  {{ photo.photo.order_number }}</span></p> -->
+            <!-- <div class="article-cta">
                 <a href="{% url 'gallery_update' photo.photo.id %}" class="btn btn-warning">Изменить <i class="fas fa-chevron-right"></i></a>
                 <div><br></div>
                 <button type="button" class="btn btn-danger btn-block delete_product"  data-location="{% url 'gallery_delete' id=photo.photo.id %}">Удалить</button>
                 <a href="{% url 'gallery_dublicate' photo.photo.id %}" class="btn btn-info" style="width: 100%; margin-top: 10px;">Дублировать </a>
-            </div>
+            </div> -->
+            <div class="article-cta" style="text-align: center">
+              <a href="{% url 'gallery_update' photo.photo.id %}" class="btn btn-danger">Изменить </a>
+              <a href="{% url 'gallery_delete' photo.photo.id %}" class="btn btn-danger">Удалить </a>
+              <a href="{% url 'gallery_dublicate' photo.photo.id %}" class="btn btn-danger">Дублировать </a>
+          </div>
           </div>
         </article>
       </div>
