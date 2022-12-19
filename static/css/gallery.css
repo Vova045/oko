@@ -34,7 +34,7 @@
   border-radius: 0 0 10px 10px;
 }
 .owl-stage {
-  width: fit-content!important;
+  width: max-content!important;
 }
 
 @media (min-width: 40em) and (max-width: 59.99em) {
