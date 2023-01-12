@@ -1,0 +1,578 @@
+.bukvy_fon {
+    display: none;
+}
+
+@media (min-width: 1px) and (max-width: 250px) {
+    .bukvy_fon {
+        display: none;
+    }
+}
+@media (min-width: 251px) and (max-width: 319px) {
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_main {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_box {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+}
+    
+@media (min-width: 320px) and (max-width: 540px) {
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+        z-index: 999;
+    }
+}
+@media (min-width: 541px) and (max-width: 768px) {
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_main {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_box {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+        z-index: 999;
+    }
+}
+@media (min-width: 541px) and (max-width: 768px) {
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_main {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_box {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+        z-index: 999;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_main {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_slider {
+        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 257px; 
+        right: 40px;
+        width: 40px;
+        cursor: pointer; z-index: 1000;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 257px; 
+        left: 40px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 1000;
+    }
+    .bukvy_box {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_number {
+        display: flex; height: 282px; position: absolute; top: 220px;
+        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
+        justify-content: flex-start;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
+        align-items: center;
+    }
+    .bukvy_img {
+        display: flex;
+    }
+    .bukvy_button {
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 20px; 
+        margin-right: 20px; width: 280px; height: 52px;
+        border-radius: 50px;
+    }
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+        z-index: 999;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_main {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_details {
+        width: 900px; height: 550px; position: absolute;
+    }
+    .bukvy_slider {
+        position: absolute; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center; top: 500px; z-index: 999;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 415px; 
+        right: 160px;
+        width: 40px;
+        cursor: pointer; z-index: 999;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 415px; 
+        right: 220px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 999;
+    }
+    .modal-head2 {
+        position: absolute; top: 150px; left: 30px;
+    }
+    .bukvy_box {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: center; margin-top: 0px;
+        align-items: center; height: 450px; 
+    }
+    .bukvy_img {
+        display: flex; padding-top: 0px;
+    }
+    .bukvy_button {
+        position: absolute;
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 410px; 
+        width: 280px; height: 52px; left: 80px;
+        border-radius: 50px;    
+    }
+    .bukvy_button:hover {
+        background-color: #ED1B24;
+    }
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+        z-index: 999;
+    }
+    .white_box {
+        background: #FFFFFF; background-color: white;
+    }
+    .black_text {
+        color:black;
+    }
+    .black_text_button:hover {
+        color:#FFFFFF;
+    }
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_main {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_details {
+        width: 900px; height: 550px; position: absolute;
+    }
+    .bukvy_slider {
+        position: absolute; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center; top: 500px; z-index: 999;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 415px; 
+        right: 160px;
+        width: 40px;
+        cursor: pointer; z-index: 999;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 415px; 
+        right: 220px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 999;
+    }
+    .modal-head2 {
+        position: absolute; top: 150px; left: 30px;
+    }
+    .bukvy_box {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: center; margin-top: 0px;
+        align-items: center; height: 450px; 
+    }
+    .bukvy_img {
+        display: flex; padding-top: 0px;
+    }
+    .bukvy_button {
+        position: absolute;
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 410px; 
+        width: 280px; height: 52px; left: 80px;
+        border-radius: 50px;    
+    }
+    .bukvy_button:hover {
+        background-color: #ED1B24;
+    }
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+        z-index: 999;
+    }
+    .white_box {
+        background: #FFFFFF; background-color: white;
+    }
+    .black_text {
+        color:black;
+    }
+    .black_text_button:hover {
+        color:#FFFFFF;
+    }
+}
+
+@media (min-width: 1921px) {
+    .bukvy_fon {
+        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
+        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
+    }
+    .bukvy_main {
+        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    }
+    .bukvy_details {
+        width: 900px; height: 550px; position: absolute;
+    }
+    .bukvy_slider {
+        position: absolute; display: flex; flex-direction: row; width: 100%; height: 51px;
+        justify-content: center; top: 500px; z-index: 999;
+    }
+    .krug {
+        display: flex; width:10px; height: 10px;
+        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
+    }
+    .krug:hover {
+        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
+    }
+    .strelka_slider_right{
+        position: absolute;
+        top: 415px; 
+        right: 160px;
+        width: 40px;
+        cursor: pointer; z-index: 999;
+    }
+    .strelka_slider_left{
+        position: absolute;
+        top: 415px; 
+        right: 220px;
+        width: 40px;
+        cursor: pointer;
+        transform: rotate(180deg); z-index: 999;
+    }
+    .modal-head2 {
+        position: absolute; top: 150px; left: 30px;
+    }
+    .bukvy_box {
+        display: flex; flex-direction: row; position: absolute;
+        top: 0px; width: 100%;
+    }
+    .bukvy_text {
+        display: flex; flex-direction: column;
+    }
+    .bukvy_img_button {
+        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: center; margin-top: 0px;
+        align-items: center; height: 450px; 
+    }
+    .bukvy_img {
+        display: flex; padding-top: 0px;
+    }
+    .bukvy_button {
+        position: absolute;
+        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
+        color: white; font-weight: 600; background: none;
+        line-height: 16px; font-size: 16px; font-weight: 600;
+        border: 2px solid #ED1B24; margin-top: 410px; 
+        width: 280px; height: 52px; left: 80px;
+        border-radius: 50px;    
+    }
+    .bukvy_button:hover {
+        background-color: #ED1B24;
+    }
+    .bukvy_close{
+        font-size: 50px;
+        color: rgb(86, 86, 86);
+        position: absolute;
+        top: 0; 
+        right: 20px;
+        width: 40px;
+        cursor: pointer;
+        z-index: 999;
+    }
+    .white_box {
+        background: #FFFFFF; background-color: white;
+    }
+    .black_text {
+        color:black;
+    }
+    .black_text_button:hover {
+        color:#FFFFFF;
+    }
+}

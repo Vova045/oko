@@ -4,6 +4,7 @@
 {% block custom_css %}
 <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/main.css' %}">
 <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/gallery.css' %}">
+<link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/bukvy.css' %}">
 
 
 {% endblock custom_css %}
@@ -62,14 +63,8 @@
       </div>
       {% endfor %}
     </div>
-    <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide-to="0">
-      <span class="sr-only" style="color: black;">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide-to="1">
-      <span class="sr-only" style="color: black;">Next</span>
-    </a> -->
   </div>
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center gallery_buttons">
     {% for category in categories %}
     <a data-target="#carouselExampleControls" data-slide-to="{{forloop.counter0}}" href="#" style="width: auto;">
         <div id="gallery_button" class="btn btn-danger" style="width: auto; margin: 3px; ;">{{category.title}}</div>
@@ -378,6 +373,9 @@
 
 {% endblock %}
 
+{% block custom_js %}
+<script type="text/javascript" defer src="{% static 'js/bukvy.js' %}"></script>
+{% endblock custom_js %}
 
 
 

@@ -68,9 +68,6 @@ form textarea {
     .bg-modal_sent {
         display: none;
     }
-    .bukvy_fon {
-        display: none;
-    }
     .topcontent {
         display: none;
     }
@@ -185,7 +182,7 @@ form textarea {
 
     /* nashiuslugi css */
     .headtext{
-        font-size: 30px; font-weight: 700; text-align: center; margin-top: 200px;
+        font-size: 30px; font-weight: 700; text-align: center;
     }
     .vseuslugi {
         width: 100%; 
@@ -380,69 +377,6 @@ form textarea {
     .okay {
         width: 100px; height: auto;
     }
-    /* Bukvy */
-    .bukvy_fon {
-        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
-        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
-    }
-    .bukvy_box {
-        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
-        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
-    }
-    .bukvy_slider {
-        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
-        justify-content: center;
-    }
-    .krug {
-        display: flex; width:10px; height: 10px;
-        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
-    }
-    .krug:hover {
-        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
-    }
-    .strelka_slider_right{
-        position: absolute;
-        top: 257px; 
-        right: 40px;
-        width: 40px;
-        cursor: pointer; z-index: 1000;
-    }
-    .strelka_slider_left{
-        position: absolute;
-        top: 257px; 
-        left: 40px;
-        width: 40px;
-        cursor: pointer;
-        transform: rotate(180deg); z-index: 1000;
-    }
-    .bukvy_main {
-        display: flex; flex-direction: row; position: absolute;
-        top: 0px; width: 100%;
-    }
-    .bukvy_text {
-        display: flex; flex-direction: column;
-    }
-    .bukvy_number {
-        display: flex; height: 282px; position: absolute; top: 220px;
-        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
-        justify-content: flex-start;
-    }
-    .bukvy_img_button {
-        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
-        align-items: center;
-    }
-    .bukvy_img {
-        display: flex;
-    }
-    .bukvy_button {
-        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
-        color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
-        border: 2px solid #ED1B24; margin-top: 20px; 
-        margin-right: 20px; width: 280px; height: 52px;
-        border-radius: 50px;
-    }
-
 }
     
 @media (min-width: 320px) and (max-width: 540px) {
@@ -864,7 +798,7 @@ form textarea {
     }
     /* nashiuslugi css */
     .headtext{
-        font-size: 30px; font-weight: 700; text-align: center; margin-top: 160px;
+        font-size: 30px; font-weight: 700; text-align: center;
     }
     .vseuslugi {
         padding-top: 30px; width: 100%; 
@@ -1055,68 +989,6 @@ form textarea {
     .okay {
         width: 120px; height: auto;
     }
-    /* Bukvy */
-    .bukvy_fon {
-        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
-        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
-    }
-    .bukvy_box {
-        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
-        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
-    }
-    .bukvy_slider {
-        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
-        justify-content: center;
-    }
-    .krug {
-        display: flex; width:10px; height: 10px;
-        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
-    }
-    .krug:hover {
-        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
-    }
-    .strelka_slider_right{
-        position: absolute;
-        top: 257px; 
-        right: 40px;
-        width: 40px;
-        cursor: pointer; z-index: 1000;
-    }
-    .strelka_slider_left{
-        position: absolute;
-        top: 257px; 
-        left: 40px;
-        width: 40px;
-        cursor: pointer;
-        transform: rotate(180deg); z-index: 1000;
-    }
-    .bukvy_main {
-        display: flex; flex-direction: row; position: absolute;
-        top: 0px; width: 100%;
-    }
-    .bukvy_text {
-        display: flex; flex-direction: column;
-    }
-    .bukvy_number {
-        display: flex; height: 282px; position: absolute; top: 220px;
-        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
-        justify-content: flex-start;
-    }
-    .bukvy_img_button {
-        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
-        align-items: center;
-    }
-    .bukvy_img {
-        display: flex;
-    }
-    .bukvy_button {
-        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
-        color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
-        border: 2px solid #ED1B24; margin-top: 20px; 
-        margin-right: 20px; width: 280px; height: 52px;
-        border-radius: 50px;
-    }
 }
 @media (min-width: 541px) and (max-width: 768px) {
     .shemaraboty {
@@ -1251,7 +1123,7 @@ form textarea {
     }
        /* nashiuslugi css */
        .headtext{
-        font-size: 30px; font-weight: 700; text-align: center; margin-top: 170px;
+        font-size: 30px; font-weight: 700; text-align: center;
     }
     .vseuslugi {
         padding-top: 30px; width: 100%; 
@@ -1360,68 +1232,6 @@ form textarea {
     }
     .sent_text {
         position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
-    }
-    /* Bukvy */
-    .bukvy_fon {
-        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
-        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
-    }
-    .bukvy_box {
-        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
-        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
-    }
-    .bukvy_slider {
-        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
-        justify-content: center;
-    }
-    .krug {
-        display: flex; width:10px; height: 10px;
-        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
-    }
-    .krug:hover {
-        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
-    }
-    .strelka_slider_right{
-        position: absolute;
-        top: 257px; 
-        right: 40px;
-        width: 40px;
-        cursor: pointer; z-index: 1000;
-    }
-    .strelka_slider_left{
-        position: absolute;
-        top: 257px; 
-        left: 40px;
-        width: 40px;
-        cursor: pointer;
-        transform: rotate(180deg); z-index: 1000;
-    }
-    .bukvy_main {
-        display: flex; flex-direction: row; position: absolute;
-        top: 0px; width: 100%;
-    }
-    .bukvy_text {
-        display: flex; flex-direction: column;
-    }
-    .bukvy_number {
-        display: flex; height: 282px; position: absolute; top: 220px;
-        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
-        justify-content: flex-start;
-    }
-    .bukvy_img_button {
-        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
-        align-items: center;
-    }
-    .bukvy_img {
-        display: flex;
-    }
-    .bukvy_button {
-        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
-        color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
-        border: 2px solid #ED1B24; margin-top: 20px; 
-        margin-right: 20px; width: 280px; height: 52px;
-        border-radius: 50px;
     }
 }
 
@@ -1616,7 +1426,7 @@ form textarea {
     }
        /* nashiuslugi css */
        .headtext{
-        font-size: 30px; font-weight: 700; text-align: center; margin-top: 170px;
+        font-size: 30px; font-weight: 700; text-align: center;
     }
     .vseuslugi {
         padding-top: 30px; width: 100%; 
@@ -1666,7 +1476,7 @@ form textarea {
     /* dopolnenie css */
     .dopolnenie {
         display: flex; flex-direction: column; background-color: #3F3939; margin-top: 50px;
-        align-items: center; padding-top: 175px;
+        align-items: center; padding-top: 55px;
     }
 
     .dopolnenie_items {
@@ -1722,68 +1532,6 @@ form textarea {
     }
     .sent_text {
         position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
-    }
-    /* Bukvy */
-    .bukvy_fon {
-        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
-        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
-    }
-    .bukvy_box {
-        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
-        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
-    }
-    .bukvy_slider {
-        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
-        justify-content: center;
-    }
-    .krug {
-        display: flex; width:10px; height: 10px;
-        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
-    }
-    .krug:hover {
-        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
-    }
-    .strelka_slider_right{
-        position: absolute;
-        top: 257px; 
-        right: 40px;
-        width: 40px;
-        cursor: pointer; z-index: 1000;
-    }
-    .strelka_slider_left{
-        position: absolute;
-        top: 257px; 
-        left: 40px;
-        width: 40px;
-        cursor: pointer;
-        transform: rotate(180deg); z-index: 1000;
-    }
-    .bukvy_main {
-        display: flex; flex-direction: row; position: absolute;
-        top: 0px; width: 100%;
-    }
-    .bukvy_text {
-        display: flex; flex-direction: column;
-    }
-    .bukvy_number {
-        display: flex; height: 282px; position: absolute; top: 220px;
-        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
-        justify-content: flex-start;
-    }
-    .bukvy_img_button {
-        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
-        align-items: center;
-    }
-    .bukvy_img {
-        display: flex;
-    }
-    .bukvy_button {
-        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
-        color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
-        border: 2px solid #ED1B24; margin-top: 20px; 
-        margin-right: 20px; width: 280px; height: 52px;
-        border-radius: 50px;
     }
 }
 
@@ -1900,8 +1648,9 @@ form textarea {
         display: none;
     }
     /* nashiuslugi css */
+
     .headtext{
-    font-size: 30px; font-weight: 700; text-align: center; margin-top: 170px;
+    font-size: 30px; font-weight: 700; text-align: center;
     }
     .vseuslugi {
         padding-top: 30px; width: 100%; 
@@ -1951,7 +1700,7 @@ form textarea {
     /* dopolnenie css */
     .dopolnenie {
         display: flex; flex-direction: column; background-color: #3F3939;
-        margin-top: 50px; flex-wrap: wrap; align-items: center; padding-top: 175px;
+        margin-top: 50px; flex-wrap: wrap; align-items: center; padding-top: 55px;
     }
 
     .dopolnenie_items {
@@ -2015,6 +1764,7 @@ form textarea {
         padding-left: 40px;
         flex-direction: column;
         line-height: 2;
+        margin-top: 120px;
     }
     .return_form input[type="text"]{
         margin-bottom: 20px; border-radius: 10px; width: 300px; border: 0;
@@ -2087,77 +1837,6 @@ form textarea {
     }
     .sent_text {
         position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
-    }
-    /* Bukvy */
-    .bukvy_fon {
-        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
-        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
-    }
-    .bukvy_box {
-        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
-        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
-    }
-    .bukvy_slider {
-        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
-        justify-content: center;
-    }
-    .krug {
-        display: flex; width:10px; height: 10px;
-        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
-    }
-    .krug:hover {
-        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
-    }
-    .strelka_slider_right{
-        position: absolute;
-        top: 257px; 
-        right: 40px;
-        width: 40px;
-        cursor: pointer; z-index: 1000;
-    }
-    .strelka_slider_left{
-        position: absolute;
-        top: 257px; 
-        left: 40px;
-        width: 40px;
-        cursor: pointer;
-        transform: rotate(180deg); z-index: 1000;
-    }
-    .bukvy_main {
-        display: flex; flex-direction: row; position: absolute;
-        top: 0px; width: 100%;
-    }
-    .bukvy_text {
-        display: flex; flex-direction: column;
-    }
-    .bukvy_number {
-        display: flex; height: 282px; position: absolute; top: 220px;
-        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
-        justify-content: flex-start;
-    }
-    .bukvy_img_button {
-        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
-        align-items: center;
-    }
-    .bukvy_img {
-        display: flex;
-    }
-    .bukvy_button {
-        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
-        color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
-        border: 2px solid #ED1B24; margin-top: 20px; 
-        margin-right: 20px; width: 280px; height: 52px;
-        border-radius: 50px;
-    }
-    .bukvy_sent-close{
-        position: absolute;
-        font-size: 50px;
-        color: white;
-        top: 0; z-index: 1000;
-        right: 20px;
-        cursor: pointer;
-        width: 40px;
     }
 }
 
@@ -2271,9 +1950,11 @@ form textarea {
     .shema_last {
         display: none;
     }
-
+    .nashiuslugi {
+        margin-top: 50px;
+    }
     .headtext{
-        font-size: 30px; font-weight: 700; text-align: center; margin-top: 180px;
+        font-size: 30px; font-weight: 700; text-align: center;
     }
     .vseuslugi {
         width: 1440px; 
@@ -2325,7 +2006,7 @@ form textarea {
     .dopolnenie {
         flex-wrap: wrap; justify-content: flex-start; margin: auto; align-items: center;
         display: flex; flex-direction: column; background-color: #3F3939;
-        width: 100%; margin-top: 50px; padding-top: 200px;
+        width: 100%; margin-top: 50px; padding-top: 50px;
     }
     .dopolnenie_headtext{
         font-size: 30px; font-weight: 700; text-align: center;
@@ -2391,6 +2072,7 @@ form textarea {
         padding-left: 50px;
         flex-direction: column;
         line-height: 2;
+        margin-top: 120px;
     }
     .return_form input[type="text"]{
         margin-bottom: 20px; border-radius: 10px; border: 0;
@@ -2466,80 +2148,6 @@ form textarea {
     }
     .sent_text {
         position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
-    }
-   /* Bukvy */
-   .bukvy_fon {
-    width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
-    display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
-    }
-    .bukvy_box {
-        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
-        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
-    }
-    .bukvy_slider {
-        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
-        justify-content: center;
-    }
-    .krug {
-        display: flex; width:10px; height: 10px;
-        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
-    }
-    .krug:hover {
-        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
-    }
-    .strelka_slider_right{
-        position: absolute;
-        top: 257px; 
-        right: 40px;
-        width: 40px;
-        cursor: pointer; z-index: 1000;
-    }
-    .strelka_slider_left{
-        position: absolute;
-        top: 257px; 
-        left: 40px;
-        width: 40px;
-        cursor: pointer;
-        transform: rotate(180deg); z-index: 1000;
-    }
-    .bukvy_main {
-        display: flex; flex-direction: row; position: absolute;
-        top: 0px; width: 100%;
-    }
-    .bukvy_text {
-        display: flex; flex-direction: column;
-    }
-    .bukvy_number {
-        display: flex; height: 282px; position: absolute; top: 220px;
-        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
-        justify-content: flex-start;
-    }
-    .bukvy_img_button {
-        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
-        align-items: center;
-    }
-    .bukvy_img {
-        display: flex;
-    }
-    .bukvy_button {
-        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
-        color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
-        border: 2px solid #ED1B24; margin-top: 20px; 
-        margin-right: 20px; width: 280px; height: 52px;
-        border-radius: 50px;    
-    }
-    .bukvy_button:hover {
-        background-color: #ED1B24;
-    }
-    .bukvy_sent-close{
-        position: absolute;
-        font-size: 50px;
-        color: white;
-        top: 0; z-index: 1000;
-        right: 20px;
-        cursor: pointer;
-        width: 40px;
     }
 }
 
@@ -2704,6 +2312,7 @@ form textarea {
         padding-left: 50px;
         flex-direction: column;
         line-height: 2;
+        margin-top: 120px;
     }
     .return_form input[type="text"]{
         margin-bottom: 20px; border-radius: 10px; border: 0;
@@ -2780,83 +2389,11 @@ form textarea {
     .sent_text {
         position: relative; display: flex; color: black; font-size: 25px; align-items: center; justify-content: center; margin-top: 15px;
     }
-
-    /* Bukvy */
-    .bukvy_fon {
-        width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0;
-        display: none; justify-content: center; align-items: center; border-radius: 4px; z-index: 1000;
-    }
-    .bukvy_box {
-        width: 900px; height: 550px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
-        display: flex; position: relative; flex-direction: column; justify-content: flex-end; overflow: hidden;
-    }
-    .bukvy_slider {
-        position: relative; display: flex; flex-direction: row; width: 100%; height: 51px;
-        justify-content: center;
-    }
-    .krug {
-        display: flex; width:10px; height: 10px;
-        margin-left: 13px; margin-right: 13px; cursor: pointer; border-radius: 5px; background-color: #C4C4C4;
-    }
-    .krug:hover {
-        background: linear-gradient(180deg, #FF2E00 0%, #ED1B24 100%);
-    }
-    .strelka_slider_right{
-        position: absolute;
-        top: 257px; 
-        right: 40px;
-        width: 40px;
-        cursor: pointer; z-index: 1000;
-    }
-    .strelka_slider_left{
-        position: absolute;
-        top: 257px; 
-        left: 40px;
-        width: 40px;
-        cursor: pointer;
-        transform: rotate(180deg); z-index: 1000;
-    }
-    .bukvy_main {
-        display: flex; flex-direction: row; position: absolute;
-        top: 0px; width: 100%;
-    }
-    .bukvy_text {
-        display: flex; flex-direction: column;
-    }
-    .bukvy_number {
-        display: flex; height: 282px; position: absolute; top: 220px;
-        font-weight: 600; font-size: 300px; background: linear-gradient(175.51deg, rgba(52, 49, 49, 0.79) 23.05%, #1B1818 74.86%); background-clip: text;
-        justify-content: flex-start;
-    }
-    .bukvy_img_button {
-        display: flex; width: 410px; left: 490px; position: relative; flex-direction: column; justify-content: flex-start; margin-top: 0px;
-        align-items: center;
-    }
-    .bukvy_img {
-        display: flex;
-    }
-    .bukvy_button {
-        display: flex; flex-direction: column; align-items: center; width: 280px; height: 52px; justify-content: center; 
-        color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
-        border: 2px solid #ED1B24; margin-top: 20px; 
-        margin-right: 20px; width: 280px; height: 52px;
-        border-radius: 50px;    
-    }
-    .bukvy_button:hover {
-        background-color: #ED1B24;
-    }
-    .bukvy_sent-close{
-        position: absolute;
-        font-size: 50px;
-        color: white;
-        top: 0; z-index: 1000;
-        right: 20px;
-        cursor: pointer;
-        width: 40px;
+    .nashiuslugi {
+        margin-top: 50px;
     }
     .headtext{
-        font-size: 30px; font-weight: 700; text-align: center; margin-top: 180px;
+        font-size: 30px; font-weight: 700; text-align: center; margin-top: 0px;
     }
     .vseuslugi {
         width: 1440px; 
