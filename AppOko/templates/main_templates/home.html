@@ -1,10 +1,12 @@
 {% extends 'main_templates/main_template.html' %}
 {% load static %}
+{% block title %}
+Студия Рекламы Око
+{% endblock title %}
 
 {% block custom_css %}
 <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/main.css' %}">
 <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/gallery.css' %}">
-<link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/bukvy.css' %}">
 
 
 {% endblock custom_css %}
@@ -77,7 +79,7 @@
         <p>Наши услуги</p>
     </div>
     <div class="vseuslugi">
-        <div id="bukvy" class="uslugi"  style="cursor: pointer;">
+        <div id="bukvy" class="uslugi"  style="cursor: pointer;" onClick="window.location='bukvy/'" >
             <div class="uslugi_text">
                 <div class="uslugi_head"  style="word-break:keep-all;">
                     <p>Объёмные<br>буквы</p>
@@ -129,7 +131,8 @@
                 <img src="{% static 'img/home/Интерьерное оформление 1.png' %}">
             </div>
         </div>
-        <div class="uslugi" onClick="window.location='detsad/'" style="cursor:pointer">
+        <div class="uslugi" onClick="window.location='detsad/'" 
+        style="cursor:pointer">
             <div class="uslugi_text">
                 <div class="uslugi_head">
                     <p>Стенды</p>
@@ -374,7 +377,7 @@
 {% endblock %}
 
 {% block custom_js %}
-<script type="text/javascript" defer src="{% static 'js/bukvy.js' %}"></script>
+<!-- <script type="text/javascript" defer src="{% static 'js/bukvy.js' %}"></script> -->
 {% endblock custom_js %}
 
 

@@ -327,3 +327,6 @@ def adminLogoutProcess(request):
     logout(request)
     messages.success(request,"Logout Succesfully")
     return HttpResponseRedirect(reverse("admin_login"))
+
+def bukvy(request):
+    return render (request, 'main_templates/bukvy.html',) 

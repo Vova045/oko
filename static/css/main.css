@@ -43,7 +43,6 @@ form textarea {
 .navbar .dropdown-item:active { background-color: white;}
 
 
-
  
 
 @media (min-width: 1px) and (max-width: 250px) {
@@ -1425,7 +1424,10 @@ form textarea {
         display: none;
     }
        /* nashiuslugi css */
-       .headtext{
+    .nashiuslugi {
+        margin-top: 40px;
+    }
+    .headtext{
         font-size: 30px; font-weight: 700; text-align: center;
     }
     .vseuslugi {
@@ -1649,6 +1651,9 @@ form textarea {
     }
     /* nashiuslugi css */
 
+    .nashiuslugi {
+        margin-top: 40px;
+    }
     .headtext{
     font-size: 30px; font-weight: 700; text-align: center;
     }

@@ -1,185 +1,334 @@
+{% extends 'main_templates/main_template.html' %}
 {% load static %}
-<div class="bukvy_fon">
-    <div class="bukvy_details">
-        <div class="bukvy_close"><img src="{% static 'img/home/x.svg' %}"></div>
-        <div class="strelka_slider_right">
-            <img src="{% static 'img/home/Стрелки.svg' %}">
-        </div>
-        <div class="strelka_slider_left">
-            <img src="{% static 'img/home/Стрелки.svg' %}">
-        </div>
-        <div class="bukvy_slider">
-            <div class="krug">
-            </div>
-            <div class="krug">
-            </div>
-            <div class="krug">
-            </div>
-            <div class="krug">
-            </div>
-            <div class="krug">
-            </div>
-            <div class="krug">
-            </div>
-            <div class="krug">
-            </div>
-        </div>
-    </div>
-    <div class="bukvy_main" style="display: flex;">
-        <div class="bukvy_box">
-            <div class="bukvy_text">
-                <div class="modal-head" style="position: absolute; top: 0px;">
-                    <div style="background: #F6121C; width: 10px; height:78px">
-                    </div>
-                    <div class="modal-formhead">
-                        <p style="margin-bottom: 0px;"> <b>Объемные буквы<br>со световым лицом</b></p>
-                    </div>
-                </div>
-                <div class="modal-head2">
-                    <p><b></b>Объёмные буквы со световым лицом с<br>внутренней подсветкой – это одна из<br>наиболее востребованных разновидностей<br>наружной рекламы.</p>
-                </div>
-                <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
-            </div>
-            <div class="bukvy_img_button" style="margin-top: 0px;">
-                <div class="bukvy_img">
-                    <img src="{% static 'img/home/буква1.png' %}">                
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bukvy_main" style="display: none;">
-        <div class="bukvy_box">
-            <div class="bukvy_text">
-                <div class="modal-head" style="position: absolute; top: 0px;">
-                    <div style="background: #F6121C; width: 10px; height:78px">
-                    </div>
-                    <div class="modal-formhead">
-                        <p style="margin-bottom: 0px;"> <b>Объемные буквы<br>с перфорированным<br>бортом</b></p>
-                    </div>
-                </div>
-                <div class="modal-head2">
-                    <p>Объёмные буквы с перфорированным<br>бортом это новый трэнд в изготовлении<br>световых букв. Буквы с перфоривованным<br>бортом выделят вам среди конкурентов.</p>
-                </div>
-                <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
-            </div>
-            <div class="bukvy_img_button" style="margin-top: 0px;">
-                <div class="bukvy_img">
-                    <img src="{% static 'img/home/буква2.png' %}">                
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bukvy_main" style="display: none;">
-        <div class="bukvy_box">
-            <div class="bukvy_text">
-                <div class="modal-head" style="position: absolute; top: 0px;">
-                    <div style="background: #F6121C; width: 10px; height:78px">
-                    </div>
-                    <div class="modal-formhead">
-                        <p style="margin-bottom: 0px;"> <b>Объемные буквы<br>со световым лицом<br>и бортом</b></p>
-                    </div>
-                </div>
-                <div class="modal-head2">
-                    <p>Объемные буквы со световым бортом<br>красиво смотрятся на фасадах<br>зданий и в интерьере. Световой борт<br>увеличивает эффект объема букв.<br>Яркий свет не раздражает глаз и<br>позволяет увидеть вывеску на<br>минимальном расстоянии</p>
-                </div>
-                <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+{% block title %}
+Объемные буквы
+{% endblock title %}
+{% block custom_css %}
+<link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/main.css' %}">
+<link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/bukvy.css' %}">
+<link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/navbar.css' %}">
+{% endblock custom_css %}
 
+{% block content %}
+<div class="navbar_otd">
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">ОБЪЕМНЫЕ<br>БУКВЫ</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">ВЫВЕСКИ</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">ШИРОКОФОРМАТНАЯ<br>ПЕЧАТЬ</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">ИНТЕРЬЕРНАЯ<br>РЕКЛАМА</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">СТЕНДЫ</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">ТАБЛИЧКИ</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">ПОЛИГРАФИЯ</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">БРЕНДИРОВАНИЕ<br>АВТО</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+    <div class="navbar_button_box" style="height: 100%;">
+        <div class="navbar_button white_button" style="height: 100%;">
+            <a href="#">МОБИЛЬНЫЕ<br>СИСТЕМЫ</a>
+        </div>
+        <hr class="nav_hr">
+    </div>
+</div>
+<hr class="nav_hr_all">
+<div class="wrapper">
+    <div class="path">
+        <p>Домашняя страница / Объемные буквы</p>
+    </div>
+    <div class="title_div row">
+        <div class="text_div">
+            <h1>Объемные<br>Буквы</h1>
+            <p>Объемные привлекательны,<br>
+в первую очередь, ценой и в связи с этим<br>
+наилучшим решением цена/качество при<br>
+необходимости изготовить наружную рекламу<br>
+именно с помощью объемных букв.</p>
+            <input type="submit" value="Заказать" form="return_form" class="bukvy_button" name="return_button"/>
+        </div>
+        <div class="image_div">
+            <div class="main_image">
+                <img class="main_image" style="object-fit: cover;object-position: 100% 0;" src="{% static 'img/bukvy/vepi315x420px.png' %}">   
             </div>
-            <div class="bukvy_img_button" style="margin-top: 0px;">
-                <div class="bukvy_img">
-                    <img src="{% static 'img/home/буква3.png' %}">                
+            <div class="second_image">
+                <div class="one_second_image">
+                    <img class="one_second_image" style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/cvetofor360x270px.png' %}"> 
+                </div>
+                <div class="two_second_image">
+                    <img class="two_second_image" style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/tc_mebel360x270px.png' %}"> 
                 </div>
             </div>
         </div>
     </div>
-    <div class="bukvy_main" style="display: none;">
-        <div class="bukvy_box">
-            <div class="bukvy_text">
-                <div class="modal-head" style="position: absolute; top: 0px;">
-                    <div style="background: #F6121C; width: 10px; height:78px">
-                    </div>
-                    <div class="modal-formhead">
-                        <p style="margin-bottom: 0px;"><b>Буквы-вывеска<br>с контражурной<br>подсветкой</b></p>
-                    </div>
-                </div>
-                <div class="modal-head2">
-                    <p>Контражур на объёмных буквах —<br>подсветка, расположенная по<br>контуру конструкции. Мягкий свет<br>рассеивается, создавая ореол вокруг<br>букв. Такое расположение создаёт<br>зрительный эффект "парящей"<br>вывески.</p>
-                </div>
-                <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
-            </div>
-            <div class="bukvy_img_button" style="margin-top: 0px;">
-                <div class="bukvy_img">
-                    <img src="{% static 'img/home/буква4.png' %}">                
-                </div>
-            </div>
+    <div class="description_div row">
+        <div class="description_title row">
+            <h1>Виды объемных букв</h1>
         </div>
-    </div>
-    <div class="bukvy_main" style="display: none;">
         <div class="bukvy_box">
-            <div class="bukvy_text">
-                <div class="modal-head" style="position: absolute; top: 0px;">
-                    <div style="background: #F6121C; width: 10px; height:78px">
+            <div class="bukvy_main">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1> Объемные буквы<br><b>со световым лицом</b></h1>
                     </div>
-                    <div class="modal-formhead">
-                        <p style="margin-bottom: 0px;"> <b>Буквы с контражурной<br>подсветкой<br> и световым лицом</b></p>
+                    <div class="modal_head_bukvy">
+                        <p>Объёмные буквы со световым лицом с<br>внутренней подсветкой – это одна из<br>наиболее востребованных разновидностей<br>наружной рекламы.</p>
                     </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
                 </div>
-                <div class="modal-head2">
-                    <p>Данный вид букв представляет собой<br>сочетание классических световых букв и букв<br>с контражурной подсветкой. Это очень<br>красивый способ подчеркнуть статус вашей<br>компании. Такие вывески никого не оставят<br>равнодушным и заставят не пройти мимо.</p>
-                </div>
-                <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
-            </div>
-            <div class="bukvy_img_button" style="margin-top: 0px;">
-                <div class="bukvy_img">
-                    <img src="{% static 'img/home/буква5.png' %}">                
+                <div class="bukvy_img_box">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква1.png' %}">                
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="bukvy_main white_box" style="display: none;">
-        <div class="bukvy_box">
-            <div class="bukvy_text">
-                <div class="modal-head" style="position: absolute; top: 0px;">
-                    <div style="background: #F6121C; width: 10px; height:78px">
-                    </div>
-                    <div class="modal-formhead black_text">
-                        <p style="margin-bottom: 0px;"> <b>Буквы из зеркального<br>
+            <div class="bukvy_main white_box">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1>Буквы из <b>зеркального <br>
                             и шлифованного<br>
-                            пластика, акрила</b></p>
+                            пластика, акрила</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Объемные буквы со световым бортом красиво <br>смотрятся на фасадах зданий и в интерьере. <br>Световой бортувеличивает эффект объема букв. <br>Яркий свет не раздражает глаз и позволяет <br> увидеть вывеску на минимальном расстоянии</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_button">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква6.png' %}">                
                     </div>
                 </div>
-                <div class="modal-head2 black_text">
-                    <p>Объёмные буквы со световым лицом с<br>внутренней подсветкой – это одна из<br>наиболее востребованных разновидностей<br>наружной рекламы.</p>
-                </div>
-                <input type="submit" value="Подробнее" form="return_form" class="bukvy_button black_text_button black_text" name="return_button"/>
             </div>
-            <div class="bukvy_img_button">
-                <div class="bukvy_img">
-                    <img src="{% static 'img/home/Буквы из зеркального и шлифованного пластика.png' %}">                
+        </div>
+        <div class="bukvy_box">
+            <div class="bukvy_main white_box">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1>Буквы <b>из прозрачного<br>акрила</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Буквы из оргстекла очень выигрышно<br> смотрятся в оформлении рецепшенов и<br> офисных помещений и интерьерных<br> вывесках.</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_button">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква7.png' %}">                
+                    </div>
+                </div>
+            </div>
+            <div class="bukvy_main">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1> Объемные буквы<br><b>с перфорированным<br>бортом</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Объёмные буквы с перфорированным<br>бортом это новый трэнд в изготовлении<br>световых букв. Буквы с перфоривованным<br>бортом выделят вам среди конкурентов.</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_box">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква2.png' %}">                
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bukvy_box">
+            <div class="bukvy_main">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1>Объемные буквы<br><b>со световым лицом<br>и бортом</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Объемные буквы со световым бортом<br>красиво смотрятся на фасадах зданий и <br>в интерьере. Световой бортувеличивает эффект<br>объема букв. Яркий свет не раздражает глаз и<br>позволяет увидеть вывеску на<br>минимальном расстоянии</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_box">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква3.png' %}">                
+                    </div>
+                </div>
+            </div>
+            <div class="bukvy_main white_box">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1>Буквы <b>из цветного<br>акрила</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Виды изделий: буквы, цифры, слова и <br>надписи, вывески, логотипы и таблички. <br>Отдельные вырезанные изделия, а <br>также составные части экспозиций и <br>панно. Могут дополняться платформой <br>– ножками для настольного применения <br>и другими конструкционными элементами.</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_button">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква8.png' %}">                
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bukvy_box">
+            <div class="bukvy_main white_box">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1>Плоские буквы <b>из ПВХ</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Псевдообъемные буквы из ПВХ ещё<br> применяются для оформления выставочных<br> стендов, интерьера в офисе. Конструкция <br>выглядит эффектно и при этом имеет <br>небольшой вес.</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_button">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква10.png' %}">                
+                    </div>
+                </div>
+            </div>
+            <div class="bukvy_main">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1>Буквы<br><b>с контражурной<br>подсветкой</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Контражур на объёмных буквах — подсветка, <br>расположенная поконтуру конструкции. <br>Мягкий свет рассеивается, создавая ореол<br>вокруг букв. Такое расположение создаёт<br> зрительный эффект "парящей" вывески.</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_box">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква4.png' %}">                
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bukvy_box">
+            <div class="bukvy_main">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1>Буквы с контражурной<br><b>подсветкой<br> и световым лицом</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Данный вид букв представляет собой<br>сочетание классических световых букв и букв<br>с контражурной подсветкой. Это очень<br>красивый способ подчеркнуть статус вашей<br>компании. Такие вывески никого не оставят<br>равнодушным и заставят не пройти мимо.</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_button">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква5.png' %}">                
+                    </div>
+                </div>
+            </div>
+            <div class="bukvy_main white_box">
+                <div class="bukvy_text">
+                    <div class="modal_head_bukvy">
+                        <h1> Плоские буквы <br><b>из композита, АКП</b></h1>
+                    </div>
+                    <div class="modal_head_bukvy">
+                        <p>Объёмные буквы с перфорированным<br>бортом это новый трэнд в изготовлении<br>световых букв. Буквы с перфоривованным<br>бортом выделят вам среди конкурентов.</p>
+                    </div>
+                    <input type="submit" value="Подробнее" form="return_form" class="bukvy_button" name="return_button"/>
+                </div>
+                <div class="bukvy_img_box">
+                    <div class="bukvy_img">
+                        <img src="{% static 'img/home/буква9.png' %}">                
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="bukvy_main white_box" style="display: none;">
-        <div class="bukvy_box">
-            <div class="bukvy_text">
-                <div class="modal-head" style="position: absolute; top: 0px;">
-                    <div style="background: #F6121C; width: 10px; height:78px">
-                    </div>
-                    <div class="modal-formhead black_text">
-                        <p style="margin-bottom: 0px;"> Объемные буквы<br><b>со световым лицом</b></p>
-                    </div>
-                </div>
-                <div class="modal-head2 black_text">
-                    <p>Объёмные буквы со световым лицом с<br>внутренней подсветкой – это одна из<br>наиболее востребованных разновидностей<br>наружной рекламы.</p>
-                </div>
-                <input type="submit" value="Подробнее" form="return_form" class="bukvy_button black_text_button black_text" name="return_button"/>
+    <div class="paper_div row">
+        <div class="papper_one">
+            <img style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/pivovarnya582x437px.png' %}"> 
+            <h1>Нужно упростить монтаж?<br>
+                Закажите буквы вместе с каркасом</h1>
+            <p>Напишите об этом в форме заказа, и менеджер включит услугу в заказ,<br>
+                а дизайнер покажет как буквы будут смотреться на каркасе</p>
+        </div>
+        <div class="papper_two">
+            <img style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/penoplast_letter582x437.png' %}"> 
+            <h1>Буквы из пенопласта - лучший вариант<br>
+                украсить любое мероприятие</h1>
+            <p>Напишите об этом в форме заказа, и менеджер включит услугу в заказ,<br>
+                а дизайнер покажет как буквы будут смотреться на каркасе</p>
+        </div>
+    </div>
+    <div class="attention_div row">
+        <div class="attention_image">
+            <img style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/dergava773x420px.png' %}"> 
+        </div>
+        <div class="attention_text">
+            <h1>Выделяйте<br>
+                нужные слова<br>
+                объемом</h1>
+            <p>Дайте важным словам выбраться <br>
+                на свободу из плоскости зданий</p>
+        </div>
+    </div>
+    <div class="gallery_div row">
+        <div class="description_title row">
+            <h1>Галерея</h1>
+        </div>
+        <div class="gallery_box row">
+            <div class="main_image_gallery">
+                <img class="main_image_gallery" style="object-fit: cover;object-position: 70% 0;" src="{% static 'img/bukvy/perfecto813x610px.png' %}">   
             </div>
-            <div class="bukvy_img_button">
-                <div class="bukvy_img">
-                    <img src="{% static 'img/home/Плоские буквы из акрила 3-20мм.png' %}">                
+            <div class="second_image_gallery">
+                <div class="one_second_image_gallery">
+                    <img class="one_second_image_gallery" style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/ozdorovlenie400x300px.png' %}"> 
+                </div>
+                <div class="two_second_image_gallery">
+                    <img class="two_second_image_gallery" style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/apteka400x300px.png' %}"> 
+                </div>
+            </div>
+            <div class="third_image_gallery">
+                <div class="one_second_image_gallery">
+                    <img class="one_second_image_gallery" style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/remont_chasov400x300px.png' %}"> 
+                </div>
+                <div class="two_second_image_gallery">
+                    <img class="two_second_image_gallery" style="object-fit: cover;object-position: 30% 70%;" src="{% static 'img/bukvy/poputi400x300px.png' %}"> 
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block custom_js %}
+<script src="{% static '/js/bukvy.js' %}"></script>
+{% endblock custom_js %}
