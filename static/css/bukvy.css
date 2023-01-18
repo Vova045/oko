@@ -215,7 +215,7 @@
     }
     
     .bukvy_main {
-        width: 500px; height: 360px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
+        width: 500px; height: 320px; background: linear-gradient(153.2deg, #1C1919 50.16%, #000000 81.91%);
         display: flex; position: relative; flex-direction: row; overflow: hidden; justify-content: space-between;
     }
     .white_box {
@@ -240,10 +240,13 @@
         position: absolute;
         display: flex; flex-direction: column; align-items: center; width: 200px; height: 52px; justify-content: center; 
         color: white; font-weight: 600; background: none;
-        line-height: 16px; font-size: 16px; font-weight: 600;
+        line-height: 16px; font-size: 13px; font-weight: 600;
         border: 2px solid #ED1B24; margin-top: 0px;
-        width: 280px; height: 52px; left: 20px; top: 270px;
+        width: 200px; height: 40px; left: 20px; top: 250px;
         border-radius: 50px;    
+    }
+    .bukvy_button:hover{
+        color: white; background: #ED1B24;
     }
     .bukvy_img_box {
         display: flex; width: 370px; position: relative; flex-direction: column;
