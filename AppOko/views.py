@@ -10,6 +10,7 @@ from django.conf import settings
 from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery
 from oko.settings import MEDIA_ROOT, MEDIA_URL
 from django.db.models import Q
+from django.core.mail import send_mail
 
 # from django.http import HttpResponse
 # import json as simplejson
@@ -28,18 +29,21 @@ from django.db.models import Q
 
 def send_gmail(request):
     if request.method == 'POST':
-        subject='Новая заявка'
-        message_name = request.POST.get('message_name')
-        message = request.POST.get('message')
-        telephone = request.POST.get('telephone')
-        form_email = settings.EMAIL_HOST_USER
-        to='reklama-oko@mail.ru'
-        msg=(f"<p>Поступила заявка от {message_name}, его телефонный номер {telephone}. Вот его сообщение: {message}</p>")
-        msg = EmailMultiAlternatives(subject,msg,form_email,[to])
-        msg.content_subtype='html'
-        msg.send()
-        return render (request, 'main_templates/home.html', {'message_name': message_name})
-        
+        if request.POST.get("form_type") == 'formOne':
+            message_name = request.POST.get('message_name')
+            message = request.POST.get('message')
+            telephone = request.POST.get('telephone')
+            msg=(f"Поступила заявка от {message_name}, его телефонный номер {telephone}. Вот его сообщение: {message}")
+            return render (request, 'main_templates/home.html', {'msg': msg, 'recaptcha_site_key':settings.RECAPTCHA_PUBLIC_KEY})
+        elif request.POST.get("form_type") == 'formTwo':
+            msg = request.POST.get('g-recaptcha_msg')
+            subject='Новая заявка'
+            form_email = settings.EMAIL_HOST_USER
+            if request.recaptcha_is_valid:
+                send_mail(subject, msg, form_email,
+    ['vovatsar@bk.ru','reklama-oko@mail.ru'], fail_silently=False)
+                return render (request, 'main_templates/home.html', {'message_name': msg, 'recaptcha_site_key':settings.RECAPTCHA_PUBLIC_KEY})
+        return render (request, 'main_templates/home.html',)
     else:
         return render (request, 'main_templates/home.html',) 
 

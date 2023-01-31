@@ -18,6 +18,7 @@
         <div class="footer_modal-form">
             <form  class="return_form_footer2" id='return_form_home' method="POST" action="{% url 'home' %}">
                 {% csrf_token %}
+                <input type="hidden" name="form_type" value="formOne">
                 <input type="text" name="message_name" placeholder="Ваше имя"  required=True>
                 <input type="text" name="telephone" placeholder="Ваше телефон" required=True pattern="[0-9.)(+-]{4,20}$">
                 <input type="text" name="email" placeholder="Ваш e-mail" required=True pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">

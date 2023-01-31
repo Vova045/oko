@@ -49,6 +49,21 @@
     {% if message_name %}
     {% include 'main_templates/message_sent.html' %}
     {% endif%}
+    {% if msg %}
+    <div class="capcha_content" id="capcha_content_msg">
+      <div class="capcha_window">
+          <div class="capcha_button">
+              <form class="capcha_form" id='capcha_form' method="POST" action="" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="hidden" name="form_type" value="formTwo">
+                  <div class="form-group g-recaptcha" data-callback="onHuman" name="g-recaptcha" data-sitekey="6LdlqD4kAAAAALp3uHHgdCX16VneAWd3CxUhtTOI"></div>
+                  <INPUT type="hidden" id="captcha" name="g-recaptcha" form="capcha_form" value="">    
+                  <INPUT type="hidden" id="captcha" name="g-recaptcha_msg" form="capcha_form" value="{{ msg }}">
+              </form>
+          </div>  
+      </div>
+    </div>
+    {% endif %}
     <div class="main-wrapper main-wrapper-1">
         {% block content %}
 
@@ -79,6 +94,7 @@
     <script src="{% static '/js/scripts.js' %}"></script>
     <script src="{% static '/js/custom.js' %}"></script>
     <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
   {% block custom_js %}
   {% endblock custom_js %}
@@ -94,7 +110,26 @@ $('.owl-carousel').owlCarousel({
     autoWidth:true,
 })
   </script>
-
+  <script>
+    //делает капчу обязательной
+    window.onload = function() {
+    var $recaptcha = document.querySelector('#g-recaptcha-response');
+    if($recaptcha) {
+        $recaptcha.setAttribute("required", "required");
+    }
+};
+  </script>
+  <SCRIPT type="text/javascript"> 
+  //передает значение капчи в инпут
+    function onHuman(response) { 
+     if (document.getElementById('capcha_content_msg')){
+        document.getElementById('captcha').value = response; 
+        if (document.getElementById('captcha').value != 0) {
+            document.getElementById('capcha_form').submit();
+      }
+     }
+    } 
+  </SCRIPT>
 </body>
 </html>
 

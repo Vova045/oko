@@ -17,8 +17,9 @@
             <div class="modal-head2">
                 <p>Остались вопросы? <br> Спросите специалиста</p>
             </div>
-            <form id="return_form_window" class="return_form" method="POST" action="{% url 'home' %}">
+            <form id="return_form_window" value="FormOne" class="return_form" method="POST" action="{% url 'home' %}">
                 {% csrf_token %}
+                <input type="hidden" name="form_type" value="formOne">
                 <input type="text" name="message_name" placeholder="Ваше имя"  required=True >
                 <input type="text" name="telephone" placeholder="Ваше телефон" required=True >
                 <input type="text" name="email" placeholder="Ваш e-mail" required=True pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">

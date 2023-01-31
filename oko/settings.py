@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'captcha',
     'AppOko',
 ]
 
@@ -161,3 +161,9 @@ EMAIL_USE_SSL = False
 import os.path
 
 LOGIN_URL = 'admin_login'
+
+RECAPTCHA_PUBLIC_KEY = '6LdlqD4kAAAAALp3uHHgdCX16VneAWd3CxUhtTOI'
+RECAPTCHA_PRIVATE_KEY = '6LdlqD4kAAAAAHZ5715-VU12oF4U3PK5QjOr2xI5'
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5
+RECAPTCHA_LANGUAGE = 'en'
