@@ -59,11 +59,13 @@
         {% url 'customer_create' as customer_create %}
         {% url 'customer_list' as customer_list %}
         {% url 'customer_update' as customer_update %}
+        {% url 'customer_fast_create' as customer_fast_create %}
         <li class="dropdown {% if request.path == customer_create %} active {% endif %}{% if request.path == customer_list %} active {% endif %}{% if request.path == customer_update %} active {% endif %}">
           <a href="#" class="nav-link has-dropdown"><span>Покупатели</span></a>
           <ul class="dropdown-menu">
             <li class="{% if request.path == customer_create %} active {% endif %}"><a class="nav-link" href="{% url 'customer_create' %}">Добавить покупателя</a></li>
             <li class="{% if request.path == customer_list %} active {% endif %}{% if request.path == customer_update %} active {% endif %}"><a class="nav-link" href="{% url 'customer_list' %}">Список покупателей</a></li>
+            <li class="{% if request.path == customer_fast_create %} active {% endif %}"><a class="nav-link" href="{% url 'customer_fast_create' %}">Быстрое добавление клиента</a></li>
           </ul>
         </li>
 
@@ -101,6 +103,16 @@
           <ul class="dropdown-menu">
             <li class="{% if request.path == gallery_list %} active {% endif %}{% if request.path == gallery_update %} active {% endif %}"><a class="nav-link" href="{% url 'gallery_list' %}">Все фото</a></li>
             <li class="{% if request.path == gallery_create %} active {% endif %}"><a class="nav-link" href="{% url 'gallery_create' %}">Добавить фото</a></li>
+          </ul>
+        </li>
+
+
+        <!-- Projects -->
+        {% url 'projects_list' as projects_list %}
+        <li class="dropdown {% if request.path == projects_list %} active {% endif %}">
+          <a href="#" class="nav-link has-dropdown"><span>Проекты</span></a>
+          <ul class="dropdown-menu">
+            <li class="{% if request.path == projects_list %} active {% endif %}"><a class="nav-link" href="{% url 'projects_list' %}">Все проекты</a></li>
           </ul>
         </li>
 

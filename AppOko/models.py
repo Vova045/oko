@@ -1,4 +1,3 @@
-
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -21,9 +20,10 @@ class StaffUser(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
 
 class CustomerUser(models.Model):
+    profile_pic=models.FileField(default="", blank=True, null=True)
     auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
-    profile_pic=models.FileField(default="")
     created_at=models.DateTimeField(auto_now_add=True)
+    
 
 
 class Chapters(models.Model):
@@ -241,3 +241,16 @@ class Gallery(models.Model):
     def get_absolute_url(self):
         return reverse("gallery_list")
 
+class Projects (models.Model):
+    date = models.CharField(max_length=150,null=True, blank=True)
+    number = models.CharField(max_length=150,null=True, blank=True)
+    name = models.CharField(max_length=150,null=True, blank=True)
+    client = models.CharField(max_length=150,null=True, blank=True)
+    manager = models.CharField(max_length=150,null=True, blank=True)
+
+    def __str__(self):
+        return self.number
+
+    class Meta:
+        ordering = ['-number']
+    

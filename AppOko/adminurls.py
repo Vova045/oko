@@ -57,6 +57,7 @@ urlpatterns = [
     path('customer_create',AdminViews.CustomerUserCreateView.as_view(),name="customer_create"),
     path('customer_list',AdminViews.CustomerUserListView.as_view(),name="customer_list"),
     path('customer_update/<slug:pk>',AdminViews.CustomerUserUpdateView.as_view(),name="customer_update"),
+    path('customer_fast_create',AdminViews.CustomerUserRandomCreateView.as_view(),name="customer_fast_create"),
 
     #Guests
     path('guest_list',AdminViews.GuestListView.as_view(),name="guest_list"),
@@ -74,5 +75,5 @@ urlpatterns = [
     path('gallery_list',AdminViews.GalleryListView.as_view(),name="gallery_list"),
     path('category_for_gallery_create',AdminViews.CategoryGalleryCreate.as_view(),name="category_for_gallery_create"),
     path('category_for_gallery_delete/<str:id>',AdminViews.CategoryGalleryDelete.as_view(),name="category_for_gallery_delete"),
-
+    path('projects_list',AdminViews.ProjectListView.as_view(),name="projects_list"),
 ]

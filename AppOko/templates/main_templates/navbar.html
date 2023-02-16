@@ -57,6 +57,11 @@
                 </div>
         </div>
 
+        <div class="user_button for_navbar_button_div" onclick="openNav()">
+            <div class="round">
+                <img class="user_button_img" src="{% static 'svg/user_icon.svg' %}"> 
+            </div>
+        </div>
 
         <div class="zayavka">
             <p style="
@@ -68,3 +73,15 @@
     </div>
 </div>
 {% endblock %}
+
+{% block custom_js %}
+<script>
+    x = document.querySelectorAll('.user_button_img')[0].style.filter
+    document.querySelectorAll('.user_button')[0].addEventListener('mouseover', function () {
+    document.querySelectorAll('.user_button_img')[0].style.filter='brightness(0) invert(1)';
+    })
+    document.querySelectorAll('.user_button')[0].addEventListener('mouseout', function () {
+    document.querySelectorAll('.user_button_img')[0].style.filter=x;
+    })
+  </script>
+{% endblock custom_js %}

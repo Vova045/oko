@@ -12,7 +12,8 @@ from django.db.models import Q
 from oko.settings import BASE_URL
 from django.views.decorators.csrf import csrf_exempt
 import json as simplejson
-
+import random
+import string
 import os, urllib
 from oko import settings
 try:
@@ -711,6 +712,7 @@ class CustomerUserListView(LoginRequiredMixin, ListView):
     model=CustomerUser
     template_name="admin_templates/customer_list.html"
     paginate_by=3
+    
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -739,7 +741,7 @@ class CustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView)
         #Saving Custom User Object for staff User
         user=form.save(commit=False)
         user.is_active=True
-        user.user_type=4
+        user.user_type=3
         user.set_password(form.cleaned_data["password"])
         user.save()
 
@@ -755,6 +757,45 @@ class CustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView)
 
         messages.success(self.request,"Customer User Created")
         return HttpResponseRedirect(reverse("customer_list"))
+
+class CustomerUserRandomCreateView(LoginRequiredMixin, View):
+# class GalleryDublicate(LoginRequiredMixin, View):
+#     def get(self,request,*args,**kwargs):
+#         gallery_id=kwargs["id"]
+#         gallery=Gallery.objects.get(id=gallery_id)
+#         gallery_dublicate=Gallery(title=gallery.title,type_of_product=gallery.type_of_product,media_content=gallery.media_content,description=gallery.description,is_active=gallery.is_active, customer = gallery.customer, order_number = gallery.order_number)
+#         gallery_dublicate.save()
+#         return redirect ("gallery_list")
+    def get(self,request):
+        id_new_user = CustomUser.objects.latest('id').id+1
+        username = "User"+str(id_new_user)
+
+        lower = string.ascii_lowercase
+        upper = string.ascii_uppercase
+        num = string.digits
+        symbols = string.punctuation
+        length = 16
+        all = lower + upper + num + symbols
+        temp = random.sample(all,length)
+        password = "".join(temp)
+
+        user=CustomUser(first_name="", last_name="", email="", username=username, password = password)
+        user.is_active=True
+        user.user_type=3
+
+            # all = string.ascii_letters + string.digits + string.punctuation
+            # pass = "".join(random.sample(all,length))
+        print(username)
+        print(password)
+        user.save()
+
+            
+        customeruser=CustomerUser.objects.get(auth_user_id=user.id)
+
+        profile_pic=''
+        customeruser.profile_pic=profile_pic
+        customeruser.save()
+        return redirect ("customer_list")
 
 class CustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
     template_name="admin_templates/customer_update.html"
@@ -781,7 +822,7 @@ class CustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView)
             profile_pic_url=fs.url(filename)
             customeruser.profile_pic=profile_pic_url
 
-        CustomerUser.save()
+        customeruser.save()
         messages.success(self.request,"Customer User Updated")
         return HttpResponseRedirect(reverse("customer_list"))
 
@@ -978,3 +1019,52 @@ class CategoryGalleryDelete(LoginRequiredMixin, View):
         category_for_gallery_id.delete()
         return redirect ("gallery_create")
         
+
+
+from http.client import HTTPResponse
+from django.shortcuts import render
+import pandas as pd
+import os
+from django.core.files.storage import FileSystemStorage
+from .models import Projects
+ 
+# Create your views here.
+def Import_Excel_pandas(request):
+    filename = "media/spisok.xls"
+    empexceldata = pd.read_excel(filename)    
+    dbframe = empexceldata
+    names_project = []
+    for dbframe in dbframe.itertuples():
+        dublicate_project = Projects.objects.filter(number = dbframe.Номер)
+        if not dublicate_project:
+            obj = Projects.objects.create(date=dbframe.Дата,number=dbframe.Номер, name=dbframe.Наименование,
+                                            client=dbframe.Контрагент, manager=dbframe.Менеджер)
+            obj.save()
+        if dublicate_project:
+            obj = Projects.objects.filter(number=dbframe.Номер).first()
+            obj.date =  dbframe.Дата
+            obj.name = dbframe.Наименование
+            obj.client = dbframe.Контрагент
+            obj.manager = dbframe.Менеджер
+            obj.save()
+        names_project.append(str(dbframe.Номер))
+    objects = Projects.objects.all()
+    for obj in objects:
+        x = str(obj.number)
+        if x not in names_project:
+            obj.delete()
+    return render(request, 'admin_templates/projects_list.html') 
+
+class ProjectListView(LoginRequiredMixin, ListView):
+    template_name="admin_templates/projects_list.html"
+    fields=["date","number","name","client","manager"]
+    model=Projects
+
+    def get(self,request):
+        Import_Excel_pandas(request)
+        projects = Projects.objects.all()
+        project_paginator = Paginator(projects, per_page=30)
+        project_page = request.GET.get('page')
+        project_page_object = project_paginator.get_page(project_page)
+        return render(request, "admin_templates/projects_list.html", {'projects':projects,'project_page_obj': project_page_object})
+ 

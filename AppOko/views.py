@@ -78,7 +78,10 @@ def home(request):
     photos = Gallery.objects.all()
     first_photo = Gallery.objects.all().first
     categories = CategoryGallery.objects.all()
-    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories})
+    user = request.GET.get('user')
+    print(user)
+    password = request.GET.get('password')
+    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password})
 
 
 from django.views.generic import ListView

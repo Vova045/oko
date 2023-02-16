@@ -1,0 +1,87 @@
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}
+Список проектов
+{% endblock title %}
+
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+{% block page_title %}
+Список проектов
+{% endblock page_title %}
+
+{% block page_content %}
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Список проектов</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-md">
+              <tbody><tr>
+                <th>Дата</th>
+                <th>Номер</th>
+                <th>Наименование</th>
+                <th>Контрагент</th>
+                <th>Менеджер</th>
+              </tr>
+              {% for project in project_page_obj %}
+              <tr>         
+                      <td>{{ project.date }}</td>
+                      <td>{{ project.number }}</td>
+                      <td>{{ project.name }}</td>
+                      <td>{{ project.client }}</td>
+                      <td>{{ project.manager }}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody></table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <nav aria-label="...">
+              <ul class="pagination">
+                {% if project_page_obj.has_previous %}
+                <li class="page-item active">
+                  <a href="{% url 'projects_list' %}?page={{ project_page_obj.previous_page_number }}"> Previous </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="{% url 'projects_list' %}?page={{ project_page_obj.previous_page_number }}">{{ project_page_obj.previous_page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                {% endif %}
+                <li class="page-item active">
+                  <a class="page-link" href="#">{{ project_page_obj.number }} <span class="sr-only"></span></a>
+                </li>
+                {% if project_page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="{% url 'projects_list' %}?page={{ project_page_obj.next_page_number }}">{{ project_page_obj.next_page_number }}</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="{% url 'projects_list' %}?page={{ project_page_obj.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Next</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+  {% endblock page_content %}
+
+
+{% block custom_js %}
+{% endblock custom_js %}
