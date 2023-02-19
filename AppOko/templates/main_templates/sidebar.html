@@ -9,7 +9,7 @@
     <a href="#">Регистрация</a> -->
           <div class="login_div" id="login_id">
             {% if not request.user.username %}
-            <div class="card card-danger">
+            <div class="card card-danger" id="signin_div">
               <div class="card-header"><h4>Вход</h4></div>
 
               <div class="card-body">
@@ -33,12 +33,12 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
                       <label class="custom-control-label" for="remember-me">Запомнить</label>
                     </div>
-                  </div>
+                  </div> -->
                   {% if messages %}
                   <div class="form-group">
                     {% for message in messages %}
@@ -60,6 +60,56 @@
                       Войти
                     </button>
                   </div>
+                  <p style="cursor: pointer;" id="registration_button" onclick="openReg()">Регистрация</p>
+                </form>
+
+              </div>
+            </div>
+            <div class="card card-danger" id="registration_div">
+              <div class="card-header"><h4>Регистрация</h4></div>
+
+              <div class="card-body">
+                <form method="POST" action="{% url 'admin_login_process' %}" class="needs-validation" novalidate="">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="email">Логин</label>
+                    <input id="email" type="text" class="form-control login_form" name="username" tabindex="1" required autofocus>
+                    <div class="invalid-feedback">
+                      Пожалуйста Введите ваш логин
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="d-block">
+                    	<label for="password" class="control-label">Пароль</label>
+                    </div>
+                    <input id="password" type="password" class="form-control login_form" name="password" tabindex="2" required>
+                    <div class="invalid-feedback">
+                      Пожалуйста введите ваш пароль
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="d-block">
+                    	<label for="password" class="control-label">Повторите Пароль</label>
+                    </div>
+                    <input id="password" type="password" class="form-control login_form" name="password" tabindex="2" required>
+                    <div class="invalid-feedback">
+                      Пожалуйста повторите ваш пароль
+                    </div>
+                  </div>
+
+                  <!-- <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+                    </div>
+                  </div> -->
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-danger btn-lg btn-block" style="background-color:#FF2E00" tabindex="4">
+                      Зарегистрироваться
+                    </button>
+                  </div>
+                  <p style="cursor: pointer;" id="signin_button" onclick="openSignIn()">Войти</p>
                 </form>
 
               </div>
@@ -88,6 +138,14 @@ function openNav() {
     setTimeout(() => {document.getElementById("login_id").style.display = "flex";}, 150);
     
   }
+}
+function openReg() {
+  document.getElementById("signin_div").style.display = "none";
+  document.getElementById("registration_div").style.display = "flex";
+}
+function openSignIn() {
+  document.getElementById("signin_div").style.display = "flex";
+  document.getElementById("registration_div").style.display = "none";
 }
 
 /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
