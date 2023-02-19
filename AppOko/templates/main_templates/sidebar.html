@@ -8,6 +8,7 @@
     <!-- <a href="#">Войти</a>
     <a href="#">Регистрация</a> -->
           <div class="login_div" id="login_id">
+            {% if not request.user.username %}
             <div class="card card-danger">
               <div class="card-header"><h4>Вход</h4></div>
 
@@ -63,8 +64,13 @@
 
               </div>
             </div>
+            {% endif %}
             <div class="simple-footer">
-              Copyright &copy; OKO 2022
+              {% if request.user.username %}
+              <p>Здравствуйте, {{ request.user.username }}<br>
+              <a href="{% url 'admin_logout_process' %}">Выйти</a></p>
+              {% endif %}
+              Copyright &copy; OKO 2022 
             </div>
           </div>
 </div>

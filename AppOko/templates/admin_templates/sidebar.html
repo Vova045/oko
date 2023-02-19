@@ -68,9 +68,33 @@
             <li class="{% if request.path == customer_fast_create %} active {% endif %}"><a class="nav-link" href="{% url 'customer_fast_create' %}">Быстрое добавление клиента</a></li>
           </ul>
         </li>
+        <!-- TempCUSTOMER Users -->
+        {% url 'tempcustomer_create' as tempcustomer_create %}
+        {% url 'tempcustomer_list' as tempcustomer_list %}
+        {% url 'tempcustomer_update' as tempcustomer_update %}
+        {% url 'tempcustomer_fast_create' as tempcustomer_fast_create %}
+        <li class="dropdown {% if request.path == tempcustomer_create %} active {% endif %}{% if request.path == tempcustomer_list %} active {% endif %}{% if request.path == tempcustomer_update %} active {% endif %}">
+          <a href="#" class="nav-link has-dropdown"><span>Временные Покупатели</span></a>
+          <ul class="dropdown-menu">
+            <li class="{% if request.path == tempcustomer_create %} active {% endif %}"><a class="nav-link" href="{% url 'tempcustomer_create' %}">Добавить временного покупателя</a></li>
+            <li class="{% if request.path == tempcustomer_list %} active {% endif %}{% if request.path == tempcustomer_update %} active {% endif %}"><a class="nav-link" href="{% url 'tempcustomer_list' %}">Список временных покупателей</a></li>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <label>Укажите номер проекта для временного пользователя</label>
+                <select class="form-control" name="project_select" id="project_select">
+                  {% for project in projects %}
+                    <option value="{{ project.id }}">{{ project.number }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <li class="{% if request.path == tempcustomer_fast_create %} active {% endif %}"><a id="project_button" class="nav-link" href="#">Быстрое добавление временного клиента</a></li>
+            </form>
+          </ul>
+        </li>
 
         <!-- Products -->
-      {% url 'product_view' as product_view %}
+      {% url 'product_view' as product_vew %}
       {% url 'product_list' as product_list %}
       {% url 'product_edit' product.id as product_edit %}
       {% url 'product_add_media' product.id as product_add_media %}
@@ -124,5 +148,24 @@
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
         <a href="{% url 'admin_logout_process' %}" class="btn btn-danger btn-lg btn-block btn-icon-split" style="background-color: #DE1A22;">ВЫЙТИ
         </a>
-      </div>        </aside>
+      </div>
+            </aside>
   </div>
+{% block custom_js %}
+<script src="{% static '/modules/jquery.min.js' %}"></script>
+<script>
+function change_url() {
+  var id = $('#project_select option:selected').val();
+  var submit = $("#project_button");
+  console.log(id)
+  var url_href = "{% url 'tempcustomer_fast_create' id='1' %}".replace('1',id.toString());
+  submit.attr('href', url_href);
+};
+$(document).ready(change_url);
+$(document).ready(function(){
+  $('select#project_select').change(change_url);
+});
+</script>
+    
+
+{% endblock custom_js %}

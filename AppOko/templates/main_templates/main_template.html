@@ -46,7 +46,7 @@
     {% include 'main_templates/sidebar.html' %}
     {% include 'main_templates/navbar.html' %}
     {% include 'main_templates/zayavka.html' %}
-    {% if user %}
+    {% if user and password %}
     {% include 'main_templates/message_for_user.html' %}
     {% endif %}
     {% if message_name %}

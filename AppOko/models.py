@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.urls import reverse
 
 class CustomUser(AbstractUser):
-    user_type_choices=((1,"Admin"),(2,"Staff"),(3,"Customer"),)
+    user_type_choices=((1,"Admin"),(2,"Staff"),(3,"Customer"),(4,"TempCustomer"),)
     user_type=models.CharField(max_length=255,choices=user_type_choices, default=1)
 
 class AdminUser(models.Model):
@@ -23,6 +23,7 @@ class CustomerUser(models.Model):
     profile_pic=models.FileField(default="", blank=True, null=True)
     auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
     created_at=models.DateTimeField(auto_now_add=True)
+
     
 
 
@@ -254,3 +255,9 @@ class Projects (models.Model):
     class Meta:
         ordering = ['-number']
     
+
+class TempCustomerUser(models.Model):
+    profile_pic=models.FileField(default="", blank=True, null=True)
+    auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
+    created_at=models.DateTimeField(auto_now_add=True)
+    project = models.OneToOneField(Projects,on_delete=models.SET_NULL, blank=True, null=True)

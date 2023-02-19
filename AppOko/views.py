@@ -7,7 +7,7 @@ from django.urls import reverse
 import urllib
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery
+from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser
 from oko.settings import MEDIA_ROOT, MEDIA_URL
 from django.db.models import Q
 from django.core.mail import send_mail
@@ -79,8 +79,11 @@ def home(request):
     first_photo = Gallery.objects.all().first
     categories = CategoryGallery.objects.all()
     user = request.GET.get('user')
-    print(user)
     password = request.GET.get('password')
+    
+    # if CustomUser.objects.filter(username=request.user.username, user_type="4"):
+    #     tempuser = CustomUser.objects.filter(username=request.user.username, user_type="4")[0]
+    #     return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':tempuser.username, 'password':tempuser.password})
     return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password})
 
 
@@ -313,7 +316,7 @@ class GalleryListView(ListView):
 
         return context
 
-
+from AppOko.models import CustomUser
 #ADMIN FUNCTION
 def adminLogin(request):
     return render(request,"admin_templates/signin.html")
@@ -321,19 +324,25 @@ def adminLogin(request):
 def adminLoginProcess(request):
     username=request.POST.get("username")
     password=request.POST.get("password")
-
     user=authenticate(request=request,username=username,password=password)
+    # print(authenticate(request=request,username=username,password=password))
     if user is not None:
-        login(request=request, user=user)
-        return HttpResponseRedirect(reverse("admin_home"))
+        user = CustomUser.objects.get(username=username)
+        if user.user_type == '1':
+            login(request=request, user=user, backend = 'django.contrib.auth.backends.ModelBackend')
+            return HttpResponseRedirect(reverse("admin_home"))
+        if user.user_type == '4':
+            login(request=request, user=user, backend = 'AppOko.auth_backend.PasswordlessAuthBackend')
+            # return render (request, 'main_templates/home.html', {'password': user.password})
+            return HttpResponseRedirect(reverse("home"))
     else:
-        messages.error(request,"Error in Login! Invalid Login Details")
+        messages.error(request,"Ошибка в Логине")
         return HttpResponseRedirect(reverse("admin_login"))
     
 def adminLogoutProcess(request):
     logout(request)
-    messages.success(request,"Logout Succesfully")
-    return HttpResponseRedirect(reverse("admin_login"))
+    # messages.success(request,"Вы успешло вышли")
+    return HttpResponseRedirect(reverse("home"))
 
 def bukvy(request):
     return render (request, 'main_templates/bukvy.html',) 

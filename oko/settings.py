@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'AppOko.context_processors.get_projects'
             ],
         },
     },
@@ -121,7 +122,10 @@ DATETIME_FORMAT="H:i:s d.m.y"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'AppOko.auth_backend.PasswordlessAuthBackend',
+)
 
 AUTH_USER_MODEL="AppOko.CustomUser"
 
@@ -142,11 +146,6 @@ if DEBUG:
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 BASE_URL="http://127.0.0.1:8000"
-
-
-
-
-
 
 
 

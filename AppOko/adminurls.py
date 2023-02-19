@@ -57,7 +57,12 @@ urlpatterns = [
     path('customer_create',AdminViews.CustomerUserCreateView.as_view(),name="customer_create"),
     path('customer_list',AdminViews.CustomerUserListView.as_view(),name="customer_list"),
     path('customer_update/<slug:pk>',AdminViews.CustomerUserUpdateView.as_view(),name="customer_update"),
-    path('customer_fast_create',AdminViews.CustomerUserRandomCreateView.as_view(),name="customer_fast_create"),
+    path('customer_fast_create/',AdminViews.CustomerUserRandomCreateView.as_view(),name="customer_fast_create"),
+    #TempCustomer User
+    path('tempcustomer_create',AdminViews.TempCustomerUserCreateView.as_view(),name="tempcustomer_create"),
+    path('tempcustomer_list',AdminViews.TempCustomerUserListView.as_view(),name="tempcustomer_list"),
+    path('tempcustomer_update/<slug:pk>',AdminViews.TempCustomerUserUpdateView.as_view(),name="tempcustomer_update"),
+    path('tempcustomer_fast_create/project=<str:id>',AdminViews.TempCustomerUserRandomCreateView.as_view(),name="tempcustomer_fast_create"),
 
     #Guests
     path('guest_list',AdminViews.GuestListView.as_view(),name="guest_list"),

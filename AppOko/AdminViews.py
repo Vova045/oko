@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, View
-from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories
+from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
 from django.contrib.messages.views import messages
@@ -20,13 +20,17 @@ try:
     from urllib import quote, unquote  # Python 2.X
 except ImportError:
     from urllib.parse import quote, unquote
-
+from django.contrib.auth.decorators import permission_required
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 
 @login_required(login_url="/admin/")
+@permission_required('AppOko.AdminUser')
 def admin_home(request):
     return render(request,"admin_templates/home.html")
+@permission_required('AppOko.TempCustomerUser')
+def customer_home(request):
+    return render(request,"main_templates/home.html")
 
 
 class ChaptersListView(LoginRequiredMixin, ListView):
@@ -712,7 +716,16 @@ class CustomerUserListView(LoginRequiredMixin, ListView):
     model=CustomerUser
     template_name="admin_templates/customer_list.html"
     paginate_by=3
-    
+
+    def get(self, request):
+        filter_val=self.request.GET.get("filter","")
+        order_by=self.request.GET.get("orderby","id")
+        if filter_val!="":
+            cat=CustomerUser.objects.filter(Q(auth_user_id__first_name__contains=filter_val) |Q(auth_user_id__last_name__contains=filter_val) | Q(auth_user_id__email__contains=filter_val) | Q(auth_user_id__username__contains=filter_val)).order_by(order_by)
+        else:
+            cat=CustomerUser.objects.all().order_by(order_by)
+        my_host=request.get_host()
+        return render(request,"admin_templates/customer_list.html", {"my_host":my_host, 'customeruser_list':cat})
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -759,13 +772,6 @@ class CustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView)
         return HttpResponseRedirect(reverse("customer_list"))
 
 class CustomerUserRandomCreateView(LoginRequiredMixin, View):
-# class GalleryDublicate(LoginRequiredMixin, View):
-#     def get(self,request,*args,**kwargs):
-#         gallery_id=kwargs["id"]
-#         gallery=Gallery.objects.get(id=gallery_id)
-#         gallery_dublicate=Gallery(title=gallery.title,type_of_product=gallery.type_of_product,media_content=gallery.media_content,description=gallery.description,is_active=gallery.is_active, customer = gallery.customer, order_number = gallery.order_number)
-#         gallery_dublicate.save()
-#         return redirect ("gallery_list")
     def get(self,request):
         id_new_user = CustomUser.objects.latest('id').id+1
         username = "User"+str(id_new_user)
@@ -785,8 +791,6 @@ class CustomerUserRandomCreateView(LoginRequiredMixin, View):
 
             # all = string.ascii_letters + string.digits + string.punctuation
             # pass = "".join(random.sample(all,length))
-        print(username)
-        print(password)
         user.save()
 
             
@@ -825,6 +829,124 @@ class CustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView)
         customeruser.save()
         messages.success(self.request,"Customer User Updated")
         return HttpResponseRedirect(reverse("customer_list"))
+
+class TempCustomerUserListView(LoginRequiredMixin, ListView):
+    model=TempCustomerUser
+    template_name="admin_templates/tempcustomer_list.html"
+    paginate_by=10
+
+    def get(self, request):
+        filter_val=self.request.GET.get("filter","")
+        order_by=self.request.GET.get("orderby","id")
+        if filter_val!="":
+            cat=TempCustomerUser.objects.filter(Q(auth_user_id__first_name__contains=filter_val) |Q(auth_user_id__last_name__contains=filter_val) | Q(auth_user_id__email__contains=filter_val) | Q(auth_user_id__username__contains=filter_val)).order_by(order_by)
+        else:
+            cat=TempCustomerUser.objects.all().order_by(order_by)
+        my_host=request.get_host()
+        return render(request,"admin_templates/tempcustomer_list.html", {"my_host":my_host, 'tempcustomeruser_list':cat})
+
+    def get_queryset(self):
+        filter_val=self.request.GET.get("filter","")
+        order_by=self.request.GET.get("orderby","id")
+        if filter_val!="":
+            cat=TempCustomerUser.objects.filter(Q(auth_user_id__first_name__contains=filter_val) |Q(auth_user_id__last_name__contains=filter_val) | Q(auth_user_id__email__contains=filter_val) | Q(auth_user_id__username__contains=filter_val)).order_by(order_by)
+        else:
+            cat=TempCustomerUser.objects.all().order_by(order_by)
+
+        return cat
+
+    def get_context_data(self,**kwargs):
+        context=super(TempCustomerUserListView,self).get_context_data(**kwargs)
+        context["filter"]=self.request.GET.get("filter","")
+        context["orderby"]=self.request.GET.get("orderby","id")
+        context["all_table_fields"]=TempCustomerUser._meta.get_fields()
+        return context
+
+class TempCustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView):
+    template_name="admin_templates/tempcustomer_create.html"
+    model=CustomUser
+    fields=["first_name","last_name","email","username","password"]
+
+    def form_valid(self,form):
+
+        #Saving Custom User Object for staff User
+        user=form.save(commit=False)
+        user.is_active=True
+        user.user_type=4
+        user.set_password(form.cleaned_data["password"])
+        user.save()
+
+        
+        tempcustomeruser=TempCustomerUser.objects.create(auth_user_id=CustomUser.objects.get(id=user.id))
+        profile_pic=self.request.FILES.get("profile_pic2")
+        if profile_pic != None:
+            fs=FileSystemStorage()
+            filename=fs.save(profile_pic.name,profile_pic)
+            profile_pic_url=fs.url(filename)
+            tempcustomeruser.profile_pic=profile_pic_url
+            tempcustomeruser.save()
+
+        messages.success(self.request,"TempCustomer User Created")
+        return HttpResponseRedirect(reverse("tempcustomer_list"))
+
+class TempCustomerUserRandomCreateView(LoginRequiredMixin, View):
+    def get(self,request,**kwargs):
+        
+        id_new_user = CustomUser.objects.latest('id').id+1
+        username = "User"+str(id_new_user)
+
+        lower = string.ascii_lowercase
+        upper = string.ascii_uppercase
+        num = string.digits
+        symbols = string.punctuation
+        length = 16
+        all = lower + upper + num + symbols
+        temp = random.sample(all,length)
+        password = "".join(temp)
+
+        user=CustomUser(first_name="", last_name="", email="", username=username, password = password)
+        user.is_active=True
+        user.user_type=4
+
+            # all = string.ascii_letters + string.digits + string.punctuation
+            # pass = "".join(random.sample(all,length))
+        user.save()
+        project=kwargs["id"]
+        tempcustomeruser=TempCustomerUser.objects.create(profile_pic='',auth_user_id=CustomUser.objects.get(id=user.id),project_id=project)
+
+        profile_pic=''
+        tempcustomeruser.profile_pic=profile_pic
+        tempcustomeruser.save()
+        return redirect ("tempcustomer_list")
+
+class TempCustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
+    template_name="admin_templates/tempcustomer_update.html"
+    model=CustomUser
+    fields=["first_name","last_name","email","username","password"]
+
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        tempcustomeruser=TempCustomerUser.objects.get(auth_user_id=self.object.pk)
+        context["TempCustomerUser"]=tempcustomeruser
+        return context
+
+    def form_valid(self,form):
+
+        user=form.save(commit=False)
+        user.save()
+
+
+        tempcustomeruser=TempCustomerUser.objects.get(auth_user_id=user.id)
+        if self.request.FILES.get("profile_pic",False):
+            profile_pic=self.request.FILES["profile_pic"]
+            fs=FileSystemStorage()
+            filename=fs.save(profile_pic.name,profile_pic)
+            profile_pic_url=fs.url(filename)
+            tempcustomeruser.profile_pic=profile_pic_url
+
+        tempcustomeruser.save()
+        messages.success(self.request,"TempCustomer User Updated")
+        return HttpResponseRedirect(reverse("tempcustomer_list"))
 
 
 class GuestListView(LoginRequiredMixin, ListView):
