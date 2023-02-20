@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,8 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ufx$(+&zs!r$ypfs3c^x#7-mmn(7ziek+*ztk5)9-q@=*&no06'
-
+SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 ALLOWED_HOSTS = ['*']
@@ -153,7 +153,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = 'vovatsar@bk.ru'
-EMAIL_HOST_PASSWORD = 't9e0gD28KZW8wC9XtgNm'
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
@@ -162,7 +162,7 @@ import os.path
 LOGIN_URL = 'admin_login'
 
 RECAPTCHA_PUBLIC_KEY = '6LdlqD4kAAAAALp3uHHgdCX16VneAWd3CxUhtTOI'
-RECAPTCHA_PRIVATE_KEY = '6LdlqD4kAAAAAHZ5715-VU12oF4U3PK5QjOr2xI5'
+RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
 RECAPTCHA_LANGUAGE = 'en'
