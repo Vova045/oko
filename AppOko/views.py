@@ -7,7 +7,7 @@ from django.urls import reverse
 import urllib
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser
+from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser, CustomerUser,Projects
 from oko.settings import MEDIA_ROOT, MEDIA_URL
 from django.db.models import Q
 from django.core.mail import send_mail
@@ -343,6 +343,40 @@ def adminLogoutProcess(request):
     logout(request)
     # messages.success(request,"Вы успешло вышли")
     return HttpResponseRedirect(reverse("home"))
+
+def adminRegistrationProcess(request):
+    username=request.POST.get("username")
+    password=request.POST.get("password")
+    password2=request.POST.get("password2")
+    if password == password2:
+        if request.user.user_type != "4":
+            user = CustomUser.objects.get(username=username)
+            if user.user_type == '1':
+                login(request=request, user=user, backend = 'django.contrib.auth.backends.ModelBackend')
+                return HttpResponseRedirect(reverse("admin_home"))
+            if user.user_type == '4':
+                login(request=request, user=user, backend = 'AppOko.auth_backend.PasswordlessAuthBackend')
+                # return render (request, 'main_templates/home.html', {'password': user.password})
+                return HttpResponseRedirect(reverse("home"))
+            else:
+                return HttpResponseRedirect(reverse("home"))
+        else:
+            old_custom_user = CustomUser.objects.get(username=request.user.username)
+            old_tempcustomer_user = TempCustomerUser.objects.get(auth_user_id_id=old_custom_user.id)
+            edit_project=Projects.objects.get(id=old_tempcustomer_user.project_id)
+            old_tempcustomer_user.delete()
+            old_custom_user.user_type = '3'
+            old_custom_user.username = username
+            old_custom_user.set_password(password)
+            old_custom_user.save()
+            new_user = CustomerUser.objects.create(auth_user_id_id=old_custom_user.id)
+            new_user.save()
+            edit_project.user=old_custom_user
+            edit_project.save()
+            return HttpResponseRedirect(reverse("home"))
+    else:
+        messages.error(request,"Не одинаковые пароли")
+        return HttpResponseRedirect(reverse("home"))
 
 def bukvy(request):
     return render (request, 'main_templates/bukvy.html',) 

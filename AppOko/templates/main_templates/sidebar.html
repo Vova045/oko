@@ -8,7 +8,7 @@
     <!-- <a href="#">Войти</a>
     <a href="#">Регистрация</a> -->
           <div class="login_div" id="login_id">
-            {% if not request.user.username %}
+            {% if not request.user.username or request.user.user_type == "4" %}
             <div class="card card-danger" id="signin_div">
               <div class="card-header"><h4>Вход</h4></div>
 
@@ -69,11 +69,11 @@
               <div class="card-header"><h4>Регистрация</h4></div>
 
               <div class="card-body">
-                <form method="POST" action="{% url 'admin_login_process' %}" class="needs-validation" novalidate="">
+                <form method="POST" action="{% url 'admin_registration_process' %}" class="needs-validation" novalidate="">
                   {% csrf_token %}
                   <div class="form-group">
                     <label for="email">Логин</label>
-                    <input id="email" type="text" class="form-control login_form" name="username" tabindex="1" required autofocus>
+                    <input id="email" type="text" class="form-control registration_form" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
                       Пожалуйста Введите ваш логин
                     </div>
@@ -83,7 +83,7 @@
                     <div class="d-block">
                     	<label for="password" class="control-label">Пароль</label>
                     </div>
-                    <input id="password" type="password" class="form-control login_form" name="password" tabindex="2" required>
+                    <input id="password" type="password" class="form-control registration_form" name="password" tabindex="2" required>
                     <div class="invalid-feedback">
                       Пожалуйста введите ваш пароль
                     </div>
@@ -91,9 +91,9 @@
 
                   <div class="form-group">
                     <div class="d-block">
-                    	<label for="password" class="control-label">Повторите Пароль</label>
+                    	<label for="password2" class="control-label">Повторите Пароль</label>
                     </div>
-                    <input id="password" type="password" class="form-control login_form" name="password" tabindex="2" required>
+                    <input id="password2" type="password" class="form-control registration_form" name="password2" tabindex="2" required>
                     <div class="invalid-feedback">
                       Пожалуйста повторите ваш пароль
                     </div>
@@ -109,7 +109,7 @@
                       Зарегистрироваться
                     </button>
                   </div>
-                  <p style="cursor: pointer;" id="signin_button" onclick="openSignIn()">Войти</p>
+                  <p style="cursor: pointer;" id="registration_form_button" onclick="openSignIn()">Войти</p>
                 </form>
 
               </div>

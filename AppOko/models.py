@@ -9,6 +9,21 @@ class CustomUser(AbstractUser):
     user_type_choices=((1,"Admin"),(2,"Staff"),(3,"Customer"),(4,"TempCustomer"),)
     user_type=models.CharField(max_length=255,choices=user_type_choices, default=1)
 
+class Projects (models.Model):
+    date = models.CharField(max_length=150,null=True, blank=True)
+    number = models.CharField(max_length=150,null=True, blank=True)
+    name = models.CharField(max_length=150,null=True, blank=True)
+    client = models.CharField(max_length=150,null=True, blank=True)
+    manager = models.CharField(max_length=150,null=True, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return self.number
+
+    class Meta:
+        ordering = ['-number']
+
+
 class AdminUser(models.Model):
     profile_pic=models.FileField(default="")
     auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
@@ -23,9 +38,13 @@ class CustomerUser(models.Model):
     profile_pic=models.FileField(default="", blank=True, null=True)
     auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
     created_at=models.DateTimeField(auto_now_add=True)
+    project = models.OneToOneField(Projects, on_delete=models.SET_NULL, blank=True, null=True)
 
-    
-
+class TempCustomerUser(models.Model):
+    profile_pic=models.FileField(default="", blank=True, null=True)
+    auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
+    created_at=models.DateTimeField(auto_now_add=True)
+    project = models.OneToOneField(Projects,on_delete=models.SET_NULL, blank=True, null=True)
 
 class Chapters(models.Model):
     id=models.AutoField(primary_key=True)
@@ -240,24 +259,4 @@ class Gallery(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse("gallery_list")
-
-class Projects (models.Model):
-    date = models.CharField(max_length=150,null=True, blank=True)
-    number = models.CharField(max_length=150,null=True, blank=True)
-    name = models.CharField(max_length=150,null=True, blank=True)
-    client = models.CharField(max_length=150,null=True, blank=True)
-    manager = models.CharField(max_length=150,null=True, blank=True)
-
-    def __str__(self):
-        return self.number
-
-    class Meta:
-        ordering = ['-number']
-    
-
-class TempCustomerUser(models.Model):
-    profile_pic=models.FileField(default="", blank=True, null=True)
-    auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
-    created_at=models.DateTimeField(auto_now_add=True)
-    project = models.OneToOneField(Projects,on_delete=models.SET_NULL, blank=True, null=True)
+        return reverse("gallery_list")    

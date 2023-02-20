@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', views.adminLogin, name="admin_login"),
     path('admin_login_process', views.adminLoginProcess, name="admin_login_process"),
     path('admin_logout_process', views.adminLogoutProcess, name="admin_logout_process"),
+    path('admin_registration_process', views.adminRegistrationProcess, name="admin_registration_process"),
 
     # Page for Admin
     path('admin_home', AdminViews.admin_home, name="admin_home"),
