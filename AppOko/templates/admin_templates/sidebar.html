@@ -140,6 +140,15 @@
           </ul>
         </li>
 
+        <!-- Projects -->
+        {% url 'chat_list' as projects_list %}
+        <li class="dropdown {% if request.path == chat_list %} active {% endif %}">
+          <a href="#" class="nav-link has-dropdown"><span>Чаты</span></a>
+          <ul class="dropdown-menu">
+            <li class="{% if request.path == chat_list %} active {% endif %}"><a class="nav-link" href="{% url 'chat_list' %}">Все чаты</a></li>
+          </ul>
+        </li>
+
       </ul>
 
 

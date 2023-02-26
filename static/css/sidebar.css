@@ -8,15 +8,16 @@
 }
 /* The sidebar menu */
 .sidebar {
+    display: flex;
     height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
+    width: 0px; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 4; /* Stay on top */
     top: 0;
     left: 0;
     background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
+    padding-top: 0px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
   }
   
@@ -51,7 +52,58 @@
     z-index: 1;
   }
   
-  
+  .main_part {
+    width: 300px; background-color: #111;
+    padding-top: 60px;
+  }
+  .second_part {
+    display: flex;
+    width: 500px; background-color: rgb(22, 22, 22);
+  }
+  .white_line {
+    height: 100%; width: 1px; margin: 0;
+    background-color: white;
+  }
+  .info {
+    display: flex; width: 400px;
+    flex-direction: column; padding-top: 60px; padding-left: 30px;
+  }
+  .info .chat_head p{
+    color: #FF003C;
+  }
+  .info .chat_body {
+    width: 430px; display: block; overflow: scroll;
+    height: 530px; border: 1px solid white; border-radius: 15px; padding: 20px;
+  }
+  .info .chat_input {
+    width: 430px; background-color: #111; color: white; font-size: 12px;
+    height: 30px; margin-top: 20px; border: 1px solid white; border-radius: 10px;
+  }
+
+  input:focus {
+    outline: none; 
+  }
+  .message_item {
+    width: 250px; height: 50px; display: flex; flex-direction: column;
+  }
+  .message_client {
+    float: right; 
+  }
+  .message_manager {
+    float: left;
+  }
+  .message_head {
+    display: flex; flex-direction: row; justify-content: space-between;
+  }
+  .message_head p{
+    font-size: 11px; color: white; margin-bottom: 7px;
+  }
+  .message_body {
+    display: flex; width: fit-content;
+  }
+  .message_body p{
+    font-size: 11px; color: #FF003C;
+  }
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #main {
     transition: margin-left .5s; /* If you want a transition effect */

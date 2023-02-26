@@ -1,0 +1,110 @@
+{% extends 'admin_templates/base_template.html' %}
+{% load static %}
+
+{% block title %}
+Чаты
+{% endblock title %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static '/css/chat_list.css' %}">
+{% endblock custom_css %}
+
+{% block page_title %}
+Чаты
+{% endblock page_title %}
+
+{% block page_content %}
+<div class="chat_wrapper row">
+  <div class="chat_list">
+    <div class="chat_list_head">
+      <p>Список чатов</p>
+    </div>
+    <div class="chat_list_body">
+      {% for user_for_chat in rooms_for_client_list %}
+      <a href="{% url 'chat_list' %}?filter={{ user_for_chat.room }}">
+        <div class="user_for_chat_div">{{user_for_chat.username}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="chat_border">
+
+  </div>
+  <div class="info">
+    {% for user_for_chat in rooms %}
+    <div class="chat_head">
+      <p>Чат с {{user_for_chat.username}}</p>
+    </div>
+    <div class="chat_body" id="chat_body">
+      {% for i in object_list %}
+      <div class="message_item {% if i.user.user_type == '1' %} message_manager {% elif i.user.user_type == '3' %} message_client {% endif %} ">
+        <div class="message_head">
+          <p>{{ i.user }}</p>
+          <p>{{ i.created }}</p>
+        </div>
+        <div class="message_body" id="message_body">
+          <p>{{ i.body }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+    {% if rooms %}
+    <div>
+      <input type="text" id="chat_message_input" placeholder="Введите ваше сообщение" form="input_chat_message" name="body" class="chat_input"/>
+      <button type="text" id="chat_message_submit" style="display: none;"></button>
+</div>
+    {% endif %}
+  </div>
+</div>
+
+  {% endblock page_content %}
+
+
+{% block custom_js %}
+<script>
+  document.getElementById('chat_body').scrollTo(0, document.getElementById('chat_body').scrollHeight);
+</script>
+<script>
+  const chatSocket = new WebSocket('ws://'+ window.location.host);
+  chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            if (data.user_type.toString() == '1') {
+              data.user_type = 'message_manager';
+            } else if (data.user_type.toString() == '3') {
+              data.user_type = 'message_client';
+            }
+            var message_client = '{% if i.user.user_type == "1" %} message_manager {% elif i.user.user_type == "3" %} message_client {% endif %}'
+            $('#chat_body').append(              
+              '<div class="message_item ' + data.user_type +'">'
+              + '<div class="message_head"><p>' + data.user_id  +  '</p><p>'+ data.created +'</p></div>' + 
+              '<div class="message_body" id="message_body">' +
+                  '<p>' + data.body + '</p></div></div>'
+              );
+            var objDiv = document.getElementById("chat_body");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        };
+
+  $("#chat_message_submit").click(function(){
+    body = document.querySelector('#chat_message_input').value
+    room_id = '{{ room_of_filter }}'
+    user_id = '{{ request.user.id }}'
+    const x = chatSocket.send(JSON.stringify({
+                'body': body,
+                'room_id':room_id,
+                'user_id':user_id
+            }));
+    });
+
+    document.querySelector('#chat_message_input').focus();
+    document.querySelector('#chat_message_input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat_message_submit').click();
+            document.querySelector('#chat_message_input').value = '';
+        }
+    };
+
+  
+</script>
+{% endblock custom_js %}

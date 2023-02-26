@@ -1,5 +1,5 @@
 from django.contrib import admin
-from AppOko.models import Chapters, SubCategories, GuestList
+from AppOko.models import Chapters, SubCategories, GuestList, AdminUser, CustomUser
 
 class ViewsAdmin(admin.ModelAdmin):
     list_display = ('id','ip', 'time')

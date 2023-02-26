@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, View
-from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser
+from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser, AdminUser, ChatRoom, Message
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
 from django.contrib.messages.views import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
@@ -24,19 +24,21 @@ from django.contrib.auth.decorators import permission_required
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 
-@login_required(login_url="/admin/")
-@permission_required('AppOko.AdminUser')
+
+
+@permission_required('AppOko.admin_permission2')
 def admin_home(request):
     return render(request,"admin_templates/home.html")
-@permission_required('AppOko.TempCustomerUser')
+
 def customer_home(request):
     return render(request,"main_templates/home.html")
 
 
-class ChaptersListView(LoginRequiredMixin, ListView):
+class ChaptersListView(PermissionRequiredMixin, ListView):
     model=Chapters
     template_name="admin_templates/chapter_list.html"
     paginate_by=21
+    permission_required = 'AppOko.admin_permission2'
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -57,20 +59,23 @@ class ChaptersListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ChaptersCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class ChaptersCreate(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model=Chapters
     success_message="Раздел добавлен"
     fields="__all__"
     template_name="admin_templates/chapter_create.html"
+    permission_required = 'AppOko.admin_permission2'
 
-class ChaptersUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class ChaptersUpdate(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model=Chapters
     success_message="Раздел обновлен!"
     fields="__all__"
     template_name="admin_templates/chapter_update.html"
+    permission_required = 'AppOko.admin_permission2'
 
 
-class ChapterDelete(LoginRequiredMixin, View):
+class ChapterDelete(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         chapter_id=kwargs["id"]
         chapter=Chapters.objects.get(id=chapter_id)
@@ -85,7 +90,8 @@ class ChapterDelete(LoginRequiredMixin, View):
         chapter.delete()
         return redirect ("chapter_list")
 
-class ChapterDublicate(LoginRequiredMixin, View):
+class ChapterDublicate(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         chapter_id=kwargs["id"]
         chapter=Chapters.objects.get(id=chapter_id)
@@ -94,7 +100,8 @@ class ChapterDublicate(LoginRequiredMixin, View):
         return redirect ("chapter_list")
         
 
-class SubCategoriesListView(LoginRequiredMixin, ListView):
+class SubCategoriesListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     model=SubCategories
     template_name="admin_templates/sub_category_list.html"
     paginate_by=21
@@ -116,11 +123,12 @@ class SubCategoriesListView(LoginRequiredMixin, ListView):
         context["all_table_fields"]=SubCategories._meta.get_fields()
         return context
 
-class SubCategoriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class SubCategoriesCreate(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model=SubCategories
     success_message="Подкатегория добавлена!"
     fields="__all__"
     template_name="admin_templates/sub_category_create.html"
+    permission_required = 'AppOko.admin_permission2'
 
     def getdetails_for_sub_category_create(request):
         chapter_name = request.GET['chapter_ajax']
@@ -140,11 +148,12 @@ class SubCategoriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return context
         
 
-class SubCategoriesUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class SubCategoriesUpdate(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model=SubCategories
     success_message="Подкатегория обновлена!"
     fields="__all__"
     template_name="admin_templates/sub_category_update.html"
+    permission_required = 'AppOko.admin_permission2'
 
 
     def get_context_data(self,**kwargs):
@@ -157,7 +166,8 @@ class SubCategoriesUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         context['chapter_selected'] = self.get_object().chapter_id
         return context
 
-class SubCategoryDelete(LoginRequiredMixin, View):
+class SubCategoryDelete(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         subcategory_id=kwargs["id"]
         subcategory=SubCategories.objects.get(id=subcategory_id)
@@ -173,7 +183,8 @@ class SubCategoryDelete(LoginRequiredMixin, View):
         subcategory.delete()
         return redirect ("sub_category_list")
 
-class SubCategoryDublicate(LoginRequiredMixin, View):
+class SubCategoryDublicate(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         subcategory_id=kwargs["id"]
         subcategory=SubCategories.objects.get(id=subcategory_id)
@@ -181,7 +192,8 @@ class SubCategoryDublicate(LoginRequiredMixin, View):
         subcategory_dublicate.save()
         return redirect ("sub_category_list")
 
-class CategoriesListView(LoginRequiredMixin, ListView):
+class CategoriesListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     model=Categories
     template_name="admin_templates/category_list.html"
     paginate_by=21
@@ -203,19 +215,22 @@ class CategoriesListView(LoginRequiredMixin, ListView):
         context["all_table_fields"]=SubCategories._meta.get_fields()
         return context
 
-class CategoriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class CategoriesCreate(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+    permission_required = 'AppOko.admin_permission2'
     model=Categories
     success_message="Категория добавлена!"
     fields="__all__"
     template_name="admin_templates/category_create.html"
 
-class CategoriesUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class CategoriesUpdate(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    permission_required = 'AppOko.admin_permission2'
     model=Categories
     success_message="Категория обновлена!"
     fields="__all__"
     template_name="admin_templates/category_update.html"
 
-class CategoryDelete(LoginRequiredMixin, View):
+class CategoryDelete(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         category_id=kwargs["id"]
         category=Categories.objects.get(id=category_id)
@@ -231,7 +246,8 @@ class CategoryDelete(LoginRequiredMixin, View):
         category.delete()
         return redirect ("category_list")
 
-class CategoryDublicate(LoginRequiredMixin, View):
+class CategoryDublicate(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         category_id=kwargs["id"]
         category=Categories.objects.get(id=category_id)
@@ -239,7 +255,8 @@ class CategoryDublicate(LoginRequiredMixin, View):
         category_dublicate.save()
         return redirect ("category_list")
 
-class ProductView(LoginRequiredMixin, SuccessMessageMixin, View):
+class ProductView(PermissionRequiredMixin, SuccessMessageMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     success_message="Продукт создан!"
     template_name="admin_templates/product_create.html"
 
@@ -359,7 +376,8 @@ def file_upload(request):
     file_url=fs.url(filename)
     return HttpResponse('{"location": "'+BASE_URL+''+file_url+'"}')
 
-class ProductListView(LoginRequiredMixin, ListView):
+class ProductListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     model=Products
     template_name="admin_templates/product_list.html"
     paginate_by=21
@@ -387,7 +405,8 @@ class ProductListView(LoginRequiredMixin, ListView):
 
         
 
-class ProductEdit(LoginRequiredMixin, View):
+class ProductEdit(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
 
     def getdetails(request):
         category_name = request.GET['category_ajax']
@@ -497,7 +516,8 @@ class ProductEdit(LoginRequiredMixin, View):
         return HttpResponse("ок")
 
 
-class ProductAddMedia(LoginRequiredMixin, View):
+class ProductAddMedia(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self, request, *args, **kwargs):
         product_id=kwargs["product_id"]
         product=Products.objects.get(id=product_id)
@@ -520,7 +540,8 @@ class ProductAddMedia(LoginRequiredMixin, View):
 
         return redirect ("product_list")
 
-class ProductEditMedia(LoginRequiredMixin, View):
+class ProductEditMedia(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self, request, *args, **kwargs):
         product_id=kwargs["product_id"]
         product=Products.objects.get(id=product_id)
@@ -528,7 +549,8 @@ class ProductEditMedia(LoginRequiredMixin, View):
 
         return render(request,"admin_templates/product_edit_media.html", {"product":product, "product_medias":product_medias})
 
-class ProductDelete(LoginRequiredMixin, View):
+class ProductDelete(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         product_id=kwargs["id"]
         product=Products.objects.get(id=product_id)
@@ -559,7 +581,8 @@ class ProductDelete(LoginRequiredMixin, View):
         product.delete()
         return redirect ("product_list")
         
-class ProductDublicate(LoginRequiredMixin, View):
+class ProductDublicate(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         product_id=kwargs["id"]
         product=Products.objects.get(id=product_id)
@@ -592,7 +615,8 @@ class ProductDublicate(LoginRequiredMixin, View):
 
         return redirect ("product_list")
 
-class ProductMediaDelete(LoginRequiredMixin, View):
+class ProductMediaDelete(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         media_id=kwargs["id"]
         product_media=ProductMedia.objects.get(id=media_id)
@@ -609,7 +633,8 @@ class ProductMediaDelete(LoginRequiredMixin, View):
         product_media.delete()
         return HttpResponseRedirect(reverse("product_edit_media",kwargs={"product_id":product_id}))
 
-class ProductAddStocks(LoginRequiredMixin, View):
+class ProductAddStocks(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self, request, *args, **kwargs):
         product_id=kwargs["product_id"]
         product=Products.objects.get(id=product_id)
@@ -630,7 +655,8 @@ class ProductAddStocks(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse("product_add_stocks", kwargs={"product_id":product_id}))
 
 
-class StaffUserListView(LoginRequiredMixin,ListView):
+class StaffUserListView(PermissionRequiredMixin,ListView):
+    permission_required = 'AppOko.admin_permission2'
     model=StaffUser
     template_name="admin_templates/staff_list.html"
     paginate_by=3
@@ -653,7 +679,8 @@ class StaffUserListView(LoginRequiredMixin,ListView):
         return context
 
 
-class StaffUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView):
+class StaffUserCreateView(PermissionRequiredMixin, SuccessMessageMixin,CreateView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/staff_create.html"
     model=CustomUser
     fields=["first_name","last_name","email","username","password"]
@@ -681,7 +708,8 @@ class StaffUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView):
         messages.success(self.request,"Staff User Created")
         return HttpResponseRedirect(reverse("staff_list"))
 
-class StaffUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
+class StaffUserUpdateView(PermissionRequiredMixin, SuccessMessageMixin,UpdateView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/staff_update.html"
     model=CustomUser
     fields=["first_name","last_name","email","username"]
@@ -712,7 +740,8 @@ class StaffUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
         return HttpResponseRedirect(reverse("staff_list"))
 
 
-class CustomerUserListView(LoginRequiredMixin, ListView):
+class CustomerUserListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     model=CustomerUser
     template_name="admin_templates/customer_list.html"
     paginate_by=3
@@ -744,7 +773,8 @@ class CustomerUserListView(LoginRequiredMixin, ListView):
         context["all_table_fields"]=CustomerUser._meta.get_fields()
         return context
 
-class CustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView):
+class CustomerUserCreateView(PermissionRequiredMixin, SuccessMessageMixin,CreateView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/customer_create.html"
     model=CustomUser
     fields=["first_name","last_name","email","username","password"]
@@ -771,7 +801,8 @@ class CustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView)
         messages.success(self.request,"Customer User Created")
         return HttpResponseRedirect(reverse("customer_list"))
 
-class CustomerUserRandomCreateView(LoginRequiredMixin, View):
+class CustomerUserRandomCreateView(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request):
         id_new_user = CustomUser.objects.latest('id').id+1
         username = "User"+str(id_new_user)
@@ -801,7 +832,8 @@ class CustomerUserRandomCreateView(LoginRequiredMixin, View):
         customeruser.save()
         return redirect ("customer_list")
 
-class CustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
+class CustomerUserUpdateView(PermissionRequiredMixin, SuccessMessageMixin,UpdateView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/customer_update.html"
     model=CustomUser
     fields=["first_name","last_name","email","username","password"]
@@ -830,7 +862,8 @@ class CustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView)
         messages.success(self.request,"Customer User Updated")
         return HttpResponseRedirect(reverse("customer_list"))
 
-class TempCustomerUserListView(LoginRequiredMixin, ListView):
+class TempCustomerUserListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     model=TempCustomerUser
     template_name="admin_templates/tempcustomer_list.html"
     paginate_by=10
@@ -862,7 +895,8 @@ class TempCustomerUserListView(LoginRequiredMixin, ListView):
         context["all_table_fields"]=TempCustomerUser._meta.get_fields()
         return context
 
-class TempCustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView):
+class TempCustomerUserCreateView(PermissionRequiredMixin, SuccessMessageMixin,CreateView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/tempcustomer_create.html"
     model=CustomUser
     fields=["first_name","last_name","email","username","password"]
@@ -889,7 +923,8 @@ class TempCustomerUserCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateV
         messages.success(self.request,"TempCustomer User Created")
         return HttpResponseRedirect(reverse("tempcustomer_list"))
 
-class TempCustomerUserRandomCreateView(LoginRequiredMixin, View):
+class TempCustomerUserRandomCreateView(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,**kwargs):
         
         id_new_user = CustomUser.objects.latest('id').id+1
@@ -919,7 +954,8 @@ class TempCustomerUserRandomCreateView(LoginRequiredMixin, View):
         tempcustomeruser.save()
         return redirect ("tempcustomer_list")
 
-class TempCustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
+class TempCustomerUserUpdateView(PermissionRequiredMixin, SuccessMessageMixin,UpdateView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/tempcustomer_update.html"
     model=CustomUser
     fields=["first_name","last_name","email","username","password"]
@@ -949,7 +985,8 @@ class TempCustomerUserUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateV
         return HttpResponseRedirect(reverse("tempcustomer_list"))
 
 
-class GuestListView(LoginRequiredMixin, ListView):
+class GuestListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/guest_list.html"
     fields=["id","ip","time","count_ip","last_time"]
     model=GuestList
@@ -974,7 +1011,8 @@ class GuestListView(LoginRequiredMixin, ListView):
         guest_page_object = guest_paginator.get_page(guest_page)
         return render(request, "admin_templates/guest_list.html",{"guestlists":guestlists_list,"viewlists":viewlists_list, "view_page_obj": view_page_object, "guest_page_obj": guest_page_object})
 
-class GalleryCreate(LoginRequiredMixin, SuccessMessageMixin, View):
+class GalleryCreate(PermissionRequiredMixin, SuccessMessageMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     success_message="Фото добавлено!"
     template_name="admin_templates/gallery_create.html"
 
@@ -1010,7 +1048,8 @@ class GalleryCreate(LoginRequiredMixin, SuccessMessageMixin, View):
 
 
 
-class GalleryUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class GalleryUpdate(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    permission_required = 'AppOko.admin_permission2'
     model=Gallery
     success_message="Категория обновлена!"
     fields="__all__"
@@ -1044,7 +1083,8 @@ class GalleryUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         categories_for_gallery = CategoryGallery.objects.all()
         return render(request,"admin_templates/gallery_update.html", {"photo":gallery, "categories_for_gallery":categories_for_gallery})
 
-class GalleryDelete(LoginRequiredMixin, View):
+class GalleryDelete(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         gallery_id=kwargs["id"]
         gallery=Gallery.objects.get(id=gallery_id)
@@ -1060,7 +1100,8 @@ class GalleryDelete(LoginRequiredMixin, View):
         gallery.delete()
         return redirect ("gallery_list")
 
-class GalleryDublicate(LoginRequiredMixin, View):
+class GalleryDublicate(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     def get(self,request,*args,**kwargs):
         gallery_id=kwargs["id"]
         gallery=Gallery.objects.get(id=gallery_id)
@@ -1069,7 +1110,8 @@ class GalleryDublicate(LoginRequiredMixin, View):
         return redirect ("gallery_list")
 
 
-class GalleryListView(LoginRequiredMixin, ListView):
+class GalleryListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     model=Gallery
     template_name="admin_templates/gallery_list.html"
     paginate_by=21
@@ -1105,7 +1147,8 @@ class GalleryListView(LoginRequiredMixin, ListView):
         context["filter_val_category_photo"]=self.request.GET.get("filter_val_category_photo","")
         return context
 
-class CategoryGalleryCreate(LoginRequiredMixin, View):
+class CategoryGalleryCreate(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
     success_message="Категория создана!"
     template_name="admin_templates/category_for_gallery_create.html"
 
@@ -1133,7 +1176,8 @@ class CategoryGalleryCreate(LoginRequiredMixin, View):
         return render(request,"admin_templates/gallery_create.html", {'title2':title, 'type_of_product2':type_of_product, 'description2':description, 'customer2':customer, 'order_number2':order_number, 'is_active2':is_active})
 
 
-class CategoryGalleryDelete(LoginRequiredMixin, View):
+class CategoryGalleryDelete(PermissionRequiredMixin, View):
+    permission_required = 'AppOko.admin_permission2'
 
     def get(self,request,*args,**kwargs):
         category_id=kwargs["id"]
@@ -1151,6 +1195,7 @@ from django.core.files.storage import FileSystemStorage
 from .models import Projects
  
 # Create your views here.
+@permission_required('AppOko.admin_permission2')
 def Import_Excel_pandas(request):
     filename = "media/spisok.xls"
     empexceldata = pd.read_excel(filename)    
@@ -1177,7 +1222,8 @@ def Import_Excel_pandas(request):
             obj.delete()
     return render(request, 'admin_templates/projects_list.html') 
 
-class ProjectListView(LoginRequiredMixin, ListView):
+class ProjectListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
     template_name="admin_templates/projects_list.html"
     fields=["date","number","name","client","manager"]
     model=Projects
@@ -1190,3 +1236,85 @@ class ProjectListView(LoginRequiredMixin, ListView):
         project_page_object = project_paginator.get_page(project_page)
         return render(request, "admin_templates/projects_list.html", {'projects':projects,'project_page_obj': project_page_object})
  
+class ChatListView(PermissionRequiredMixin, ListView):
+    permission_required = 'AppOko.admin_permission2'
+    model=ChatRoom
+    template_name="admin_templates/chat_list.html"
+
+    # def get(self,request):
+    #     filter_val=self.request.GET.get("filter","")
+    #     if filter_val != "":
+    #         user_for_chat = CustomUser.objects.get(id=filter_val)
+    #         room = ChatRoom.objects.get(host=user_for_chat)
+    #         messages=Message.objects.filter(user_id=filter_val)
+    #     else:
+    #         messages=''
+    #     if request.method == "POST":
+    #         print('пошел запрос пост')
+    #         if request.POST.get("form_type") == 'message_type':
+    #             print('сейчас создастся сообщение')
+    #             Message.objects.create(
+    #                 user = request.user.username,
+    #                 room = room,
+    #                 body = request.POST.get("body")
+    #             )
+    #             return redirect('chat_list')
+
+    def get_queryset(self):
+
+        filter_val=self.request.GET.get("filter","")
+        if filter_val!="":
+            room = ChatRoom.objects.get(host_id=filter_val)
+            messages=Message.objects.filter(room_id=room).order_by("created")
+            user_for_chat = CustomUser.objects.get(id=filter_val)
+        else:
+            messages=''
+            #передается object_list
+        return messages
+
+    def post(self, request):
+        if self.request.method == "POST":
+            if self.request.POST.get("form_type") == 'message_type':
+                room = self.request.GET.get("filter")
+                room = ChatRoom.objects.get(host=room)
+                Message.objects.create(
+                    user = self.request.user,
+                    room = room,
+                    body = self.request.POST.get("body")
+                )
+                room=str(room.host_id)
+                redirect_url = reverse('chat_list')
+                return redirect(f'{redirect_url}?filter={room}')
+
+    def get_context_data(self, *args,**kwargs):
+        filter_val=self.request.GET.get("filter","")
+        if filter_val!="":
+            user = CustomerUser.objects.filter(auth_user_id=filter_val).values_list('auth_user_id')
+        else:
+            user = ''
+        rooms = ChatRoom.objects.filter(host_id__in=user)
+        messages=Message.objects.filter(room__in=rooms).order_by("created")
+        room_list=[]
+        for i in rooms:
+            room = i.host_id
+            username = CustomUser.objects.get(id=i.host_id).username
+            room_list.append({"room":room, "username":username})
+
+        client_user=CustomerUser.objects.all().values_list('auth_user_id')
+        rooms_for_client_list = ChatRoom.objects.filter(host_id__in=client_user)
+        rooms_for_client_list_list=[]
+        for i in rooms_for_client_list:
+            room = i.host.id
+            username = CustomUser.objects.get(id=i.host_id).username
+            rooms_for_client_list_list.append({"room":room, "username":username})
+        if filter_val != '':
+            room_of_filter=ChatRoom.objects.get(host_id=filter_val).id
+        else:
+            room_of_filter=''
+        context=super().get_context_data(*args,**kwargs)
+        context["filter"]=self.request.GET.get("filter","")
+        context["messages"]=messages
+        context["room_of_filter"]=room_of_filter
+        context["rooms"]=room_list
+        context["rooms_for_client_list"]=rooms_for_client_list_list
+        return context

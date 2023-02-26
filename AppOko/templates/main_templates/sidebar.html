@@ -4,137 +4,186 @@
 <link rel="stylesheet" href="{% static '/css/sidebar.css' %}">
 {% endblock custom_css %}
 <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <!-- <a href="#">Войти</a>
-    <a href="#">Регистрация</a> -->
-          <div class="login_div" id="login_id">
-            {% if not request.user.username or request.user.user_type == "4" %}
-            <div class="card card-danger" id="signin_div">
-              <div class="card-header"><h4>Вход</h4></div>
-
-              <div class="card-body">
-                <form method="POST" action="{% url 'admin_login_process' %}" class="needs-validation" novalidate="">
-                  {% csrf_token %}
-                  <div class="form-group">
-                    <label for="email">Логин</label>
-                    <input id="email" type="text" class="form-control login_form" name="username" tabindex="1" required autofocus>
-                    <div class="invalid-feedback">
-                      Пожалуйста Введите ваш логин
-                    </div>
+    <div class="main_part">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <!-- <a href="#">Войти</a>
+      <a href="#">Регистрация</a> -->
+        <div class="login_div" id="login_id">
+          {% if not request.user.username or request.user.user_type == "4" %}
+          <div class="card card-danger" id="signin_div">
+            <div class="card-header"><h4>Вход</h4></div>
+  
+            <div class="card-body">
+              <form method="POST" action="{% url 'admin_login_process' %}" class="needs-validation" novalidate="">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="email">Логин</label>
+                  <input id="email" type="text" class="form-control login_form" name="username" tabindex="1" required autofocus>
+                  <div class="invalid-feedback">
+                    Пожалуйста Введите ваш логин
                   </div>
-
-                  <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password" class="control-label">Пароль</label>
-                    </div>
-                    <input id="password" type="password" class="form-control login_form" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      Пожалуйста введите ваш пароль
-                    </div>
+                </div>
+  
+                <div class="form-group">
+                  <div class="d-block">
+                    <label for="password" class="control-label">Пароль</label>
                   </div>
-
-                  <!-- <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Запомнить</label>
-                    </div>
-                  </div> -->
-                  {% if messages %}
-                  <div class="form-group">
-                    {% for message in messages %}
-                    {% if message.tags == "error" %}
-                    <div class="alert alert-danger">
-                      {{ message }}
-                    </div>
-                    {% endif %}
-                    {% if message.tags == "success" %}
-                    <div class="alert alert-success">
-                      {{ message }}
-                    </div>
-                    {% endif %}
-                    {% endfor %}
+                  <input id="password" type="password" class="form-control login_form" name="password" tabindex="2" required>
+                  <div class="invalid-feedback">
+                    Пожалуйста введите ваш пароль
+                  </div>
+                </div>
+  
+                <!-- <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+                    <label class="custom-control-label" for="remember-me">Запомнить</label>
+                  </div>
+                </div> -->
+                {% if messages %}
+                <div class="form-group">
+                  {% for message in messages %}
+                  {% if message.tags == "error" %}
+                  <div class="alert alert-danger">
+                    {{ message }}
                   </div>
                   {% endif %}
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-danger btn-lg btn-block" style="background-color:#FF2E00" tabindex="4">
-                      Войти
-                    </button>
+                  {% if message.tags == "success" %}
+                  <div class="alert alert-success">
+                    {{ message }}
                   </div>
-                  <p style="cursor: pointer;" id="registration_button" onclick="openReg()">Регистрация</p>
-                </form>
-
-              </div>
-            </div>
-            <div class="card card-danger" id="registration_div">
-              <div class="card-header"><h4>Регистрация</h4></div>
-
-              <div class="card-body">
-                <form method="POST" action="{% url 'admin_registration_process' %}" class="needs-validation" novalidate="">
-                  {% csrf_token %}
-                  <div class="form-group">
-                    <label for="email">Логин</label>
-                    <input id="email" type="text" class="form-control registration_form" name="username" tabindex="1" required autofocus>
-                    <div class="invalid-feedback">
-                      Пожалуйста Введите ваш логин
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password" class="control-label">Пароль</label>
-                    </div>
-                    <input id="password" type="password" class="form-control registration_form" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      Пожалуйста введите ваш пароль
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password2" class="control-label">Повторите Пароль</label>
-                    </div>
-                    <input id="password2" type="password" class="form-control registration_form" name="password2" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      Пожалуйста повторите ваш пароль
-                    </div>
-                  </div>
-
-                  <!-- <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                    </div>
-                  </div> -->
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-danger btn-lg btn-block" style="background-color:#FF2E00" tabindex="4">
-                      Зарегистрироваться
-                    </button>
-                  </div>
-                  <p style="cursor: pointer;" id="registration_form_button" onclick="openSignIn()">Войти</p>
-                </form>
-
-              </div>
-            </div>
-            {% endif %}
-            <div class="simple-footer">
-              {% if request.user.username %}
-              <p>Здравствуйте, {{ request.user.username }}<br>
-              <a href="{% url 'admin_logout_process' %}">Выйти</a></p>
-              {% endif %}
-              Copyright &copy; OKO 2022 
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                {% endif %}
+                <div class="form-group">
+                  <button type="submit" class="btn btn-danger btn-lg btn-block" style="background-color:#FF2E00" tabindex="4">
+                    Войти
+                  </button>
+                </div>
+                <p style="cursor: pointer;" id="registration_button" onclick="openReg()">Регистрация</p>
+              </form>
+  
             </div>
           </div>
+          <div class="card card-danger" id="registration_div">
+            <div class="card-header"><h4>Регистрация</h4></div>
+  
+            <div class="card-body">
+              <form method="POST" action="{% url 'admin_registration_process' %}" class="needs-validation" novalidate="">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="email">Логин</label>
+                  <input id="email" type="text" class="form-control registration_form" name="username" tabindex="1" required autofocus>
+                  <div class="invalid-feedback">
+                    Пожалуйста Введите ваш логин
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <div class="d-block">
+                    <label for="password" class="control-label">Пароль</label>
+                  </div>
+                  <input id="password" type="password" class="form-control registration_form" name="password" tabindex="2" required>
+                  <div class="invalid-feedback">
+                    Пожалуйста введите ваш пароль
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <div class="d-block">
+                    <label for="password2" class="control-label">Повторите Пароль</label>
+                  </div>
+                  <input id="password2" type="password" class="form-control registration_form" name="password2" tabindex="2" required>
+                  <div class="invalid-feedback">
+                    Пожалуйста повторите ваш пароль
+                  </div>
+                </div>
+  
+                <!-- <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+                  </div>
+                </div> -->
+                <div class="form-group">
+                  <button type="submit" class="btn btn-danger btn-lg btn-block" style="background-color:#FF2E00" tabindex="4">
+                    Зарегистрироваться
+                  </button>
+                </div>
+                <p style="cursor: pointer;" id="registration_form_button" onclick="openSignIn()">Войти</p>
+              </form>
+  
+            </div>
+          </div>
+          {% endif %}
+          <div class="simple-footer">
+            {% if request.user.username %}
+            <p>Здравствуйте, {{ request.user.username }} <br>
+            <a href="{% url 'admin_logout_process' %}">Выйти</a></p>
+            {% endif %}
+            Copyright &copy; OKO 2022 
+          </div>
+        </div>
+    </div>
+    <div class="second_part">
+      <div class="white_line">
+      </div>
+      <div class="info">
+        <div class="chat_head">
+          <p id="chat_head_id">Чат с нашим менеджером</p>
+        </div>
+        <div class="chat_body" id="chat_body">
+          <!-- <div class="message_item message_manager">
+            <div class="message_head">
+              <p>Менеджер Елена</p>
+              <p>22.02.2023 00:09</p>
+            </div>
+            <div class="message_body">
+              <p>Здравствуйте, что Вас интересует?</p>
+            </div>
+          </div> -->
+          <!-- <div class="message_item message_client">
+            <div class="message_head">
+              <p>Вы</p>
+              <p>22.02.2023 00:11</p>
+            </div>
+            <div class="message_body">
+              <p>Световые буквы</p>
+            </div>
+          </div> -->
+          {% for message in room_messages %}
+          <div class="message_item {% if message.user.user_type == '1' %} message_manager {% elif message.user.user_type == '3' %} message_client {% endif %}">
+            <div class="message_head">
+              <p>{{ message.user }}</p>
+              <p>{{ message.created }}</p>
+            </div>
+            <div class="message_body" id="message_body">
+              <p>{{ message.body }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div>
+            <input type="text" id="chat_message_input" placeholder="Введите ваше сообщение" form="input_chat_message" name="body" class="chat_input"/>
+            <button type="text" id="chat_message_submit" style="display: none;"></button>
+        </div>
+      </div>
+    </div>
 </div>
 {% block custom_js %}
+<script src="{% static '/modules/jquery.min.js' %}"></script>
 <script>
+  document.getElementById('chat_body').scrollTo(0, document.getElementById('chat_body').scrollHeight);
+
     /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
 function openNav() {
-  if (document.getElementById("mySidebar").style.width == "400px")
+  if (document.getElementById("mySidebar").style.width == "800px")
   {
   document.getElementById("login_id").style.display = "none";
   document.getElementById("mySidebar").style.width = "0";
   }
   else {
-    document.getElementById("mySidebar").style.width = "400px";
+    document.getElementById("mySidebar").style.width = "800px";
     setTimeout(() => {document.getElementById("login_id").style.display = "flex";}, 150);
     
   }
@@ -152,5 +201,46 @@ function openSignIn() {
 function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
 }
+</script>
+<script>
+  const chatSocket = new WebSocket('ws://'+ window.location.host);
+  chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            if (data.user_type.toString() == '1') {
+              data.user_type = 'message_manager';
+            } else if (data.user_type.toString() == '3') {
+              data.user_type = 'message_client';
+            }
+            
+            $('#chat_body').append(
+              '<div class="message_item ' + data.user_type +'">'
+              + '<div class="message_head"><p>' + data.user_id  +  '</p><p>'+ data.created +'</p></div>' + 
+              '<div class="message_body" id="message_body">' +
+                  '<p>' + data.body + '</p></div></div>'
+              );
+            var objDiv = document.getElementById("chat_body");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        };
+
+  $("#chat_message_submit").click(function(){
+    body = document.querySelector('#chat_message_input').value
+    room_id = '{{ room.id }}'
+    user_id = '{{ request.user.id }}'
+    const x = chatSocket.send(JSON.stringify({
+                'body': body,
+                'room_id':room_id,
+                'user_id':user_id
+            }));
+    });
+
+    document.querySelector('#chat_message_input').focus();
+    document.querySelector('#chat_message_input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat_message_submit').click();
+            document.querySelector('#chat_message_input').value = '';
+        }
+    };
+
+  
 </script>
 {% endblock custom_js %}

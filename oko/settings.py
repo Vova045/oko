@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'captcha',
     'AppOko',
+    'channels',
+    
 ]
 
 MIDDLEWARE = [
@@ -70,9 +73,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'oko.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -113,7 +113,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -166,3 +166,12 @@ RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
 RECAPTCHA_LANGUAGE = 'en'
+
+ASGI_APPLICATION = 'oko.asgi.application'
+WSGI_APPLICATION = 'oko.wsgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}

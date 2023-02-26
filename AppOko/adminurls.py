@@ -82,4 +82,7 @@ urlpatterns = [
     path('category_for_gallery_create',AdminViews.CategoryGalleryCreate.as_view(),name="category_for_gallery_create"),
     path('category_for_gallery_delete/<str:id>',AdminViews.CategoryGalleryDelete.as_view(),name="category_for_gallery_delete"),
     path('projects_list',AdminViews.ProjectListView.as_view(),name="projects_list"),
+
+    #Chats
+    path('chat_list',AdminViews.ChatListView.as_view(),name="chat_list"),
 ]

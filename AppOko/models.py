@@ -8,6 +8,8 @@ from django.urls import reverse
 class CustomUser(AbstractUser):
     user_type_choices=((1,"Admin"),(2,"Staff"),(3,"Customer"),(4,"TempCustomer"),)
     user_type=models.CharField(max_length=255,choices=user_type_choices, default=1)
+    is_staff = models.IntegerField(null=True, blank=True, default=1)
+
 
 class Projects (models.Model):
     date = models.CharField(max_length=150,null=True, blank=True)
@@ -28,6 +30,7 @@ class AdminUser(models.Model):
     profile_pic=models.FileField(default="")
     auth_user_id=models.OneToOneField(CustomUser,on_delete=models.PROTECT)
     created_at=models.DateTimeField(auto_now_add=True)
+
 
 class StaffUser(models.Model):
     profile_pic=models.FileField(default="", blank=True, null=True)
@@ -223,9 +226,7 @@ def save_user_profile(sender,instance, **kwargs):
     if instance.user_type==3:
         instance.customeruser.save()
 
-
 #Просмотры и Гости
-
 
 class GuestList(models.Model):
     ip = models.CharField('IP-адрес', max_length=100)
@@ -243,9 +244,6 @@ class CategoryGallery(models.Model):
     id=models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     is_active=models.IntegerField(default=1)
-    
-
-
 
 class Gallery(models.Model):
     id=models.AutoField(primary_key=True)
@@ -260,3 +258,28 @@ class Gallery(models.Model):
 
     def get_absolute_url(self):
         return reverse("gallery_list")    
+
+class ChatRoom(models.Model):
+    host = models.OneToOneField(CustomUser, on_delete=models.SET_NULL, null=True)
+    participants = models.ManyToManyField(CustomUser, related_name='participants', blank=True)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-updated', '-created']
+
+    def __str__(self):
+        return self.host
+
+class Message(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    room = models.ForeignKey(ChatRoom, on_delete=models.CASCADE)
+    body = models.TextField()
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-updated', '-created']
+
+    def __str__(self):
+        return self.body[0:50]
