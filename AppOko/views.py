@@ -71,7 +71,8 @@ def get_id(request):
 
 
 def home(request):
-    
+
+
     get_id(request)
     if request.method == "POST":
         if request.POST.get("form_type") == 'mail_type':
@@ -80,7 +81,10 @@ def home(request):
     # Добавление разрешения для пользователей
     user_for_permission = CustomUser.objects.filter(user_type="1")
     ct = ContentType.objects.get_for_model(AdminUser)
-    permission = Permission.objects.get(codename ='admin_permission2', content_type = ct)
+    try:
+        permission = Permission.objects.get(codename ='admin_permission2', content_type = ct)
+    except:
+        permission = Permission.objects.create(codename ='admin_permission2', content_type = ct)
     for i in user_for_permission:
         i.user_permissions.add(permission)
 
@@ -355,7 +359,7 @@ def adminLoginProcess(request):
     username=request.POST.get("username")
     password=request.POST.get("password")
     user=authenticate(request=request,username=username,password=password)
-    # print(authenticate(request=request,username=username,password=password))
+    print(user)
     if user is not None:
         user = CustomUser.objects.get(username=username)
         print(user)

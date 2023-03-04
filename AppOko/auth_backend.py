@@ -7,6 +7,7 @@ class PasswordlessAuthBackend(ModelBackend):
     def authenticate(request, self, username, password):
         try:
             user = CustomUser.objects.get(username=username)
+            print(user)
             if user.user_type == '4':
                 if username == username and password == password:
                     return user

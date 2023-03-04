@@ -1,0 +1,136 @@
+вебсокет запустилсявебсокет запустилсявебсокет запустилсявебсокет запустилсяspecific.GtDaxLdK!UJiTqDHzHgTy
+connectсообщение
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('127.0.0.1', 6379)}])
+specific.GtDaxLdK!UJiTqDHzHgTy
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+вебсокет запустилсяspecific.rzVWFaQJ!gufDcWrroENA
+connectвебсокет запустилсяspecific.FFJoQfmh!TzAYXTVCKXFB
+connectdfv
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('127.0.0.1', 6379)}, {'address': ('192.168.0.19', 6379)}])
+specific.FFJoQfmh!TzAYXTVCKXFB
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+specific.FFJoQfmh!FOQaTImcRNCK
+connectzxc 
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('127.0.0.1', 6379)}, {'address': ('192.168.0.19', 6379)}])
+specific.FFJoQfmh!FOQaTImcRNCK
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+specific.FFJoQfmh!iAoxFnoYdUpZ
+connectвебсокет запустилсявебсокет запустилсявебсокет запустилсявебсокет запустилсявебсокет запустилсявебсокет запустилсяspecific.bf7256331f214de7bb06b65e7c701c75!3e88afd0a1fc4b4cac65a23de7acc673
+connectвебсокет запустилсяspecific.24bb5d8d721a4ed68f32f4c55921ce34!ed7c93fc175041efb95714ada83f088d
+connectвебсокет запустилсяspecific.BUrWbgnE!bHlIvcVfwcHE
+connectklm
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('127.0.0.1', 6379)}])
+specific.BUrWbgnE!bHlIvcVfwcHE
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+вебсокет запустилсяspecific.nGVaqkph!knVMjeSsjqBA
+connectfgdb
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('192.168.0.19', 6379)}, {'address': ('127.0.0.1', 6379)}])
+specific.nGVaqkph!knVMjeSsjqBA
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+specific.nGVaqkph!nlfvqwtcRJrI
+connectghgjk
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('192.168.0.19', 6379)}, {'address': ('127.0.0.1', 6379)}])
+specific.nGVaqkph!nlfvqwtcRJrI
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+вебсокет запустилсяspecific.lzVyuMtF!olAnmRWUauGj
+connectfgd
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('192.168.0.19', 6379)}, {'address': ('127.0.0.1', 6379)}])
+specific.lzVyuMtF!olAnmRWUauGj
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+specific.lzVyuMtF!KKPJNSkWHMMT
+connectdfgdfg
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('192.168.0.19', 6379)}, {'address': ('127.0.0.1', 6379)}])
+specific.lzVyuMtF!KKPJNSkWHMMT
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+specific.lzVyuMtF!iPxqqOIQCDaG
+connectghnh
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('192.168.0.19', 6379)}, {'address': ('127.0.0.1', 6379)}])
+specific.lzVyuMtF!iPxqqOIQCDaG
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+вебсокет запустилсявебсокет запустилсяspecific.zjmPqaIx!xcwPqtfaGGAB
+connectfgdfdg
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('192.168.0.19', 6379)}, {'address': ('127.0.0.1', 6379)}])
+specific.zjmPqaIx!xcwPqtfaGGAB
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение
+вебсокет запустилсявебсокет запустилсявебсокет запустилсявебсокет запустилсяspecific.KvQkTUSW!AXRNYRIdsfQS
+connect111
+1
+12
+создание сообщения в функции
+сообщение создалось
+RedisChannelLayer(hosts=[{'address': ('192.168.0.19', 6379)}, {'address': ('127.0.0.1', 6379)}, {'address': ('reklama-oko.ru', 6379)}])
+specific.KvQkTUSW!AXRNYRIdsfQS
+чатбокс открылся
+12
+сейчас возьмем логин
+сейчас создастся сообщение

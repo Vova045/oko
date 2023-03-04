@@ -10,12 +10,15 @@
 
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
-from django.urls import re_path
+from django.urls import re_path, path
 from oko import consumers
 
 # URLs that handle the WebSocket connection are placed here.
 websocket_urlpatterns=[
                     re_path("", consumers.ChatRoomConsumer.as_asgi(),),
+                    path("ws://127.0.0.1:6379/", consumers.ChatRoomConsumer.as_asgi(),),
+                    path("ws://192.168.0.1:6379/", consumers.ChatRoomConsumer.as_asgi(),),
+                    path("ws://reklama-oko.ru:6379/", consumers.ChatRoomConsumer.as_asgi(),),
                     re_path("/admindashboard/chat_list", consumers.ChatRoomConsumer.as_asgi(),),
                 ]                        
 

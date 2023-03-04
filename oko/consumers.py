@@ -38,7 +38,12 @@ def int_value_from_ru_month(date_str):
 
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
-    print("класс запустился")
+    import sys
+    sys.stdout = open("file.txt", "a")
+    f1 = open("file.txt", "a")
+    f1.write("вебсокет запустился")
+    f1.close()
+    
     
     async def connect (self):
         self.group_name = 'my_socket'
@@ -46,6 +51,11 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         await self.accept()
         x = self.channel_name
         print(x)
+        import sys
+        sys.stdout = open("file.txt", "a")
+        f1 = open("file.txt", "a")
+        f1.write("connect")
+        f1.close()
         return x
 
         
@@ -61,7 +71,8 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         print(room_id)
         user_id = text_data_json['user_id']
         print(user_id)
-        # room_id2 = await sync_to_async(ChatRoom.objects.get)(id=room_id)
+        # room_id2 = await sync_to_
+        # async(ChatRoom.objects.get)(id=room_id)
         # print(room_id2)
         # user_id2 = await sync_to_async(CustomUser.objects.get)(id=user_id)
         # print(user_id2)
@@ -100,7 +111,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         message_text_created = message.created
         message_text_updated = message.updated
         date_str = '05 марта 2015, 13:00'
-        locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8') 
+        locale.setlocale(locale.LC_TIME, 'Russian_Russia.1251') 
         date_str = int_value_from_ru_month(date_str)
         message_text_created = str(message_text_created).split('.')[0]
         message_text_created = str(message.created.strftime('%d %B %Y г. %H:%M'))

@@ -171,6 +171,10 @@
     </div>
 </div>
 {% block custom_js %}
+<!-- <script>
+  const web_url = 'ws://' + window.location.host
+  console.log(web_url)
+</script> -->
 <script src="{% static '/modules/jquery.min.js' %}"></script>
 <script>
   document.getElementById('chat_body').scrollTo(0, document.getElementById('chat_body').scrollHeight);
@@ -202,9 +206,46 @@ function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
 }
 </script>
+
 <script>
+
   const chatSocket = new WebSocket('ws://'+ window.location.host);
-  chatSocket.onmessage = function(e) {
+console.log('коннект')
+console.log(chatSocket)
+
+    document.querySelector('#chat_message_input').focus();
+      document.querySelector('#chat_message_input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat_message_submit').click();
+            document.querySelector('#chat_message_input').value = '';
+        }
+    };
+    
+      $("#chat_message_submit").click(function(){
+    body = document.querySelector('#chat_message_input').value
+    room_id = '{{ room.id }}'
+    user_id = '{{ request.user.id }}'
+    const data = JSON.stringify({
+                'body': body,
+                'room_id':room_id,
+                'user_id':user_id
+            })
+
+    if (chatSocket.readyState === WebSocket.OPEN) {
+        chatSocket.send(data);
+    } else {
+        console.warn("websocket is not connected");
+    }
+
+
+    console.log('данные отправились на сервер')
+    });
+    
+    
+  
+    chatSocket.onmessage = function(e) {
+      console.log('открылась функция отправки данных от сервера на сайт')
+
             const data = JSON.parse(e.data);
             if (data.user_type.toString() == '1') {
               data.user_type = 'message_manager';
@@ -222,24 +263,13 @@ function closeNav() {
             objDiv.scrollTop = objDiv.scrollHeight;
         };
 
-  $("#chat_message_submit").click(function(){
-    body = document.querySelector('#chat_message_input').value
-    room_id = '{{ room.id }}'
-    user_id = '{{ request.user.id }}'
-    const x = chatSocket.send(JSON.stringify({
-                'body': body,
-                'room_id':room_id,
-                'user_id':user_id
-            }));
-    });
 
-    document.querySelector('#chat_message_input').focus();
-    document.querySelector('#chat_message_input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#chat_message_submit').click();
-            document.querySelector('#chat_message_input').value = '';
-        }
-    };
+  
+
+
+
+
+
 
   
 </script>
