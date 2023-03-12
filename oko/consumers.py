@@ -38,7 +38,6 @@ def int_value_from_ru_month(date_str):
 
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
-<<<<<<< Updated upstream
     import sys
     sys.stdout = open("file.txt", "a")
     f1 = open("file.txt", "a")
@@ -46,27 +45,16 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
     f1.close()
     
     
-=======
-
->>>>>>> Stashed changes
     async def connect (self):
         self.group_name = 'my_socket'
         await self.channel_layer.group_add(self.group_name, self.channel_name)
         await self.accept()
         x = self.channel_name
         print(x)
-<<<<<<< Updated upstream
         import sys
         sys.stdout = open("file.txt", "a")
         f1 = open("file.txt", "a")
         f1.write("connect")
-=======
-        print("класс запустился")
-        import sys
-        sys.stdout = open("file.txt", "a")
-        f1 = open("file.txt", "a")
-        f1.write("вебсокет запустился")
->>>>>>> Stashed changes
         f1.close()
         return x
 
@@ -83,13 +71,8 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         print(room_id)
         user_id = text_data_json['user_id']
         print(user_id)
-<<<<<<< Updated upstream
         # room_id2 = await sync_to_
         # async(ChatRoom.objects.get)(id=room_id)
-=======
-        
-        # room_id2 = await sync_to_async(ChatRoom.objects.get)(id=room_id)
->>>>>>> Stashed changes
         # print(room_id2)
         # user_id2 = await sync_to_async(CustomUser.objects.get)(id=user_id)
         # print(user_id2)

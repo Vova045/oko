@@ -172,10 +172,6 @@
     </div>
 </div>
 {% block custom_js %}
-<!-- <script>
-  const web_url = 'ws://' + window.location.host
-  console.log(web_url)
-</script> -->
 <script src="{% static '/modules/jquery.min.js' %}"></script>
 <script>
   document.getElementById('chat_body').scrollTo(0, document.getElementById('chat_body').scrollHeight);
@@ -209,70 +205,6 @@ function closeNav() {
 </script>
 
 <script>
-<<<<<<< Updated upstream
-
-  const chatSocket = new WebSocket('ws://'+ window.location.host);
-console.log('коннект')
-console.log(chatSocket)
-
-    document.querySelector('#chat_message_input').focus();
-      document.querySelector('#chat_message_input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#chat_message_submit').click();
-            document.querySelector('#chat_message_input').value = '';
-        }
-    };
-    
-      $("#chat_message_submit").click(function(){
-    body = document.querySelector('#chat_message_input').value
-    room_id = '{{ room.id }}'
-    user_id = '{{ request.user.id }}'
-    const data = JSON.stringify({
-                'body': body,
-                'room_id':room_id,
-                'user_id':user_id
-            })
-
-    if (chatSocket.readyState === WebSocket.OPEN) {
-        chatSocket.send(data);
-    } else {
-        console.warn("websocket is not connected");
-    }
-
-
-    console.log('данные отправились на сервер')
-    });
-    
-    
-  
-    chatSocket.onmessage = function(e) {
-      console.log('открылась функция отправки данных от сервера на сайт')
-
-            const data = JSON.parse(e.data);
-            if (data.user_type.toString() == '1') {
-              data.user_type = 'message_manager';
-            } else if (data.user_type.toString() == '3') {
-              data.user_type = 'message_client';
-            }
-            
-            $('#chat_body').append(
-              '<div class="message_item ' + data.user_type +'">'
-              + '<div class="message_head"><p>' + data.user_id  +  '</p><p>'+ data.created +'</p></div>' + 
-              '<div class="message_body" id="message_body">' +
-                  '<p>' + data.body + '</p></div></div>'
-              );
-            var objDiv = document.getElementById("chat_body");
-            objDiv.scrollTop = objDiv.scrollHeight;
-        };
-
-
-  
-
-
-
-
-
-=======
   document.querySelector('#chat_message_input').focus();
   document.querySelector('#chat_message_input').onkeyup = function(e) {
     if (e.keyCode === 13) {  // enter, return
@@ -321,7 +253,6 @@ console.log(chatSocket)
           }
           
         }
->>>>>>> Stashed changes
 
       });
     }
