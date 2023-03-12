@@ -174,7 +174,11 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
+<<<<<<< Updated upstream
             "hosts": [("192.168.0.19", 6379),("127.0.0.1", 6379),("reklama-oko.ru", 6379)],
+=======
+            "hosts": [("127.0.0.1", 6379,),("192.168.0.19", 6379,)],
+>>>>>>> Stashed changes
         },
     }
 }

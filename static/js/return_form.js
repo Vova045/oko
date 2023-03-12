@@ -20,6 +20,9 @@ document.querySelectorAll('.modal-close')[0].addEventListener('click', function 
 })
 
 // Закрытие сообщения, что письмо отправлено
-document.querySelectorAll('.mail_sent-close')[0].addEventListener('click', function () {
-    document.querySelectorAll('.bg-modal_sent')[0].style.display = 'none';
-})
+var selection = document.querySelectorAll('.mail_sent-close')[0] !== undefined;
+if (selection) {
+    document.querySelectorAll('.mail_sent-close')[0].addEventListener('click', function () {
+        document.querySelectorAll('.bg-modal_sent')[0].style.display = 'none';
+    })
+}

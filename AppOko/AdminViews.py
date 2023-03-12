@@ -23,7 +23,30 @@ except ImportError:
 from django.contrib.auth.decorators import permission_required
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+import datetime
 
+import locale
+RU_MONTH_VALUES = {
+    'января': 1,
+    'февраля': 2,
+    'марта': 3,
+    'апреля': 4,
+    'мая': 5,
+    'июня': 6,
+    'июля': 7,
+    'августа': 8,
+    'сентября': 9,
+    'октября': 10,
+    'ноября': 11,
+    'декабря': 12,
+}
+
+
+def int_value_from_ru_month(date_str):
+    for k, v in RU_MONTH_VALUES.items():
+        date_str = date_str.replace(k, str(v))
+
+    return date_str
 
 
 @permission_required('AppOko.admin_permission2')
@@ -1240,26 +1263,6 @@ class ChatListView(PermissionRequiredMixin, ListView):
     permission_required = 'AppOko.admin_permission2'
     model=ChatRoom
     template_name="admin_templates/chat_list.html"
-
-    # def get(self,request):
-    #     filter_val=self.request.GET.get("filter","")
-    #     if filter_val != "":
-    #         user_for_chat = CustomUser.objects.get(id=filter_val)
-    #         room = ChatRoom.objects.get(host=user_for_chat)
-    #         messages=Message.objects.filter(user_id=filter_val)
-    #     else:
-    #         messages=''
-    #     if request.method == "POST":
-    #         print('пошел запрос пост')
-    #         if request.POST.get("form_type") == 'message_type':
-    #             print('сейчас создастся сообщение')
-    #             Message.objects.create(
-    #                 user = request.user.username,
-    #                 room = room,
-    #                 body = request.POST.get("body")
-    #             )
-    #             return redirect('chat_list')
-
     def get_queryset(self):
 
         filter_val=self.request.GET.get("filter","")
@@ -1318,3 +1321,97 @@ class ChatListView(PermissionRequiredMixin, ListView):
         context["rooms"]=room_list
         context["rooms_for_client_list"]=rooms_for_client_list_list
         return context
+
+
+def chatmessage_send(request):
+    body = request.GET['body']
+    if body == "":
+        result = ""
+        return HttpResponse(simplejson.dumps(result), content_type='application/json')
+    room_id = request.GET['room_id']
+    user_id = request.GET['user_id']
+    host_id = request.GET['host_id']
+    if room_id == '':
+        room_id2 = ChatRoom.objects.get(host_id=host_id)
+    else:
+        room_id2 = ChatRoom.objects.get(id=room_id)
+    user_id2 = CustomUser.objects.get(id=user_id)
+    new_message = Message.objects.create(user=user_id2, room=room_id2, body=body)
+    user_type = user_id2.user_type
+    username = user_id2.username
+    result = []
+
+    message_text_created = new_message.created
+    message_text_updated = new_message.updated
+    date_str = '05 марта 2015, 13:00'
+    locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8') 
+    date_str = int_value_from_ru_month(date_str)
+    message_text_created = str(new_message).split('.')[0]
+    message_text_created = str(new_message.created.strftime('%d %B %Y г. %H:%M'))
+    message_text_updated = message_text_updated.strptime(date_str, '%d %m %Y, %H:%M')
+    message_text_updated = str(message_text_updated.strftime('%d %B %Y, %H:%M'))
+
+    result.append({
+            "user_id": username,
+            "body": body,
+            "room_id": room_id,
+            "created": message_text_created,
+            "updated": message_text_updated,
+            "user_type": user_type
+        })
+    return HttpResponse(simplejson.dumps(result), content_type='application/json')
+
+def chatmessage_check(request):
+    room_id = request.GET['room_id']
+    host_id = request.GET['host_id']
+    if room_id == '':
+        room_id2 = ChatRoom.objects.get(host_id=host_id)
+    else:
+        room_id2 = ChatRoom.objects.get(id=room_id)
+    user_id = request.GET['user_id']
+    user_id2 = CustomUser.objects.get(id=user_id)
+    # if user_id == None:
+    #     user_id == room_id2.host_id
+    # all_messages_list = request.GET['all_messages_list']
+    # print(all_messages_list)
+    last_date = datetime.datetime.now()
+    first_date= datetime.datetime.now() - datetime.timedelta(seconds=3.1)
+    all_messages = Message.objects.filter(room=room_id2,created__range=(first_date, last_date)).exclude(user_id=user_id)
+    print(all_messages)
+    # print(all_messages)
+    result = []
+    for message in all_messages:
+        user_id3 = CustomUser.objects.get(id=message.user_id)
+        user_type = user_id3.user_type
+        username = user_id3.username
+        print(username)
+        result = []
+        body = message.body
+        message_text_created = message.created
+        message_text_updated = message.updated
+        date_str = '05 марта 2015, 13:00'
+        locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8') 
+        date_str = int_value_from_ru_month(date_str)
+        message_text_created = str(message).split('.')[0]
+        message_text_created = str(message.created.strftime('%d %B %Y г. %H:%M'))
+        message_text_updated = message_text_updated.strptime(date_str, '%d %m %Y, %H:%M')
+        message_text_updated = str(message_text_updated.strftime('%d %B %Y, %H:%M'))
+        result.append({
+                "username": username,
+                "body": body,
+                "room_id": room_id,
+                "created": message_text_created,
+                "updated": message_text_updated,
+                "user_type": user_type
+            }) 
+        print(result)
+    user_type = user_id2.user_type
+    username = user_id2.username
+
+    if all_messages.exists():
+        # result.append({
+        #         "messages": messages,
+        #     })
+        return HttpResponse(simplejson.dumps(result), content_type='application/json')
+    result2 = ""
+    return HttpResponse(simplejson.dumps(result2), content_type='application/json')

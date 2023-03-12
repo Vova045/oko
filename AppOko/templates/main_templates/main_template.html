@@ -92,7 +92,7 @@
     <script src="{% static '/modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
   
     <!-- Page Specific JS File -->
-    <script src="{% static '/js/page/index-0.js' %}"></script>
+    <!-- <script src="{% static '/js/page/index-0.js' %}"></script> -->
     
     <!-- Template JS File -->
     <script src="{% static '/js/scripts.js' %}"></script>
@@ -103,8 +103,11 @@
   {% block custom_js %}
   {% endblock custom_js %}
   <script>
-    document.getElementById("title").onkeyup=function(){
+    var selection2 = document.getElementById("title") !== null;
+    if (selection2) {
+      document.getElementById("title").onkeyup=function(){
       document.getElementById("url_slug").value=document.getElementById("title").value.toLowerCase().replace(/ /g,"-");
+      }
     }
   </script>
   <script type="text/javascript" defer src="{% static 'js/return_form.js' %}"></script>

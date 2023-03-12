@@ -154,6 +154,7 @@
           {% for message in room_messages %}
           <div class="message_item {% if message.user.user_type == '1' %} message_manager {% elif message.user.user_type == '3' %} message_client {% endif %}">
             <div class="message_head">
+              <input class="id_message" style="display: none;" value="{{ message.id }}"></input>
               <p>{{ message.user }}</p>
               <p>{{ message.created }}</p>
             </div>
@@ -208,6 +209,7 @@ function closeNav() {
 </script>
 
 <script>
+<<<<<<< Updated upstream
 
   const chatSocket = new WebSocket('ws://'+ window.location.host);
 console.log('коннект')
@@ -270,7 +272,118 @@ console.log(chatSocket)
 
 
 
+=======
+  document.querySelector('#chat_message_input').focus();
+  document.querySelector('#chat_message_input').onkeyup = function(e) {
+    if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#chat_message_submit').click();
+        document.querySelector('#chat_message_input').value = '';
+      }
+  };
+  function getdata_chatmessage() {
+    var body = document.querySelector('#chat_message_input').value
+    var room_id = '{{ room.id }}'
+    var user_id = '{{ request.user.id }}'
+    var host_id = ''
+      
+    $.ajax({
+        url: '/admindashboard/chatmessage_send',
+        data : {
+          'body' : body,
+          'room_id' : room_id,
+          'user_id' : user_id,
+          'host_id' : host_id,
+        },
+        method : 'GET',
+        async : false,
+        success : function(result){
+          if (result !== ""){
+            console.log(result[0].user_id)
+          console.log(result[0].body)
+          console.log(result[0].room_id)
+          console.log(result[0].created)
+          console.log(result[0].updated)
+          console.log(result[0].user_type)
+          if (result[0].user_type.toString() == '1') {
+            result[0].user_type = 'message_manager';
+          } else if (result[0].user_type.toString() == '3') {
+            result[0].user_type = 'message_client';
+          }
 
+          $('#chat_body').append(
+          '<div class="message_item ' + result[0].user_type +'">'
+          + '<div class="message_head"><p>' + result[0].user_id  +  '</p><p>'+ result[0].created +'</p></div>' + 
+          '<div class="message_body" id="message_body">' +
+              '<p>' + result[0].body + '</p></div></div>'
+          );
+          var objDiv = document.getElementById("chat_body");
+          objDiv.scrollTop = objDiv.scrollHeight;
+          }
+          
+        }
+>>>>>>> Stashed changes
+
+      });
+    }
+  function getdata_checkmessage() {
+    // console.log("чек")
+    // var id_messages = document.querySelectorAll(".id_message")
+    // var id_messages_list = [];
+    //   for (var i = 0; i < id_messages.length; i++) {
+    //       if (id_messages[i].value) {
+    //         id_messages_list.push(id_messages[i].value);
+    //       }
+    //   }
+    // console.log(id_messages_list)
+    var room_id = '{{ room.id }}'
+    var user_id = '{{ request.user.id }}'
+    var host_id = ''
+    $.ajax({
+        url: '/admindashboard/chatmessage_check',
+        data : {
+          'room_id' : room_id,
+          'user_id' : user_id,
+          'host_id' : host_id
+          // 'id_messages_list' : id_messages_list,  
+        },
+        method : 'GET',
+        async : false,
+        success : function(result){
+          console.log('Сообщение в чатлисте')
+          if (result !== ""){
+            console.log("результат" + result)
+            console.log("результат длина" + result.length)
+            for (var i = result.length - 1; i >= 0; i--) {
+              if (result[i].toString() == '1') {
+              console.log('Сообщение от менеджера')
+              result[i].user_type = 'message_manager';
+              } else if (result[i].user_type.toString() == '3') {
+                console.log('Сообщение от клиента')
+                result[i].user_type = 'message_client';
+              }
+
+              $('#chat_body').append(
+              '<div class="message_item ' + result[i].user_type +'">'
+              + '<div class="message_head"><p>' + result[i].username  +  '</p><p>'+ result[i].created +'</p></div>' + 
+              '<div class="message_body" id="message_body">' +
+                  '<p>' + result[i].body + '</p></div></div>'
+              );
+              console.log('Сообщение появилось')
+              var objDiv = document.getElementById("chat_body");
+              objDiv.scrollTop = objDiv.scrollHeight;
+              };
+          }
+          
+        }
+      });
+    }
+  $(document).ready(function(){
+    document.querySelector('#chat_message_submit').onclick = function(){
+      console.log("Функция сейчас запустится")
+      getdata_chatmessage()
+    }
+  });
+  window.setInterval(getdata_checkmessage, 3000);
   
 </script>
 {% endblock custom_js %}
