@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json as simplejson
 import random
 import string
+import locale
 import os, urllib
 from oko import settings
 try:
@@ -27,18 +28,18 @@ import datetime
 
 import locale
 RU_MONTH_VALUES = {
-    'января': 1,
-    'февраля': 2,
-    'марта': 3,
-    'апреля': 4,
-    'мая': 5,
-    'июня': 6,
-    'июля': 7,
-    'августа': 8,
-    'сентября': 9,
-    'октября': 10,
-    'ноября': 11,
-    'декабря': 12,
+    'January': 'января',
+    'February': 'февраля',
+    'March': 'марта',
+    'April': 'апреля',
+    'May': 'мая',
+    'June': 'июня',
+    'July': 'июля',
+    'August': 'августа',
+    'September': 'сентября',
+    'October': 'октября',
+    'November': 'ноября',
+    'December': 'декабря',
 }
 
 
@@ -1343,13 +1344,12 @@ def chatmessage_send(request):
 
     message_text_created = new_message.created
     message_text_updated = new_message.updated
-    date_str = '05 марта 2015, 13:00'
-    locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8') 
-    date_str = int_value_from_ru_month(date_str)
+
     message_text_created = str(new_message).split('.')[0]
     message_text_created = str(new_message.created.strftime('%d %B %Y г. %H:%M'))
-    message_text_updated = message_text_updated.strptime(date_str, '%d %m %Y, %H:%M')
+    message_text_created = int_value_from_ru_month(message_text_created)
     message_text_updated = str(message_text_updated.strftime('%d %B %Y, %H:%M'))
+
 
     result.append({
             "user_id": username,
@@ -1389,13 +1389,12 @@ def chatmessage_check(request):
         body = message.body
         message_text_created = message.created
         message_text_updated = message.updated
-        date_str = '05 марта 2015, 13:00'
-        locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8') 
-        date_str = int_value_from_ru_month(date_str)
+        
         message_text_created = str(message).split('.')[0]
         message_text_created = str(message.created.strftime('%d %B %Y г. %H:%M'))
-        message_text_updated = message_text_updated.strptime(date_str, '%d %m %Y, %H:%M')
+        message_text_created = int_value_from_ru_month(message_text_created)
         message_text_updated = str(message_text_updated.strftime('%d %B %Y, %H:%M'))
+
         result.append({
                 "username": username,
                 "body": body,

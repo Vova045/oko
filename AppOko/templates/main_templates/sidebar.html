@@ -280,16 +280,11 @@ function closeNav() {
         method : 'GET',
         async : false,
         success : function(result){
-          console.log('Сообщение в чатлисте')
           if (result !== ""){
-            console.log("результат" + result)
-            console.log("результат длина" + result.length)
             for (var i = result.length - 1; i >= 0; i--) {
               if (result[i].toString() == '1') {
-              console.log('Сообщение от менеджера')
               result[i].user_type = 'message_manager';
               } else if (result[i].user_type.toString() == '3') {
-                console.log('Сообщение от клиента')
                 result[i].user_type = 'message_client';
               }
 
@@ -310,7 +305,6 @@ function closeNav() {
     }
   $(document).ready(function(){
     document.querySelector('#chat_message_submit').onclick = function(){
-      console.log("Функция сейчас запустится")
       getdata_chatmessage()
     }
   });
