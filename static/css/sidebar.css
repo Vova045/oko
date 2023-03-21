@@ -1,10 +1,10 @@
 .closed_sidebar {
     display: flex; position: fixed; top: 0; flex-direction: row; justify-content: center;
-    height: 100%; width: 0px; background-color: #FF003C; z-index: 4;
+    height: 100%; width: 70px; background-color: #FF003C; z-index: 2;
 }
 .nav_icon_div {
-    display: flex; width: 50px; height: fit-content; margin-top: 15px; padding: 7px;
-    cursor: pointer;z-index: 1; 
+  display: flex; width: 50px; height: fit-content; margin-top: 15px; padding: 7px;
+  cursor: pointer;z-index: 1; 
 }
 /* The sidebar menu */
 .sidebar {
@@ -12,7 +12,7 @@
     height: 100%; /* 100% Full-height */
     width: 0px; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 4; /* Stay on top */
+    z-index: 3; /* Stay on top */
     top: 0;
     left: 0;
     background-color: #111; /* Black*/
@@ -31,11 +31,11 @@
     transition: 0.3s;
   }
 
-  .simple-footer a{
+  /* .simple-footer a{
     font-size: 15px;
     padding: 0px;
     width: fit-content;
-  }
+  } */
   
   /* When you mouse over the navigation links, change their color */
   .sidebar a:hover {
@@ -51,13 +51,16 @@
     margin-left: 50px;
     z-index: 1;
   }
-  
+    #main {
+    transition: margin-left .5s; /* If you want a transition effect */
+    position: relative;
+  }
   .main_part {
-    width: 300px; background-color: #111;
-    padding-top: 60px;
+    width: 300px;
+    padding-top: 60px; 
   }
   .second_part {
-    display: flex;
+    display: none;
     width: 500px; background-color: rgb(22, 22, 22);
   }
   .white_line {
@@ -76,10 +79,16 @@
     height: 530px; border: 1px solid white; border-radius: 15px; padding: 20px;
   }
   .info .chat_input {
-    width: 430px; background-color: #111; color: white; font-size: 12px;
-    height: 30px; margin-top: 20px; border: 1px solid white; border-radius: 10px;
+    display: flex; flex-wrap: nowrap;
+    width: 400px; background-color: #111; color: white; font-size: 12px;
+    height: 30px; margin-top: 0px; border: 1px solid white; border-radius: 10px;
   }
-
+  .input_field {
+    display: flex; flex-direction: row; flex-wrap: nowrap; margin-top: 10px; width: 430px; align-items: center;
+  }
+  .skrepka {
+    width: 22px; height: 22px; display: flex; margin-right: 10px; cursor: pointer;
+  }
   input:focus {
     outline: none; 
   }
@@ -105,10 +114,7 @@
     font-size: 11px; color: #FF003C;
   }
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #main {
-    transition: margin-left .5s; /* If you want a transition effect */
-    position: relative;
-  }
+
   
   .login_div {
     margin-top: 50px; width: 80%; margin: 0 auto; display: none; flex-direction: column;
@@ -129,8 +135,31 @@
   #registration_div .card-header{
     width: fit-content;
   }
+  #chat_message_input {
+    padding-left: 10px; 
+  }
+
+  .select_media {
+    display: none;
+  }
+  .preview_media{
+    display: none;
+    border: 1px solid white; border-radius: 20px; width: 150px; height: 150px; margin-top: 10px;
+  }
+  .sidebar_item {
+    display: flex; flex-direction: row;
+  }
+  .sidebar_item_hr {
+    background: #F6121C; width: 5px; height:20px; margin-right: 10px;
+  }
+  .sidebar_item p{
+    color: white; cursor: pointer;
+  }
+
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}
     .sidebar a {font-size: 18px;}
   }
+
+  

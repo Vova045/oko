@@ -3,6 +3,11 @@
 {% block custom_css %}
 <link rel="stylesheet" href="{% static '/css/sidebar.css' %}">
 {% endblock custom_css %}
+<div class="closed_sidebar">
+  <div class="nav_icon_div" onclick="openNav()">
+      <img class="nav_icon_div_img" src="{% static 'svg/nav_icon.svg' %}">
+  </div>
+</div>
 <div id="mySidebar" class="sidebar">
     <div class="main_part">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -116,6 +121,12 @@
             </div>
           </div>
           {% endif %}
+          {% if not request.user.username or request.user.user_type == "1" %}
+          <div class="sidebar_item">
+            <div class="sidebar_item_hr"></div>
+            <p id="corporation_chat">Корпоративный чат</p>
+          </div>
+          {% endif %}
           <div class="simple-footer">
             {% if request.user.username %}
             <p>Здравствуйте, {{ request.user.username }} <br>
@@ -164,9 +175,16 @@
           </div>
           {% endfor %}
         </div>
-        <div>
+        <div class="input_field">
+            <div class="skrepka">
+              <img src="{% static 'svg/skrepka.svg' %}">
+              <input type="file" name="media_content[]" class="form-control select_media" />
+            </div>
             <input type="text" id="chat_message_input" placeholder="Введите ваше сообщение" form="input_chat_message" name="body" class="chat_input"/>
             <button type="text" id="chat_message_submit" style="display: none;"></button>
+        </div>
+        <div class="preview_media">
+
         </div>
       </div>
     </div>
@@ -176,15 +194,29 @@
 <script>
   document.getElementById('chat_body').scrollTo(0, document.getElementById('chat_body').scrollHeight);
 
+  document.querySelector('#corporation_chat').onclick = function(){
+    document.getElementById("mySidebar").style.width = "fit-content";
+    if(document.querySelector('.second_part').style.display == 'flex'){
+      document.querySelector('.second_part').style.display = "none";
+    }
+    else {
+      document.querySelector('.second_part').style.display = "flex";
+    }
+  }
+
+  document.querySelector('.skrepka').onclick = function(){
+    document.querySelector('.select_media').click();
+    }
     /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
 function openNav() {
-  if (document.getElementById("mySidebar").style.width == "800px")
+  if (document.getElementById("mySidebar").style.width == "fit-content" || document.getElementById("mySidebar").style.width == "300px")
   {
   document.getElementById("login_id").style.display = "none";
   document.getElementById("mySidebar").style.width = "0";
   }
   else {
-    document.getElementById("mySidebar").style.width = "800px";
+    document.querySelector('.second_part').style.display = "none";
+    document.getElementById("mySidebar").style.width = "300px";
     setTimeout(() => {document.getElementById("login_id").style.display = "flex";}, 150);
     
   }
@@ -308,7 +340,7 @@ function closeNav() {
       getdata_chatmessage()
     }
   });
-  window.setInterval(getdata_checkmessage, 3000);
+  // window.setInterval(getdata_checkmessage, 3000);
   
 </script>
 {% endblock custom_js %}

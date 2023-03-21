@@ -36,12 +36,13 @@
         {% block custom_css %}
 
         {% endblock custom_css %}
+
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
     <link rel="apple-touch-icon" href="{% static 'touch-icon-iphone.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=block">
-    <script src="//code.jivo.ru/widget/mpBUQ0Hg0P" async></script>
+    <!-- <script src="//code.jivo.ru/widget/mpBUQ0Hg0P" async></script> -->
 </head>
     {% include 'main_templates/sidebar.html' %}
     {% include 'main_templates/navbar.html' %}
@@ -56,9 +57,9 @@
     <div class="capcha_content" id="capcha_content_msg">
       <div class="capcha_window">
           <div class="capcha_button">
-              <form class="capcha_form" id='capcha_form' method="POST" action="" enctype="multipart/form-data">
+              <form class="capcha_form_class" id='capcha_form' method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
                   {% csrf_token %}
-                  <input type="hidden" name="form_type" value="formTwo">
+                  <input type="hidden" name="form_type" value="captcha_type">
                   <div class="form-group g-recaptcha" data-callback="onHuman" name="g-recaptcha" data-sitekey="6LdlqD4kAAAAALp3uHHgdCX16VneAWd3CxUhtTOI"></div>
                   <INPUT type="hidden" id="captcha" name="g-recaptcha" form="capcha_form" value="">    
                   <INPUT type="hidden" id="captcha" name="g-recaptcha_msg" form="capcha_form" value="{{ msg }}">
@@ -67,10 +68,11 @@
       </div>
     </div>
     {% endif %}
-    <div class="main-wrapper main-wrapper-1">
+    <div class="main-wrapper main-wrapper-1" id="main">
         {% block content %}
 
         {% endblock content%}
+        
     <footer>
       {% include 'main_templates/footer.html' %}
     </footer>
@@ -112,10 +114,10 @@
   </script>
   <script type="text/javascript" defer src="{% static 'js/return_form.js' %}"></script>
   <script>
-$('.owl-carousel').owlCarousel({
-    margin:20,
-    autoWidth:true,
-})
+// $('.owl-carousel').owlCarousel({
+//     margin:20,
+//     autoWidth:true,
+// })
   </script>
   <script>
     //делает капчу обязательной
@@ -129,7 +131,8 @@ $('.owl-carousel').owlCarousel({
   <SCRIPT type="text/javascript"> 
   //передает значение капчи в инпут
     function onHuman(response) { 
-     if (document.getElementById('capcha_content_msg')){
+      console.log("функция запустилась")
+      if (document.getElementById('capcha_content_msg')){
         document.getElementById('captcha').value = response; 
         if (document.getElementById('captcha').value != 0) {
             document.getElementById('capcha_form').submit();

@@ -6,9 +6,9 @@ document.querySelectorAll('.zayavka')[0].addEventListener('click', function () {
     div.style.display = 'flex';
 })
 
-document.querySelectorAll('.topcontent_zayavka')[0].addEventListener('click', function () {
-    div.style.display = 'flex';
-})
+// document.querySelectorAll('.topcontent_zayavka')[0].addEventListener('click', function () {
+//     div.style.display = 'flex';
+// })
 
 
 document.addEventListener('keypress', function (e) {

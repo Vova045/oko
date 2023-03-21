@@ -1,103 +1,50 @@
 {% load static %}
 
 {% block custom_css %}
+<link rel="stylesheet" href="{% static '/css/footer2.css' %}">
 <link rel="stylesheet" href="{% static '/css/footer.css' %}">
-
 {% endblock custom_css %}
 
 {% block content %}
 
 <div class="footer">
-    <div class="footer_headtext" style="color: white;">
-        <p>Форма<br>обратной связи</p>
-    </div>
-    <div class="head2text head2text_footer" style="color: white;">
-        <p>Остались вопросы?<br>Спросите специалиста</p>
-    </div>
-    <div class="return_form_footer">
-        <div class="footer_modal-form">
-            <form  class="return_form_footer2" id='return_form_home' method="POST" action="{% url 'home' %}">
-                {% csrf_token %}
-                <input type="hidden" name="form_type" value="mail_type">
-                <input type="text" name="message_name" placeholder="Ваше имя"  required=True>
-                <input type="text" name="telephone" placeholder="Ваше телефон" required=True pattern="[0-9.)(+-]{4,20}$">
-                <input type="text" name="email" placeholder="Ваш e-mail" required=True pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                <textarea type="text" name="message" placeholder="Ваше сообщение" required=True></textarea>                      
-            </form>
-        </div>
-        <div class="info_footer">
-            <div class="footer_modal-social">
-                <div class="footer_modal-telephone">
-                    <div>
-                        <img src="{% static 'img/home/01.svg' %}" style="margin-right: 13px;">
-                    </div>
-                    <p>8 (4725) <b>41-02-41</b>, 8 (910) 741-02-41</p>
-                </div>
-                <div class="footer_modal-time">
-                    <div>
-                        <img src="{% static 'img/home/02.svg' %}" style="margin-right: 13px;">
-                    </div>
-                    <p>с 10:00 до 17:30 выходные сб - вс </p>
-                </div>
-                <div class="footer_modal-adress">
-                    <div>
-                        <img src="{% static 'img/home/03.svg' %}" style="margin-right: 13px;">
-                    </div>
-                    <p>г. Старый Оскол, ул. Ленина, 78/2</p>
-                </div>
-                <div class="footer_modal-mail">
-                    <div>
-                        <img src="{% static 'img/home/04.svg' %}" style="margin-right: 13px;">
-                    </div>
-                    <p>reklama-oko@mail.ru</p>
-                </div>
-                <div class="footer_modal-vk">
-                    <div>
-                        <img src="{% static 'img/home/05.svg' %}" style="margin-right: 13px;">
-                    </div>
-                    <p>reklama_oko</p>
-                </div>
-                <div class="footer_modal-button_box">
-                    <input type="submit" value="Отправить" form="return_form_home" class="footer_modal-button" name="return_button"/>
-                </div>
+    <div class="office_info">
+        <h1>Офис</h1>
+        <div class="office_footer_div">
+            <div class="footer_icon_img_div">
+                <img class="footer_icon_img" src="{% static 'svg/address_footer_icon.svg' %}">
             </div>
+            <p><b>г. Старый Оскол, ул. Ленина, 78/2</b></p>
+        </div>
+        <div class="office_footer_div">
+            <div class="footer_icon_img_div">
+                <img class="footer_icon_img" src="{% static 'svg/time_footer_icon.svg' %}">
+            </div>
+            <p>с 10:00 до 17:30 выходные сб - вс</p>
+        </div>
+        <div class="office_footer_div">
+            <div class="footer_icon_img_div">
+                <img class="footer_icon_img" src="{% static 'svg/phone_footer_icon.svg' %}">
+            </div>
+            <p>8 (4725) <b>41-02-41</b>, 8 (910) 741-02-41</p>
         </div>
     </div>
-</div>
-<div class="vhod_fon">
-    <div class="vhod">
-        <p><a href="{% url 'admin_login' %}" style="cursor: pointer;">Вход</a></p>
+    <div class="social_info">
+        <div class="footer_mail">
+            <div class="footer_icon_img_div">
+                <img class="footer_icon_img mail" src="{% static 'svg/mail_icon.svg' %}"> 
+            </div>
+            <p class="footer_icon_img">reklama-oko@mail.ru</p>             
+        </div>
+        <div class="footer_vk">
+            <div class="footer_icon_img_div">
+                <img class="footer_icon_img" src="{% static 'svg/vk_icon.svg' %}"> 
+            </div>
+            <p class="footer_icon_img">reklama_oko</p>             
+        </div>
     </div>
-</div>
-<div class="footer-fon">
-    <div class="footer-content">
-        <div class="footer-text">
-            <p>Наружная<br>реклама</p>
-        </div>
-        <div class="footer-text">
-            <p>Интерьерная<br>реклама</p>
-        </div>
-        <div class="footer-text">
-            <p>Широкоформатная<br>печать</p>
-        </div>
-        <div class="footer-text">
-            <p>Стенды</p>
-        </div>
-        <div class="footer-logo">
-            <img src="{% static 'img/home/лого 1.svg' %}">
-        </div>
-        <div class="footer-text">
-            <p>Таблички</p>
-        </div>
-        <div class="footer-text">
-            <p>Полиграфия</p>
-        </div>
-        <div class="footer-text">
-            <p>Брендирование<br>транспорта</p>
-        </div>
-        <div class="footer-text">
-            <p>Мобильные<br>системы</p>
-        </div>
+    <div class="logo_info">
+        <img class="schema_icon_img" src="{% static 'svg/pink_logo.svg' %}">
     </div>
 </div>
 

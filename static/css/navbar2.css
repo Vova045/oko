@@ -1,0 +1,110 @@
+.navbar_fon {
+    width: 100%; height: 120px;
+    right: 0; margin: auto;
+    display: flex; flex-direction: row;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    align-items: center;
+    mix-blend-mode: normal;
+    filter: drop-shadow(0px 2px 30px rgba(0, 0, 0, 0.05));
+}
+.navbar_items {
+    width: 1200px; height: 100%; display: flex; flex-direction: row;
+    align-items: center; justify-content: space-between;
+}
+.navbar_logo {
+    height: fit-content; width: 200px;
+}
+img {
+    max-width:100%;
+    height:auto;
+}
+.navbar_contact {
+    display: flex; flex-direction: column; justify-content: left;
+}
+.navbar_contact p{
+    color: black; margin-bottom: 0; padding-left: 9px;
+}
+.navbar_mail {
+    display: flex; flex-direction: row; align-items: center; 
+}
+.navbar_mail_img_div{
+    display: flex; flex-direction: row; align-items: center; justify-content: center; 
+    height: 16px; width: 16px;
+}
+.navbar_mail_img {
+    height: fit-content; width: auto;
+}
+.navbar_vk {
+    display: flex; flex-direction: row; align-items: center;
+}
+.navbar_vk_img {
+    height: fit-content; width: auto;
+}
+.navbar_phone {
+    display: flex; flex-direction: column; align-items: right;
+}
+.navbar_homephone {
+    display: flex; flex-direction: row; align-items: center;
+}
+.navbar_phone p{
+    color: black; margin-bottom: 0; padding-left: 9px;
+}
+.navbar_mobilephone p{
+    padding-left: 0;
+}
+.navbar_mobilephone {
+    text-align: end;
+}
+.navbat_button_div {
+    display: flex; flex-direction: row; align-items: center;
+}
+.for_navbar_button_div {
+    margin: 10px;
+}
+.navbar_button {
+    display: flex; align-items: center; height: fit-content; width: fit-content;
+    cursor: pointer; border-radius: 50px;
+    padding: 19px; font-size: 12px; font-weight: 600; padding-left: 34px; padding-right: 34px;
+}
+.navbar_button.white{
+    background-color: white; border: 2px solid #ED1B24;
+    color: black;
+}
+.navbar_button.white:hover{
+    background-color: #ED1B24; border: 2px solid #ED1B24;
+    color: white;
+}
+.user_button{
+    display: flex; align-items: center; height: fit-content; width: fit-content;
+    cursor: pointer; border-radius: 50px; padding: 12px;
+    background-color: white; border: 2px solid #636363;
+}
+.user_button:hover {
+    background-color: #636363;
+}
+.user_button_img :hover{ 
+    filter: brightness(0) invert(1);
+}
+.user_button .round img{
+    margin-bottom: -11px;
+}
+.user_button .round{
+    display: flex; align-items: center; height: fit-content; width: fit-content;
+    justify-content: center;
+    width: 36px; height: 36px;
+}
+.search_button{
+    display: flex; align-items: center; height: fit-content; width: fit-content;
+    cursor: pointer; border-radius: 50px; padding: 12px;
+    background-color: white; border: 2px solid #636363;
+}
+.search_button:hover{
+    background-color: #636363;
+}
+.search_button .round{
+    display: flex; align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+}

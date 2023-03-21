@@ -1,0 +1,203 @@
+body {
+    background-color:rgb(255, 255, 255);
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    width: 100%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+img {
+    max-width:100%;
+    height:auto;
+}
+
+/* Слайдер */
+.top_slider {
+    display: flex; flex-direction: row; justify-content: space-between;
+    width: 1200px; height: 700px;margin-left: auto; margin-right: auto;
+}
+.top_slider_text {
+    display: flex; flex-direction: column; justify-content: center;
+    width: 483px; height: 100%;
+}
+.top_slider_text h6{
+    font-size: 35px; font-weight: 400;margin-bottom: 30px;cursor: default;
+}
+.top_slider_text h1{
+    font-size: 64px; font-weight: 700;margin-bottom: 50px;cursor: default;
+}
+.top_slider_text h4{
+    font-size: 16px; font-weight: 400; width: 184px;margin-bottom: 55px; cursor: default;
+}
+.top_slider_text a{
+    text-decoration: none;
+    font-size: 16px; font-weight: 700; color: #FF003C;
+}
+.top_slider_img_with_button {
+    display: flex; flex-direction: row;
+    width: fit-content; height: 100%;
+}
+.top_slider_img {
+    display: flex; flex-direction: row; align-items: center; justify-content: center;
+    width: 511px; height: 100%;
+}
+.background_round {
+    display: flex; align-items: center; justify-content: center;
+    width: 472px; height: 472px; border-radius: 236px; background: #FF003C;
+}
+.top_slider_png_div {
+    position: absolute; width: 511px; height: 511px;margin-right: 70px;
+}
+.top_slider_png {
+    width: 511px; height: 511px;
+}
+.top_slider_button {
+    display: flex; flex-direction: row; align-items: center; justify-content: center;
+    width: 80px; height: 100%;
+}
+.slider_buttons_div {
+    display: flex; flex-direction: column; align-items: center; justify-content: space-around;
+    width: 35px; height: 214px;
+}
+.slider_button_div {
+    cursor: pointer;
+}
+/* Схема работы */
+.scheme_divs {
+    width: 1200px; height: 155px; display: flex; flex-direction: row;
+    margin-left: auto; margin-right: auto; margin-top: -50px;
+    justify-content: space-around;
+}
+.scheme_div {
+    height: 100%; width: 298px; display: flex; flex-direction: column;
+    background-color: black;
+}
+.sheme_div_imgs {
+    display: flex; width: 100%; justify-content: space-between; align-items: flex-start;
+    padding-left: 30px; padding-right: 30px; padding-top: 20px;
+}
+.schema_strelka_img {
+    width: 18px; height: auto;
+}
+.sheme_div_texts {
+    padding-left: 30px; color: white;
+}
+.sheme_div_texts h1{
+    font-size: 18px; font-weight: 700; 
+}
+.sheme_div_texts p{
+    font-size: 12px; font-weight: 400; line-height: 16px;
+}
+
+/* Услуги */
+.services {
+    height: 850px; width: 100%; background-color: #EBECEC; margin-top: -70px;
+}
+.services_title{
+    display: flex; justify-content: center; padding-top: 105px; padding-bottom: 25px;
+}
+.services_title h1{
+    font-size: 28px; font-weight: 700;
+}
+.services_divs {
+    display: flex; height: 622px; width: 1200px;
+    margin-left: auto; margin-right: auto; flex-wrap: wrap;
+}
+.services_div{
+    display: flex; flex-direction: row; width: 380px; height: 180px;
+    margin: 10px; border-radius: 20px; padding-left: 10px;
+    background: url('../svg/uslugi_fon.svg'); background-position: center;
+    justify-content: space-between;
+}
+.services_text{
+    padding-left: 20px; padding-top: 20px;
+}
+.services_text_title {
+    display: flex; height: 50px;
+}
+.services_text_title h1{
+    font-size: 18px; font-weight: 600;
+}
+.services_button {
+    padding-top: 40px;
+}
+.services_button .navbar_button {
+    padding-top: 12px; padding-bottom: 12px;
+}
+
+/* Форма заявка */
+.order_fon{
+    display: flex; flex-direction: row; width: 100%; height: 189px;
+    background-color: #FF003C;
+    margin-top: -25px; align-items: top; padding-top: 50px; justify-content: space-around;
+}
+.order_div{
+    display: flex; flex-direction: row; width: 1440px; height: 100%;
+    align-items: top; justify-content: space-around;
+}
+.order_div_text{
+    color: white;
+}
+.order_div_text p{
+    margin: 0;
+}
+.order_div_form {
+    display: flex; flex-direction: column; width: 500px; height: 700px; background-color: white;
+    z-index: 1;
+}
+
+.order_form_text {
+    padding-left: 45px; padding-top: 60px;
+}
+.order_form_text h1{
+    width: 207px; font-size: 24px; font-weight: 600; padding-bottom: 15px;
+}
+.order_form_text p{
+    width: 207px; font-size: 16px;padding-bottom: 40px;
+}
+.order_form{
+    padding: 0; width: 400px;
+}
+.order_form .form-group{
+    width: inherit; padding-bottom: 10px;
+}
+.order_form input[type="text"]{
+    border-radius: 5px; border: 1px solid; border-color: #959595; background-color: white; height: 30px;
+    margin-bottom: 20px;
+}
+.order_form textarea{
+    border-radius: 5px; border: 1px solid; border-color: #959595; background-color: white; height: 130px!important;
+    margin-bottom: 20px;
+}
+
+.order_form ::placeholder {
+    color: #959595; font-size: 11px; 
+  }
+
+.confidentional_check p{
+    font-size: 10px; font-weight: 100; text-align: left; padding-left: 0; margin-left: 0px; line-height: 16px;
+}
+
+.order_button_footer {
+    width: 224px; height: 70px; border: 0; cursor: pointer;
+    display: flex; flex-direction: row; justify-content: center; align-items: center;
+    font-size: 16px; background-color: #FF003C; color: white;
+}
+.confident_with_button {
+    display: flex; flex-direction: row; justify-content: end; width: 463px;
+}
+.yandex_map {
+    filter: grayscale(1);
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 1;
+    padding-left: 70px;
+}

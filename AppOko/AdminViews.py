@@ -1365,6 +1365,9 @@ def chatmessage_check(request):
     room_id = request.GET['room_id']
     host_id = request.GET['host_id']
     if room_id == '':
+        if host_id == '':
+            result2 = ""
+            return HttpResponse(simplejson.dumps(result2), content_type='application/json')
         room_id2 = ChatRoom.objects.get(host_id=host_id)
     else:
         room_id2 = ChatRoom.objects.get(id=room_id)
@@ -1389,7 +1392,6 @@ def chatmessage_check(request):
         body = message.body
         message_text_created = message.created
         message_text_updated = message.updated
-        
         message_text_created = str(message).split('.')[0]
         message_text_created = str(message.created.strftime('%d %B %Y г. %H:%M'))
         message_text_created = int_value_from_ru_month(message_text_created)

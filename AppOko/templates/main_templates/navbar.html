@@ -1,75 +1,53 @@
 {% load static %}
 
 {% block custom_css %}
-<link rel="stylesheet" href="{% static '/css/navbar.css' %}">
+<link rel="stylesheet" href="{% static '/css/navbar2.css' %}">
 {% endblock custom_css %}
 
 {% block content %}
-<div class="navbar-fon" >
-    <div class="navbar">
-
-        <div class="logo">
-            <a href="{% url 'home' %}" style="cursor: pointer;"><img src="{% static 'img/navbar/Group 14.svg' %}"></a>
+<div class="navbar_fon">
+    <div class="navbar_items">
+        <div class="navbar_logo">
+            <a href="{% url 'home' %}" style="cursor: pointer;"><img class="navbar_logo_img" src="{% static 'svg/logo.svg' %}"></a>
         </div>
-        <div class="logo_mobile">
-            <img src="{% static 'img/home/Group 12.svg' %}">
-        </div>
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div class="vk">
-                <a href="https://vk.com/reklama_oko"><img src="{% static 'img/navbar/05.svg' %} "></a>      
+        <div class="navbar_contact">
+            <div class="navbar_mail">
+                <div class="navbar_mail_img_div">
+                    <a href="mailto:reklama-oko@mail.ru"><img class="navbar_mail_img" src="{% static 'svg/mail_icon.svg' %}"></a>
+                </div>
+                <a href="mailto:reklama-oko@mail.ru"><p class="navbar_mail_text">reklama-oko@mail.ru</p></a>
             </div>
-            <div class="miniphone">
-                <a href="tel:+79107410241"><img src="{% static 'img/navbar/телефон.svg' %}"></a>
+            <div class="navbar_vk">
+                <a href="https://vk.com/reklama_oko"><img class="navbar_vk_img" src="{% static 'svg/vk_icon.svg' %}"></a>
+                <a href="https://vk.com/reklama_oko"><p class="navbar_vk_text">reklama_oko</p></a>
             </div>
         </div>
-        <div class="miniphone2">
-            <a href="tel:+79107410241"><img src="{% static 'img/navbar/телефон 2.svg' %}" style="width: 35px; height: auto;"></a>
+        <div class="navbar_phone">
+            <div class="navbar_homephone">
+                <div class="navbar_homephone_img_div">
+                    <a href="tel:+79107410241"><img class="navbar_homephone_img" src="{% static 'svg/phone_icon.svg' %}"></a>
+                </div>
+                <a href="tel:+74725410241"><p>8 (4725) <b>41-02-41</b></p></a>
+            </div>
+            <a href="tel:+79107410241"><div class="navbar_mobilephone">
+                <p>8 (910)  741-02-41</p>
+            </div></a>
         </div>
-        <div class="social"> 
-            <div class="font">
-                <div>
-                    <img src="{% static 'img/navbar/06 1.svg' %}" style="width: 13px; margin-right: 12px; margin-left: 1px;">
-                <a href="mailto:reklama-oko@mail.ru">reklama-oko@mail.ru
-                </a>
+        <div class="navbat_button_div">
+            <div class="order_button for_navbar_button_div zayavka">
+                <input type="submit" value="Оставить заявку" form="#" class="navbar_button white" name="send_ask_form"/>
+            </div>  
+            <div class="user_button for_navbar_button_div" onclick="openNav()">
+                <div class="round">
+                    <img class="user_button_img" src="{% static 'svg/user_icon.svg' %}"> 
                 </div>
             </div>
-            <div class="font">
-                <div>
-                    <img src="{% static 'img/navbar/05.svg' %} " style="width: 16px; margin-right: 10px;">
-                <a href="https://vk.com/reklama_oko">reklama_oko
-                </a>
+            <div class="search_button for_navbar_button_div">
+                <div class="round">
+                    <img class="search_button_img" src="{% static 'svg/search_icon.svg' %}"> 
                 </div>
             </div>
         </div>
-
-        <div class="phone"> 
-                <div class="font" style="display: flex; margin-bottom: 5px;">
-                    <div>
-                        <img src="{% static 'img/navbar/телефон 1.svg' %}" style="width: 10px; margin-right: 13px;">
-                    </div>
-                    <a href="tel:+74725410241">8 (4725) <b>41-02-41 </b>
-                    </a>
-                </div>
-                <div class="font">
-                    <div class="phone_equal">
-                        <a href="tel:+79107410241">8 (910)  741-02-41</a>
-                    </div>
-                </div>
-        </div>
-
-        <div class="user_button for_navbar_button_div" onclick="openNav()">
-            <div class="round">
-                <img class="user_button_img" src="{% static 'svg/user_icon.svg' %}"> 
-            </div>
-        </div>
-
-        <div class="zayavka">
-            <p style="
-            line-height: 11px;
-            margin: auto; cursor: pointer;" >Оставить заявку</p>
-        </div>
-        
-
     </div>
 </div>
 {% endblock %}
@@ -77,11 +55,18 @@
 {% block custom_js %}
 <script>
     x = document.querySelectorAll('.user_button_img')[0].style.filter
+    z = document.querySelectorAll('.search_button_img')[0].style.filter
     document.querySelectorAll('.user_button')[0].addEventListener('mouseover', function () {
     document.querySelectorAll('.user_button_img')[0].style.filter='brightness(0) invert(1)';
     })
     document.querySelectorAll('.user_button')[0].addEventListener('mouseout', function () {
     document.querySelectorAll('.user_button_img')[0].style.filter=x;
+    })
+    document.querySelectorAll('.search_button')[0].addEventListener('mouseover', function () {
+    document.querySelectorAll('.search_button_img')[0].style.filter='brightness(0) invert(1)';
+    })
+    document.querySelectorAll('.search_button')[0].addEventListener('mouseout', function () {
+    document.querySelectorAll('.search_button_img')[0].style.filter=z;
     })
   </script>
 {% endblock custom_js %}

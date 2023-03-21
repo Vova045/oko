@@ -30,13 +30,13 @@ from django.contrib.auth.models import Permission
 
 def send_gmail(request):
     if request.method == 'POST':
-        if request.POST.get("form_type") == 'formOne':
+        if request.POST.get("form_type") == 'mail_type':
             message_name = request.POST.get('message_name')
             message = request.POST.get('message')
             telephone = request.POST.get('telephone')
             msg=(f"Поступила заявка от {message_name}, его телефонный номер {telephone}. Вот его сообщение: {message}")
             return render (request, 'main_templates/home.html', {'msg': msg, 'recaptcha_site_key':settings.RECAPTCHA_PUBLIC_KEY})
-        elif request.POST.get("form_type") == 'formTwo':
+        elif request.POST.get("form_type") == 'captcha_type':
             msg = request.POST.get('g-recaptcha_msg')
             subject='Новая заявка'
             form_email = settings.EMAIL_HOST_USER
@@ -71,11 +71,9 @@ def get_id(request):
 
 
 def home(request):
-
-
     get_id(request)
     if request.method == "POST":
-        if request.POST.get("form_type") == 'mail_type':
+        if request.POST.get("form_type") == 'mail_type' or request.POST.get("form_type") == 'captcha_type':
             return send_gmail(request)
 
     # Добавление разрешения для пользователей
