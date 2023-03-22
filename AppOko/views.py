@@ -81,6 +81,7 @@ def home(request):
     room_messages = None
     admin_rooms = None
     admin_messages = None
+    admin_room = None
     if request.user.id:
         if request.user.user_type == "3":
             user_for_chat = CustomUser.objects.get(id=request.user.id)
@@ -97,7 +98,8 @@ def home(request):
             if request.GET.get('room_id'):
                 room_id=request.GET['room_id']
                 admin_messages = AdminChatMessage.objects.filter(room_id=room_id)
-    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages})    
+                admin_room = "Открыть комнату при открытии страницы"
+    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages, "admin_room":admin_room})    
 
 from django.views.generic import ListView
 from AppOko.models import Products
@@ -337,7 +339,6 @@ def adminLoginProcess(request):
     username=request.POST.get("username")
     password=request.POST.get("password")
     user=authenticate(request=request,username=username,password=password)
-    print(user)
     if user is not None:
         user = CustomUser.objects.get(username=username)
         print(user)
