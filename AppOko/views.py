@@ -7,26 +7,11 @@ from django.urls import reverse
 import urllib
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser, CustomerUser,Projects, ChatRoom, Message, AdminUser
+from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser, CustomerUser,Projects, ChatRoom, Message, AdminUser, AdminChatRooms, AdminChatMessage
 from oko.settings import MEDIA_ROOT, MEDIA_URL
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.contrib.auth.models import Permission
-
-
-# from django.http import HttpResponse
-# import json as simplejson
-# def getdetails(request):
-#     category_name = request.GET['category_select']
-#     print (category_name)
-#     result_set = []
-#     all_subcategories = []
-#     answer = str(category_name[1:-1])
-#     selected_category = Chapters.objects.get(title=answer)
-#     all_subcategories = selected_category.subcategories_set.all()
-#     for subcategory in all_subcategories:
-#         result_set.append({'title': subcategory.title})
-#     return HttpResponse(simplejson.dumps(result_set), mimetype='application/json', content_type='application/json')
 
 def send_gmail(request):
     if request.method == 'POST':
@@ -94,6 +79,8 @@ def home(request):
     user_for_chat = None
     room = None
     room_messages = None
+    admin_rooms = None
+    admin_messages = None
     if request.user.id:
         if request.user.user_type == "3":
             user_for_chat = CustomUser.objects.get(id=request.user.id)
@@ -105,19 +92,12 @@ def home(request):
             user_for_chat = CustomUser.objects.get(id=request.user.id)
             room = ChatRoom.objects.get(host=user_for_chat)
             room_messages = room.message_set.all().order_by('created') 
-            # if request.method == "POST":
-            #     if request.POST.get("form_type") == 'message_type':
-            #         message = Message.objects.create(
-            #             user = user_for_chat,
-            #             room = room,
-            #             body = request.POST.get("body")
-            #         )
-            #         return redirect('home')
-    # if CustomUser.objects.filter(username=request.user.username, user_type="4"):
-    #     tempuser = CustomUser.objects.filter(username=request.user.username, user_type="4")[0]
-    #     return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':tempuser.username, 'password':tempuser.password})
-    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages})
-
+        if request.user.user_type == "1":
+            admin_rooms = AdminChatRooms.objects.all()
+            if request.GET.get('room_id'):
+                room_id=request.GET['room_id']
+                admin_messages = AdminChatMessage.objects.filter(room_id=room_id)
+    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages})    
 
 from django.views.generic import ListView
 from AppOko.models import Products
@@ -388,6 +368,7 @@ def adminRegistrationProcess(request):
         if not request.user.is_authenticated:
             old_custom_user = CustomUser.objects.create(username=username)
             old_custom_user.user_type = '3'
+            old_custom_user.is_staff = '0'
             old_custom_user.set_password(password)
             ChatRoom.objects.create(host=old_custom_user)
             old_custom_user.save()
@@ -400,7 +381,6 @@ def adminRegistrationProcess(request):
                 return HttpResponseRedirect(reverse("admin_home"))
             if user.user_type == '4':
                 login(request=request, user=user, backend = 'AppOko.auth_backend.PasswordlessAuthBackend')
-                # return render (request, 'main_templates/home.html', {'password': user.password})
                 return HttpResponseRedirect(reverse("home"))
             else:
                 return HttpResponseRedirect(reverse("home"))

@@ -110,7 +110,7 @@ class Products(models.Model):
     product_description=models.TextField(null=True, blank=True)
     product_long_description=models.TextField(null=True, blank=True)
     created_ad=models.DateTimeField(auto_now_add=True)
-    added_by_staff=models.ForeignKey(StaffUser, on_delete=models.PROTECT)
+    added_by_staff=models.ForeignKey(StaffUser, on_delete=models.PROTECT, blank=True, null=True)
     in_stock_total = models.BigIntegerField(default=1)
     is_active=models.IntegerField(default=1)
 
@@ -279,7 +279,24 @@ class Message(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ['updated', 'created']
+
+    def __str__(self):
+        return self.body[0:50]
+
+class AdminChatRooms(models.Model):
+    name = models.CharField(max_length=255)
+    is_active=models.IntegerField(default=1)
+
+class AdminChatMessage(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    room = models.ForeignKey(AdminChatRooms, on_delete=models.CASCADE)
+    body = models.TextField()
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['updated', 'created']
 
     def __str__(self):
         return self.body[0:50]

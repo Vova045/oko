@@ -8,12 +8,12 @@
       <img class="nav_icon_div_img" src="{% static 'svg/nav_icon.svg' %}">
   </div>
 </div>
-<div id="mySidebar" class="sidebar">
+<div id="mySidebar" class="sidebar {% if admin_messages %} chatflex {% endif %}">
     <div class="main_part">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <!-- <a href="#">Войти</a>
       <a href="#">Регистрация</a> -->
-        <div class="login_div" id="login_id">
+        <div class="login_div {% if admin_messages %} chat_field {% endif %}" id="login_id">
           {% if not request.user.username or request.user.user_type == "4" %}
           <div class="card card-danger" id="signin_div">
             <div class="card-header"><h4>Вход</h4></div>
@@ -121,7 +121,7 @@
             </div>
           </div>
           {% endif %}
-          {% if not request.user.username or request.user.user_type == "1" %}
+          {% if request.user.user_type == "1" %}
           <div class="sidebar_item">
             <div class="sidebar_item_hr"></div>
             <p id="corporation_chat">Корпоративный чат</p>
@@ -136,12 +136,19 @@
           </div>
         </div>
     </div>
-    <div class="second_part">
+    <div class="second_part {% if admin_messages %} chat_field {% endif %}">
       <div class="white_line">
       </div>
       <div class="info">
         <div class="chat_head">
+          {% if request.user.user_type == "3" %}
           <p id="chat_head_id">Чат с нашим менеджером</p>
+          {% endif %}
+          <div class="type_chat">
+            {% for room in admin_rooms %}
+            <a href="{% url 'home' %}?room_id={{ room.id }}"<p>{{ room.name }}</p></a>
+            {% endfor %}
+          </div>
         </div>
         <div class="chat_body" id="chat_body">
           <!-- <div class="message_item message_manager">
@@ -162,6 +169,22 @@
               <p>Световые буквы</p>
             </div>
           </div> -->
+          {% for room in admin_rooms %}
+            {% for adminmessage in admin_messages %}
+              {% if adminmessage.room_id == room.id %}
+              <div class="message_item {% if adminmessage.user.user_type == '1' %} message_manager {% elif adminmessage.user.user_type == '3' %} message_client {% endif %}">
+                <div class="message_head">
+                  <input class="id_message" style="display: none;" value="{{ adminmessage.id }}"></input>
+                  <p>{{ adminmessage.user }}</p>
+                  <p>{{ adminmessage.created }}</p>
+                </div>
+                <div class="message_body" id="message_body">
+                  <p>{{ adminmessage.body }}</p>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
           {% for message in room_messages %}
           <div class="message_item {% if message.user.user_type == '1' %} message_manager {% elif message.user.user_type == '3' %} message_client {% endif %}">
             <div class="message_head">
@@ -249,6 +272,8 @@ function closeNav() {
     var room_id = '{{ room.id }}'
     var user_id = '{{ request.user.id }}'
     var host_id = ''
+    var url = new URL(window.location.href);
+    var admin_room_id = url.searchParams.get("room_id");
       
     $.ajax({
         url: '/admindashboard/chatmessage_send',
@@ -257,6 +282,7 @@ function closeNav() {
           'room_id' : room_id,
           'user_id' : user_id,
           'host_id' : host_id,
+          'admin_room_id' : admin_room_id,
         },
         method : 'GET',
         async : false,
@@ -289,25 +315,18 @@ function closeNav() {
       });
     }
   function getdata_checkmessage() {
-    // console.log("чек")
-    // var id_messages = document.querySelectorAll(".id_message")
-    // var id_messages_list = [];
-    //   for (var i = 0; i < id_messages.length; i++) {
-    //       if (id_messages[i].value) {
-    //         id_messages_list.push(id_messages[i].value);
-    //       }
-    //   }
-    // console.log(id_messages_list)
     var room_id = '{{ room.id }}'
     var user_id = '{{ request.user.id }}'
     var host_id = ''
+    var url = new URL(window.location.href);
+    var admin_room_id = url.searchParams.get("room_id");
     $.ajax({
         url: '/admindashboard/chatmessage_check',
         data : {
           'room_id' : room_id,
           'user_id' : user_id,
-          'host_id' : host_id
-          // 'id_messages_list' : id_messages_list,  
+          'host_id' : host_id,
+          'admin_room_id' : admin_room_id,
         },
         method : 'GET',
         async : false,
@@ -340,7 +359,7 @@ function closeNav() {
       getdata_chatmessage()
     }
   });
-  // window.setInterval(getdata_checkmessage, 3000);
+  window.setInterval(getdata_checkmessage, 3000);
   
 </script>
 {% endblock custom_js %}

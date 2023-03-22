@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, View
-from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser, AdminUser, ChatRoom, Message
+from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser, AdminUser, ChatRoom, Message, AdminChatRooms, AdminChatMessage
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
 from django.contrib.messages.views import messages
@@ -1332,12 +1332,18 @@ def chatmessage_send(request):
     room_id = request.GET['room_id']
     user_id = request.GET['user_id']
     host_id = request.GET['host_id']
-    if room_id == '':
-        room_id2 = ChatRoom.objects.get(host_id=host_id)
+    admin_room_id = request.GET['admin_room_id']
+    if admin_room_id != '':
+        user_id2 = CustomUser.objects.get(id=user_id)
+        room_id2 = AdminChatRooms.objects.get(id=admin_room_id)
+        new_message = AdminChatMessage.objects.create(user=user_id2, room=room_id2, body=body)
     else:
-        room_id2 = ChatRoom.objects.get(id=room_id)
-    user_id2 = CustomUser.objects.get(id=user_id)
-    new_message = Message.objects.create(user=user_id2, room=room_id2, body=body)
+        if room_id == '':
+            room_id2 = ChatRoom.objects.get(host_id=host_id)
+        else:
+            room_id2 = ChatRoom.objects.get(id=room_id)
+        user_id2 = CustomUser.objects.get(id=user_id)
+        new_message = Message.objects.create(user=user_id2, room=room_id2, body=body)
     user_type = user_id2.user_type
     username = user_id2.username
     result = []
@@ -1364,30 +1370,32 @@ def chatmessage_send(request):
 def chatmessage_check(request):
     room_id = request.GET['room_id']
     host_id = request.GET['host_id']
-    if room_id == '':
-        if host_id == '':
-            result2 = ""
-            return HttpResponse(simplejson.dumps(result2), content_type='application/json')
-        room_id2 = ChatRoom.objects.get(host_id=host_id)
+    admin_room_id = request.GET['admin_room_id']
+    if admin_room_id != '':
+        room_id2 = AdminChatRooms.objects.get(id=admin_room_id)
+        user_id = request.GET['user_id']
+        user_id2 = CustomUser.objects.get(id=user_id)
+        last_date = datetime.datetime.now()
+        first_date= datetime.datetime.now() - datetime.timedelta(seconds=3.1)
+        all_messages = AdminChatMessage.objects.filter(room=room_id2,created__range=(first_date, last_date)).exclude(user_id=user_id)
     else:
-        room_id2 = ChatRoom.objects.get(id=room_id)
-    user_id = request.GET['user_id']
-    user_id2 = CustomUser.objects.get(id=user_id)
-    # if user_id == None:
-    #     user_id == room_id2.host_id
-    # all_messages_list = request.GET['all_messages_list']
-    # print(all_messages_list)
-    last_date = datetime.datetime.now()
-    first_date= datetime.datetime.now() - datetime.timedelta(seconds=3.1)
-    all_messages = Message.objects.filter(room=room_id2,created__range=(first_date, last_date)).exclude(user_id=user_id)
-    print(all_messages)
-    # print(all_messages)
+        if room_id == '':
+            if host_id == '':
+                result2 = ""
+                return HttpResponse(simplejson.dumps(result2), content_type='application/json')
+            room_id2 = ChatRoom.objects.get(host_id=host_id)
+        else:
+            room_id2 = ChatRoom.objects.get(id=room_id)
+        user_id = request.GET['user_id']
+        user_id2 = CustomUser.objects.get(id=user_id)
+        last_date = datetime.datetime.now()
+        first_date= datetime.datetime.now() - datetime.timedelta(seconds=3.1)
+        all_messages = Message.objects.filter(room=room_id2,created__range=(first_date, last_date)).exclude(user_id=user_id)
     result = []
     for message in all_messages:
         user_id3 = CustomUser.objects.get(id=message.user_id)
         user_type = user_id3.user_type
         username = user_id3.username
-        print(username)
         result = []
         body = message.body
         message_text_created = message.created
@@ -1405,14 +1413,10 @@ def chatmessage_check(request):
                 "updated": message_text_updated,
                 "user_type": user_type
             }) 
-        print(result)
     user_type = user_id2.user_type
     username = user_id2.username
 
     if all_messages.exists():
-        # result.append({
-        #         "messages": messages,
-        #     })
         return HttpResponse(simplejson.dumps(result), content_type='application/json')
     result2 = ""
     return HttpResponse(simplejson.dumps(result2), content_type='application/json')
