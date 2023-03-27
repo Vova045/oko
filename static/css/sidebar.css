@@ -93,7 +93,7 @@
     outline: none; 
   }
   .message_item {
-    width: 250px; height: 50px; display: flex; flex-direction: column;
+    width: 250px; height: fit-content; min-height: 50px; display: flex; flex-direction: column;
   }
   .message_client {
     float: right; 
@@ -143,8 +143,8 @@
     display: none;
   }
   .preview_media{
-    display: none;
-    border: 1px solid white; border-radius: 20px; width: 150px; height: 150px; margin-top: 10px;
+    display: flex;
+    width: fit-content; margin-top: 10px; margin-bottom: 10px; margin-right: 10px;
   }
   .sidebar_item {
     display: flex; flex-direction: row;
@@ -167,6 +167,12 @@
   }
   .chat_field {
     display: flex;
+  }
+  .message_img {
+    display: flex; height: 80px; margin-bottom: 10px;
+  }
+  .image_message {
+    width: auto; height: 100%;
   }
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {

@@ -300,3 +300,8 @@ class AdminChatMessage(models.Model):
 
     def __str__(self):
         return self.body[0:50]
+
+class AdminChatMessageMedia(models.Model):
+    message_id=models.ForeignKey(AdminChatMessage,on_delete=models.CASCADE)
+    media_content=models.FileField()
+    created_at=models.DateTimeField(auto_now_add=True)

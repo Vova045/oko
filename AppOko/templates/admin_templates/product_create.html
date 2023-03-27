@@ -338,6 +338,7 @@
     $(document).on("change",".select_media", function(){
         var media_type=$(this).parents(".media_div_row").find(".media_type").val();
         var img_preview=$(this).parents(".media_div_row").find(".img_preview");
+        console.log(img_preview)
         var vid_preview=$(this).parents(".media_div_row").find(".video_preview");
         showPreviewMedia(this, media_type, img_preview, vid_preview)
     });
@@ -351,6 +352,7 @@
                     img_preview.show();
                     img_preview.css({"border":"5px solid orange"})
                     img_preview.css({"border-radius":"10px"})
+                    console.log(img_preview)
                 }
                 if(media_type=="2"){
                     video_preview.show();

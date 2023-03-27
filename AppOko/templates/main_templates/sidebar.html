@@ -136,7 +136,7 @@
           </div>
         </div>
     </div>
-    <div class="second_part {% if admin_messages %} chat_field {% endif %}">
+    <div class="second_part {% if admin_room %} chat_field {% endif %}">
       <div class="white_line">
       </div>
       <div class="info">
@@ -151,24 +151,6 @@
           </div>
         </div>
         <div class="chat_body" id="chat_body">
-          <!-- <div class="message_item message_manager">
-            <div class="message_head">
-              <p>Менеджер Елена</p>
-              <p>22.02.2023 00:09</p>
-            </div>
-            <div class="message_body">
-              <p>Здравствуйте, что Вас интересует?</p>
-            </div>
-          </div> -->
-          <!-- <div class="message_item message_client">
-            <div class="message_head">
-              <p>Вы</p>
-              <p>22.02.2023 00:11</p>
-            </div>
-            <div class="message_body">
-              <p>Световые буквы</p>
-            </div>
-          </div> -->
           {% for room in admin_rooms %}
             {% for adminmessage in admin_messages %}
               {% if adminmessage.room_id == room.id %}
@@ -181,10 +163,18 @@
                 <div class="message_body" id="message_body">
                   <p>{{ adminmessage.body }}</p>
                 </div>
+                  {% for media in admin_media_for_messages %}
+                    {% if media.message_id == adminmessage %}
+                    <div class="message_img">
+                      <img class="image_message" src="{{ media.media_content }}">
+                    </div>
+                    {% endif %}
+                  {% endfor %}
               </div>
               {% endif %}
             {% endfor %}
           {% endfor %}
+
           {% for message in room_messages %}
           <div class="message_item {% if message.user.user_type == '1' %} message_manager {% elif message.user.user_type == '3' %} message_client {% endif %}">
             <div class="message_head">
@@ -201,13 +191,19 @@
         <div class="input_field">
             <div class="skrepka">
               <img src="{% static 'svg/skrepka.svg' %}">
-              <input type="file" name="media_content[]" class="form-control select_media" />
+              <form method="POST" id="media_upload_form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" id="media_document" name="media_document"/>
+                <input type="file" name="media_content[]" id="image_to_upload" class="form-control select_media" />
+              </form>
             </div>
             <input type="text" id="chat_message_input" placeholder="Введите ваше сообщение" form="input_chat_message" name="body" class="chat_input"/>
             <button type="text" id="chat_message_submit" style="display: none;"></button>
         </div>
         <div class="preview_media">
-
+          <div class="div_media">
+              <img style="display:none" class="img_preview">
+          </div>
         </div>
       </div>
     </div>
@@ -216,7 +212,10 @@
 <script src="{% static '/modules/jquery.min.js' %}"></script>
 <script>
   document.getElementById('chat_body').scrollTo(0, document.getElementById('chat_body').scrollHeight);
-
+  document.querySelector('.sidebar_item').onclick = function(){
+    var objDiv = document.getElementById("chat_body");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
   document.querySelector('#corporation_chat').onclick = function(){
     document.getElementById("mySidebar").style.width = "fit-content";
     if(document.querySelector('.second_part').style.display == 'flex'){
@@ -267,59 +266,102 @@ function closeNav() {
         document.querySelector('#chat_message_input').value = '';
       }
   };
-  function getdata_chatmessage() {
+
+  function getdata_image() {
+    var formData = new FormData();
+    var ins = document.getElementById('image_to_upload').files.length;
+    for (var x = 0; x < ins; x++) {
+      formData.append("media_content[]", document.getElementById('image_to_upload').files[x]);
+    }
+    var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    formData.append('csrfmiddlewaretoken', csrf_token);
+
     var body = document.querySelector('#chat_message_input').value
     var room_id = '{{ room.id }}'
     var user_id = '{{ request.user.id }}'
     var host_id = ''
     var url = new URL(window.location.href);
     var admin_room_id = url.searchParams.get("room_id");
-      
+    if (admin_room_id == null){
+      admin_room_id = 1
+    }
+
+    formData.append('body', body);
+    formData.append('room_id', room_id);
+    formData.append('user_id', user_id);
+    formData.append('host_id', host_id);
+    formData.append('admin_room_id', admin_room_id);
+
+    console.log('Отправился файл')
+    console.log(formData)
     $.ajax({
-        url: '/admindashboard/chatmessage_send',
-        data : {
-          'body' : body,
-          'room_id' : room_id,
-          'user_id' : user_id,
-          'host_id' : host_id,
-          'admin_room_id' : admin_room_id,
-        },
-        method : 'GET',
+        url: '/admindashboard/chatmessage_send_media',
+        data: formData,
+        method : 'POST',
+        headers:{
+        "X-CSRFToken": csrf_token
+    },
+        processData: false,
+        contentType: false,
         async : false,
         success : function(result){
           if (result !== ""){
-            console.log(result[0].user_id)
-          console.log(result[0].body)
-          console.log(result[0].room_id)
-          console.log(result[0].created)
-          console.log(result[0].updated)
-          console.log(result[0].user_type)
           if (result[0].user_type.toString() == '1') {
             result[0].user_type = 'message_manager';
           } else if (result[0].user_type.toString() == '3') {
             result[0].user_type = 'message_client';
           }
 
-          $('#chat_body').append(
+          // $('#chat_body').append(
+          // '<div class="message_item ' + result[0].user_type +'">'
+          // + '<div class="message_head"><p>' + result[0].user_id  +  '</p><p>'+ result[0].created +'</p></div>' + 
+          // '<div class="message_body" id="message_body">' +
+          //     '<p>' + result[0].body + '</p></div></div>'
+          // );
+          if (result[0].media_message[0] == undefined) {
+            $('#chat_body').append(
           '<div class="message_item ' + result[0].user_type +'">'
           + '<div class="message_head"><p>' + result[0].user_id  +  '</p><p>'+ result[0].created +'</p></div>' + 
           '<div class="message_body" id="message_body">' +
               '<p>' + result[0].body + '</p></div></div>'
           );
+
+          var objDiv = document.getElementById("chat_body");
+              objDiv.scrollTop = objDiv.scrollHeight;
+          }
+          else {
+            $('#chat_body').append(
+          '<div class="message_item ' + result[0].user_type +'">'
+          + '<div class="message_head"><p>' + result[0].user_id  +  '</p><p>'+ result[0].created +'</p></div>' + 
+          '<div class="message_body" id="message_body">' +
+              '<p>' + result[0].body + '</p></div>' +
+          '<div class="message_img">' +
+            '<img class="image_message" src="' + result[0].media_message[0].media_content + '">' + "</div></div>"
+          );
+          }
+
+          document.querySelector('.img_preview').style.display = "none";
+          console.log(result[0].media_message[0].media_content);
           var objDiv = document.getElementById("chat_body");
           objDiv.scrollTop = objDiv.scrollHeight;
           }
-          
+          var form = document.getElementById('media_upload_form')
+          form.reset();
         }
 
       });
     }
+  
   function getdata_checkmessage() {
     var room_id = '{{ room.id }}'
     var user_id = '{{ request.user.id }}'
     var host_id = ''
     var url = new URL(window.location.href);
     var admin_room_id = url.searchParams.get("room_id");
+    if (admin_room_id == null){
+      admin_room_id = 1
+    }
+
     $.ajax({
         url: '/admindashboard/chatmessage_check',
         data : {
@@ -339,16 +381,33 @@ function closeNav() {
                 result[i].user_type = 'message_client';
               }
 
-              $('#chat_body').append(
+              if (result[i].media_message[0] == undefined) {
+                $('#chat_body').append(
               '<div class="message_item ' + result[i].user_type +'">'
               + '<div class="message_head"><p>' + result[i].username  +  '</p><p>'+ result[i].created +'</p></div>' + 
               '<div class="message_body" id="message_body">' +
                   '<p>' + result[i].body + '</p></div></div>'
               );
-              console.log('Сообщение появилось')
+
               var objDiv = document.getElementById("chat_body");
-              objDiv.scrollTop = objDiv.scrollHeight;
-              };
+                  objDiv.scrollTop = objDiv.scrollHeight;
+              }
+
+              else {
+                $('#chat_body').append(
+              '<div class="message_item ' + result[i].user_type +'">'
+              + '<div class="message_head"><p>' + result[i].username  +  '</p><p>'+ result[i].created +'</p></div>' + 
+              '<div class="message_body" id="message_body">' +
+                  '<p>' + result[i].body + '</p></div>' +
+              '<div class="message_img">' +
+                '<img class="image_message" src="' + result[i].media_message[0].media_content + '">' + "</div></div>"
+              );
+
+              var objDiv = document.getElementById("chat_body");
+                  objDiv.scrollTop = objDiv.scrollHeight;
+              }
+
+            };
           }
           
         }
@@ -356,10 +415,32 @@ function closeNav() {
     }
   $(document).ready(function(){
     document.querySelector('#chat_message_submit').onclick = function(){
-      getdata_chatmessage()
+      getdata_image()
     }
   });
   window.setInterval(getdata_checkmessage, 3000);
   
+</script>
+<script>
+
+  $(document).on("change",".select_media", function(){
+      var img_preview=$(this).parents().find(".img_preview");
+      showPreviewMedia(this, img_preview)
+    });
+
+  function showPreviewMedia(input, img_preview){
+      if (input.files){
+          var reader = new FileReader();
+          reader.onload=function(e){
+            img_preview.attr("src",e.target.result);
+            img_preview.show();
+            img_preview.css({"height":"80px"})
+            var objDiv = document.getElementById("chat_body");
+            objDiv.scrollTop = objDiv.scrollHeight;
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+
 </script>
 {% endblock custom_js %}

@@ -7,7 +7,7 @@ from django.urls import reverse
 import urllib
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser, CustomerUser,Projects, ChatRoom, Message, AdminUser, AdminChatRooms, AdminChatMessage
+from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser, CustomerUser,Projects, ChatRoom, Message, AdminUser, AdminChatRooms, AdminChatMessage, AdminChatMessageMedia
 from oko.settings import MEDIA_ROOT, MEDIA_URL
 from django.db.models import Q
 from django.core.mail import send_mail
@@ -82,6 +82,7 @@ def home(request):
     admin_rooms = None
     admin_messages = None
     admin_room = None
+    admin_media_for_messages = None
     if request.user.id:
         if request.user.user_type == "3":
             user_for_chat = CustomUser.objects.get(id=request.user.id)
@@ -98,8 +99,13 @@ def home(request):
             if request.GET.get('room_id'):
                 room_id=request.GET['room_id']
                 admin_messages = AdminChatMessage.objects.filter(room_id=room_id)
+                admin_media_for_messages = AdminChatMessageMedia.objects.filter(message_id__in=admin_messages)
                 admin_room = "Открыть комнату при открытии страницы"
-    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages, "admin_room":admin_room})    
+            else:
+                room_id="1"
+                admin_messages = AdminChatMessage.objects.filter(room_id=room_id)
+                admin_media_for_messages = AdminChatMessageMedia.objects.filter(message_id__in=admin_messages)
+    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages, "admin_room":admin_room, "admin_media_for_messages":admin_media_for_messages})    
 
 from django.views.generic import ListView
 from AppOko.models import Products

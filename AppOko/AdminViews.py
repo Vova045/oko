@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, View
-from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser, AdminUser, ChatRoom, Message, AdminChatRooms, AdminChatMessage
+from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser, AdminUser, ChatRoom, Message, AdminChatRooms, AdminChatMessage, AdminChatMessageMedia
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
 from django.contrib.messages.views import messages
@@ -1281,11 +1281,20 @@ class ChatListView(PermissionRequiredMixin, ListView):
             if self.request.POST.get("form_type") == 'message_type':
                 room = self.request.GET.get("filter")
                 room = ChatRoom.objects.get(host=room)
-                Message.objects.create(
+                new_message = Message.objects.create(
                     user = self.request.user,
                     room = room,
                     body = self.request.POST.get("body")
                 )
+                media_content_list=request.FILES.getlist("media_content[]")
+                i=0
+                for media_content in media_content_list:
+                    fs=FileSystemStorage()
+                    filename=fs.save(media_content.name,media_content)
+                    media_url=fs.url(filename)
+                    product_media=AdminChatMessageMedia(message_id=new_message,media_content=media_url)
+                    product_media.save()
+                    i=i+1
                 room=str(room.host_id)
                 redirect_url = reverse('chat_list')
                 return redirect(f'{redirect_url}?filter={room}')
@@ -1323,20 +1332,31 @@ class ChatListView(PermissionRequiredMixin, ListView):
         context["rooms_for_client_list"]=rooms_for_client_list_list
         return context
 
-
-def chatmessage_send(request):
-    body = request.GET['body']
-    if body == "":
+def chatmessage_send_media(request):
+    body = request.POST["body"]
+    if body == "" and not request.FILES.getlist('media_content[]'):
         result = ""
         return HttpResponse(simplejson.dumps(result), content_type='application/json')
-    room_id = request.GET['room_id']
-    user_id = request.GET['user_id']
-    host_id = request.GET['host_id']
-    admin_room_id = request.GET['admin_room_id']
+    room_id = request.POST['room_id']
+    user_id = request.POST['user_id']
+    host_id = request.POST['host_id']
+    admin_room_id = request.POST['admin_room_id']
     if admin_room_id != '':
         user_id2 = CustomUser.objects.get(id=user_id)
         room_id2 = AdminChatRooms.objects.get(id=admin_room_id)
         new_message = AdminChatMessage.objects.create(user=user_id2, room=room_id2, body=body)
+        print(new_message)
+        if request.FILES.getlist('media_content[]'):
+            media_content_list = request.FILES.getlist('media_content[]')
+            print(media_content_list)
+            i=0
+            for media_content in media_content_list:
+                fs=FileSystemStorage()
+                filename=fs.save(media_content.name,media_content)
+                media_url=fs.url(filename)
+                message_media=AdminChatMessageMedia(message_id=new_message,media_content=media_url)
+                message_media.save()
+                i=i+1
     else:
         if room_id == '':
             room_id2 = ChatRoom.objects.get(host_id=host_id)
@@ -1355,18 +1375,33 @@ def chatmessage_send(request):
     message_text_created = str(new_message.created.strftime('%d %B %Y г. %H:%M'))
     message_text_created = int_value_from_ru_month(message_text_created)
     message_text_updated = str(message_text_updated.strftime('%d %B %Y, %H:%M'))
-
-
+    print('здесь')
+    media_message = []
+    medias_message = AdminChatMessageMedia.objects.filter(message_id=new_message)
+    print(medias_message)
+    if medias_message:
+        for media in medias_message:
+            message = media.message_id_id
+            photo = media.media_content.name
+            media_message.append({
+            "message_id":message,
+            "media_content":photo
+        })
+    else:
+        medias_message = ""
+    print(media_message)
     result.append({
             "user_id": username,
             "body": body,
             "room_id": room_id,
             "created": message_text_created,
             "updated": message_text_updated,
-            "user_type": user_type
+            "user_type": user_type,
+            "media_message": media_message,
         })
     return HttpResponse(simplejson.dumps(result), content_type='application/json')
-
+    
+    
 def chatmessage_check(request):
     room_id = request.GET['room_id']
     host_id = request.GET['host_id']
@@ -1405,13 +1440,27 @@ def chatmessage_check(request):
         message_text_created = int_value_from_ru_month(message_text_created)
         message_text_updated = str(message_text_updated.strftime('%d %B %Y, %H:%M'))
 
+        media_message = []
+        medias_message = AdminChatMessageMedia.objects.filter(message_id=message)
+        if medias_message:
+            for media in medias_message:
+                message = media.message_id_id
+                photo = media.media_content.name
+                media_message.append({
+                "message_id":message,
+                "media_content":photo
+            })
+        else:
+            medias_message = ""
+
         result.append({
                 "username": username,
                 "body": body,
                 "room_id": room_id,
                 "created": message_text_created,
                 "updated": message_text_updated,
-                "user_type": user_type
+                "user_type": user_type,
+                "media_message": media_message
             }) 
     user_type = user_id2.user_type
     username = user_id2.username
@@ -1420,3 +1469,23 @@ def chatmessage_check(request):
         return HttpResponse(simplejson.dumps(result), content_type='application/json')
     result2 = ""
     return HttpResponse(simplejson.dumps(result2), content_type='application/json')
+
+
+
+# class ProductMediaDelete(PermissionRequiredMixin, View):
+#     permission_required = 'AppOko.admin_permission2'
+#     def get(self,request,*args,**kwargs):
+#         media_id=kwargs["id"]
+#         product_media=ProductMedia.objects.get(id=media_id)
+
+#         string = quote(settings.MEDIA_ROOT+str(product_media.media_content).replace("media","").replace("//","/"))
+#         string = urllib.parse.unquote(string,encoding=('utf-8'))
+#         string = unquote(string)
+#         if not product_media.media_content == "/media/nofoto.jpeg":
+#             productsmedia_with = ProductMedia.objects.filter(media_content=product_media.media_content)
+#             if len(productsmedia_with) == 1:
+#                 os.remove(string)
+        
+#         product_id=product_media.product_id.id
+#         product_media.delete()
+#         return HttpResponseRedirect(reverse("product_edit_media",kwargs={"product_id":product_id}))
