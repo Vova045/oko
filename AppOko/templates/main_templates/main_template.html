@@ -53,6 +53,7 @@
     {% if message_name %}
     {% include 'main_templates/message_sent.html' %}
     {% endif%}
+    {% include 'main_templates/image_preview.html' %}
     {% if msg %}
     <div class="capcha_content" id="capcha_content_msg">
       <div class="capcha_window">
@@ -131,7 +132,6 @@
   <SCRIPT type="text/javascript"> 
   //передает значение капчи в инпут
     function onHuman(response) { 
-      console.log("функция запустилась")
       if (document.getElementById('capcha_content_msg')){
         document.getElementById('captcha').value = response; 
         if (document.getElementById('captcha').value != 0) {

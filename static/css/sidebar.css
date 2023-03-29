@@ -168,8 +168,11 @@
   .chat_field {
     display: flex;
   }
+  .mainflex {
+    display: none;
+  }
   .message_img {
-    display: flex; height: 80px; margin-bottom: 10px;
+    display: flex; height: 80px; margin-bottom: 10px; cursor: pointer;
   }
   .image_message {
     width: auto; height: 100%;

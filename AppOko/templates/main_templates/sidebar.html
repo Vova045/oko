@@ -9,7 +9,7 @@
   </div>
 </div>
 <div id="mySidebar" class="sidebar {% if admin_room %} chatflex {% endif %}">
-    <div class="main_part">
+    <div class="main_part {% if admin_room %} mainflex {% endif %}">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <!-- <a href="#">Войти</a>
       <a href="#">Регистрация</a> -->
@@ -137,9 +137,10 @@
         </div>
     </div>
     <div class="second_part {% if admin_room %} chat_field {% endif %}">
-      <div class="white_line">
-      </div>
+      <!-- <div class="white_line">
+      </div> -->
       <div class="info">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="chat_head">
           {% if request.user.user_type == "3" %}
           <p id="chat_head_id">Чат с нашим менеджером</p>
@@ -165,7 +166,7 @@
                 </div>
                   {% for media in admin_media_for_messages %}
                     {% if media.message_id == adminmessage %}
-                    <div class="message_img">
+                    <div class="message_img" onclick="ImagePreview( '{{ media.media_content }}' )">
                       <img class="image_message" src="{{ media.media_content }}">
                     </div>
                     {% endif %}
@@ -223,12 +224,19 @@
     }
     else {
       document.querySelector('.second_part').style.display = "flex";
+      document.querySelector('.main_part').style.display = "none";
     }
   }
 
   document.querySelector('.skrepka').onclick = function(){
     document.querySelector('.select_media').click();
     }
+function ImagePreview(image) {
+  document.querySelector('.bg_image').style.display = "flex";
+  document.querySelector('.bg_image').style.cursor = "pointer";
+  var image_msg = document.querySelector('.image_preview');
+  image_msg.src = image;
+}
     /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
 function openNav() {
   if (document.getElementById("mySidebar").style.width == "fit-content" || document.getElementById("mySidebar").style.width == "300px")
@@ -239,6 +247,7 @@ function openNav() {
   else {
     document.querySelector('.second_part').style.display = "none";
     document.getElementById("mySidebar").style.width = "300px";
+    document.querySelector('.main_part').style.display = "flex";
     setTimeout(() => {document.getElementById("login_id").style.display = "flex";}, 150);
     
   }
@@ -292,8 +301,6 @@ function closeNav() {
     formData.append('host_id', host_id);
     formData.append('admin_room_id', admin_room_id);
 
-    console.log('Отправился файл')
-    console.log(formData)
     $.ajax({
         url: '/admindashboard/chatmessage_send_media',
         data: formData,
@@ -335,7 +342,7 @@ function closeNav() {
           + '<div class="message_head"><p>' + result[0].user_id  +  '</p><p>'+ result[0].created +'</p></div>' + 
           '<div class="message_body" id="message_body">' +
               '<p>' + result[0].body + '</p></div>' +
-          '<div class="message_img">' +
+          '<div class="message_img" onclick="ImagePreview( \''+ result[0].media_message[0].media_content + '\' )" >' +
             '<img class="image_message" src="' + result[0].media_message[0].media_content + '">' + "</div></div>"
           );
           }
@@ -399,7 +406,7 @@ function closeNav() {
               + '<div class="message_head"><p>' + result[i].username  +  '</p><p>'+ result[i].created +'</p></div>' + 
               '<div class="message_body" id="message_body">' +
                   '<p>' + result[i].body + '</p></div>' +
-              '<div class="message_img">' +
+                  '<div class="message_img" onclick="ImagePreview( '+ "'{{ media.media_content }}'" + ' )" >' +
                 '<img class="image_message" src="' + result[i].media_message[0].media_content + '">' + "</div></div>"
               );
 
