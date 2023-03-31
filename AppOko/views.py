@@ -7,7 +7,7 @@ from django.urls import reverse
 import urllib
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser, CustomerUser,Projects, ChatRoom, Message, AdminUser, AdminChatRooms, AdminChatMessage, AdminChatMessageMedia
+from AppOko.models import Gallery, GuestList, Chapters, Categories, Products, ProductMedia, SubCategories, CategoryGallery, TempCustomerUser, CustomerUser,Projects, ChatRoom, Message, AdminUser, AdminChatRooms, AdminChatMessage, AdminChatMessageMedia, AdminChatReadMessage
 from oko.settings import MEDIA_ROOT, MEDIA_URL
 from django.db.models import Q
 from django.core.mail import send_mail
@@ -83,6 +83,8 @@ def home(request):
     admin_messages = None
     admin_room = None
     admin_media_for_messages = None
+    admin_readable = None
+    all_admin_readable = None
     if request.user.id:
         if request.user.user_type == "3":
             user_for_chat = CustomUser.objects.get(id=request.user.id)
@@ -98,14 +100,21 @@ def home(request):
             admin_rooms = AdminChatRooms.objects.all()
             if request.GET.get('room_id'):
                 room_id=request.GET['room_id']
+                user_for_chat = CustomUser.objects.get(id=request.user.id)
                 admin_messages = AdminChatMessage.objects.filter(room_id=room_id)
+                admin_readable = AdminChatReadMessage.objects.filter(room_id=room_id, user_for_read=user_for_chat, is_read=0)
+                all_admin_readable = AdminChatReadMessage.objects.filter(user_for_read=user_for_chat, is_read=0)
                 admin_media_for_messages = AdminChatMessageMedia.objects.filter(message_id__in=admin_messages)
                 admin_room = "Открыть комнату при открытии страницы"
             else:
                 room_id="1"
+                user_for_chat = CustomUser.objects.get(id=request.user.id)
                 admin_messages = AdminChatMessage.objects.filter(room_id=room_id)
                 admin_media_for_messages = AdminChatMessageMedia.objects.filter(message_id__in=admin_messages)
-    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages, "admin_room":admin_room, "admin_media_for_messages":admin_media_for_messages})    
+                admin_readable = AdminChatReadMessage.objects.filter(room_id=room_id, user_for_read=user_for_chat, is_read=0)
+                all_admin_readable = AdminChatReadMessage.objects.filter(user_for_read=user_for_chat, is_read=0)
+    print(all_admin_readable)
+    return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages, "admin_room":admin_room, "admin_media_for_messages":admin_media_for_messages, "admin_readable":admin_readable, "all_admin_readable":all_admin_readable})    
 
 from django.views.generic import ListView
 from AppOko.models import Products
@@ -347,7 +356,6 @@ def adminLoginProcess(request):
     user=authenticate(request=request,username=username,password=password)
     if user is not None:
         user = CustomUser.objects.get(username=username)
-        print(user)
         if user.user_type == '1':
             login(request=request, user=user, backend = 'django.contrib.auth.backends.ModelBackend')
             return HttpResponseRedirect(reverse("admin_home"))

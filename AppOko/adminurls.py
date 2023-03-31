@@ -87,5 +87,6 @@ urlpatterns = [
     path('chat_list',AdminViews.ChatListView.as_view(),name="chat_list"),
     path('chatmessage_send_media',AdminViews.chatmessage_send_media,name="chatmessage_send_media"),
     path('chatmessage_check',AdminViews.chatmessage_check,name="chatmessage_check"),
+    path('chatmessage_reading',AdminViews.chatmessage_reading,name="chatmessage_reading"),
 
 ]

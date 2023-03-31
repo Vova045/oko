@@ -171,11 +171,24 @@
   .mainflex {
     display: none;
   }
+  .non_read{
+    background-color: #292929;
+  }
   .message_img {
     display: flex; height: 80px; margin-bottom: 10px; cursor: pointer;
   }
   .image_message {
     width: auto; height: 100%;
+  }
+  .round_for_non_read_message {
+    display: none; flex-direction: row; align-items: center; justify-content: center; background-color: #111; color: white;
+    width: 20px; height: 20px; overflow: hidden; border-radius: 20px; position: absolute; left: 30px;top: 30px;
+  }
+  .round_for_non_read_message p{
+    margin: 0;
+  }
+  .display {
+    display: flex;
   }
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {

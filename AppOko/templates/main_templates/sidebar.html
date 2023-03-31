@@ -6,6 +6,10 @@
 <div class="closed_sidebar">
   <div class="nav_icon_div" onclick="openNav()">
       <img class="nav_icon_div_img" src="{% static 'svg/nav_icon.svg' %}">
+      <div class="round_for_non_read_message {% if all_admin_readable|length != 0 %}display{% endif %}">
+        <p id="all_non_readable_message">{{ all_admin_readable|length }}</p>
+      </div>
+      
   </div>
 </div>
 <div id="mySidebar" class="sidebar {% if admin_room %} chatflex {% endif %}">
@@ -155,7 +159,7 @@
           {% for room in admin_rooms %}
             {% for adminmessage in admin_messages %}
               {% if adminmessage.room_id == room.id %}
-              <div class="message_item {% if adminmessage.user.user_type == '1' %} message_manager {% elif adminmessage.user.user_type == '3' %} message_client {% endif %}">
+              <div class="message_item {% if adminmessage.user.user_type == '1' %} message_manager {% elif adminmessage.user.user_type == '3' %} message_client {% endif %}{% for admin_read in admin_readable %}{% if admin_read.message_id == adminmessage %}{% if admin_read.message_id == adminmessage %}non_read{% endif %}{% endif %}{% endfor %}">
                 <div class="message_head">
                   <input class="id_message" style="display: none;" value="{{ adminmessage.id }}"></input>
                   <p>{{ adminmessage.user }}</p>
@@ -268,6 +272,7 @@ function closeNav() {
 </script>
 
 <script>
+  const pageTitle = document.title
   document.querySelector('#chat_message_input').focus();
   document.querySelector('#chat_message_input').onkeyup = function(e) {
     if (e.keyCode === 13) {  // enter, return
@@ -348,7 +353,6 @@ function closeNav() {
           }
 
           document.querySelector('.img_preview').style.display = "none";
-          console.log(result[0].media_message[0].media_content);
           var objDiv = document.getElementById("chat_body");
           objDiv.scrollTop = objDiv.scrollHeight;
           }
@@ -360,6 +364,7 @@ function closeNav() {
     }
   
   function getdata_checkmessage() {
+    readMessage()
     var room_id = '{{ room.id }}'
     var user_id = '{{ request.user.id }}'
     var host_id = ''
@@ -380,17 +385,28 @@ function closeNav() {
         method : 'GET',
         async : false,
         success : function(result){
-          if (result !== ""){
+          if(document.querySelector('#all_non_readable_message')){
+            document.querySelector('#all_non_readable_message').innerText = result[0].all_non_readable_message;
+          }
+          if (result[0].all_non_readable_message == 0) {
+            document.querySelector('.round_for_non_read_message').classList.remove('display');
+            document.title = pageTitle
+          }
+          else {
+            document.querySelector('.round_for_non_read_message').classList.add('display');
+            newPageTitle = 'Новое сообщение';
+            document.title = newPageTitle;
+          }
+          if (result[0].without_message !== "1"){
             for (var i = result.length - 1; i >= 0; i--) {
-              if (result[i].toString() == '1') {
+              if (result[i].user_type.toString() == '1') {
               result[i].user_type = 'message_manager';
               } else if (result[i].user_type.toString() == '3') {
                 result[i].user_type = 'message_client';
               }
-
               if (result[i].media_message[0] == undefined) {
                 $('#chat_body').append(
-              '<div class="message_item ' + result[i].user_type +'">'
+              '<div class="message_item ' + result[i].user_type + " "+ result[i].new_status + '">'
               + '<div class="message_head"><p>' + result[i].username  +  '</p><p>'+ result[i].created +'</p></div>' + 
               '<div class="message_body" id="message_body">' +
                   '<p>' + result[i].body + '</p></div></div>'
@@ -402,14 +418,14 @@ function closeNav() {
 
               else {
                 $('#chat_body').append(
-              '<div class="message_item ' + result[i].user_type +'">'
+              '<div class="message_item ' + result[i].user_type + " " + result[i].new_status +'">'
               + '<div class="message_head"><p>' + result[i].username  +  '</p><p>'+ result[i].created +'</p></div>' + 
               '<div class="message_body" id="message_body">' +
                   '<p>' + result[i].body + '</p></div>' +
                   '<div class="message_img" onclick="ImagePreview( '+ "'{{ media.media_content }}'" + ' )" >' +
                 '<img class="image_message" src="' + result[i].media_message[0].media_content + '">' + "</div></div>"
               );
-
+              console.log("тут" + result[i].new_status)
               var objDiv = document.getElementById("chat_body");
                   objDiv.scrollTop = objDiv.scrollHeight;
               }
@@ -448,6 +464,32 @@ function closeNav() {
           reader.readAsDataURL(input.files[0]);
       }
   }
+ function readMessage(){
+  var url = new URL(window.location.href);
+  var admin_room_id = url.searchParams.get("room_id");
+  if (admin_room_id == null){
+    admin_room_id = 1
+  }
+  var user_id = '{{ request.user.id }}'
+  if (document.querySelector('.second_part').style.display == "flex" ){
+    
+    $.ajax({
+        url: '/admindashboard/chatmessage_reading',
+        data : {
+          'user_id' : user_id,
+          'admin_room_id' : admin_room_id,
+        },
+        method : 'GET',
+        async : false,
+        success : function(result){
+          if (document.querySelector('.non_read')){
+            document.querySelector('.non_read').classList.remove('non_read');
+          }
 
+        }
+  })
+
+  }
+ }
 </script>
 {% endblock custom_js %}

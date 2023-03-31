@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, View
-from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser, AdminUser, ChatRoom, Message, AdminChatRooms, AdminChatMessage, AdminChatMessageMedia
+from AppOko.models import CategoryGallery, Chapters, Gallery, Products, SubCategories, CustomUser, ProductAbout, ProductDetails, ProductMedia, ProductTransaction, ProductTags, StaffUser, CustomerUser, GuestList, Categories, TempCustomerUser, AdminUser, ChatRoom, Message, AdminChatRooms, AdminChatMessage, AdminChatMessageMedia, AdminChatReadMessage
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.storage import FileSystemStorage
 from django.contrib.messages.views import messages
@@ -1341,14 +1341,17 @@ def chatmessage_send_media(request):
     user_id = request.POST['user_id']
     host_id = request.POST['host_id']
     admin_room_id = request.POST['admin_room_id']
+    new_read_status = ""
     if admin_room_id != '':
         user_id2 = CustomUser.objects.get(id=user_id)
         room_id2 = AdminChatRooms.objects.get(id=admin_room_id)
         new_message = AdminChatMessage.objects.create(user=user_id2, room=room_id2, body=body)
-        print(new_message)
+        admin_users = CustomUser.objects.filter(user_type=1).exclude(id=user_id2.id)
+        for admin_user in admin_users:
+            new_read_status = AdminChatReadMessage.objects.create(message_id=new_message,room=room_id2,user_for_read=admin_user)
+            new_read_status = new_read_status.is_read
         if request.FILES.getlist('media_content[]'):
             media_content_list = request.FILES.getlist('media_content[]')
-            print(media_content_list)
             i=0
             for media_content in media_content_list:
                 fs=FileSystemStorage()
@@ -1375,10 +1378,8 @@ def chatmessage_send_media(request):
     message_text_created = str(new_message.created.strftime('%d %B %Y г. %H:%M'))
     message_text_created = int_value_from_ru_month(message_text_created)
     message_text_updated = str(message_text_updated.strftime('%d %B %Y, %H:%M'))
-    print('здесь')
     media_message = []
     medias_message = AdminChatMessageMedia.objects.filter(message_id=new_message)
-    print(medias_message)
     if medias_message:
         for media in medias_message:
             message = media.message_id_id
@@ -1389,7 +1390,10 @@ def chatmessage_send_media(request):
         })
     else:
         medias_message = ""
-    print(media_message)
+    if new_read_status == 0:
+        new_read_status = "not_read"
+    elif new_read_status == 1:
+        new_read_status = "read"
     result.append({
             "user_id": username,
             "body": body,
@@ -1398,6 +1402,7 @@ def chatmessage_send_media(request):
             "updated": message_text_updated,
             "user_type": user_type,
             "media_message": media_message,
+            "new_status": new_read_status,
         })
     return HttpResponse(simplejson.dumps(result), content_type='application/json')
     
@@ -1406,6 +1411,8 @@ def chatmessage_check(request):
     room_id = request.GET['room_id']
     host_id = request.GET['host_id']
     admin_room_id = request.GET['admin_room_id']
+    new_read_status = ""
+    all_non_read_messages = ""
     if admin_room_id != '':
         room_id2 = AdminChatRooms.objects.get(id=admin_room_id)
         user_id = request.GET['user_id']
@@ -1413,6 +1420,16 @@ def chatmessage_check(request):
         last_date = datetime.datetime.now()
         first_date= datetime.datetime.now() - datetime.timedelta(seconds=3.1)
         all_messages = AdminChatMessage.objects.filter(room=room_id2,created__range=(first_date, last_date)).exclude(user_id=user_id)
+        for message in all_messages:
+            new_reads_status = AdminChatReadMessage.objects.filter(message_id=message, user_for_read=user_id2)
+            for new_read_status in new_reads_status:
+                new_read_status = new_read_status.is_read
+                if new_read_status == 0:
+                    new_read_status = "non_read"
+                elif new_read_status == 1:
+                    new_read_status = ""
+        all_non_readable_message = AdminChatReadMessage.objects.filter(user_for_read=user_id2,is_read=0)
+        all_non_readable_message = len(all_non_readable_message)
     else:
         if room_id == '':
             if host_id == '':
@@ -1452,7 +1469,6 @@ def chatmessage_check(request):
             })
         else:
             medias_message = ""
-
         result.append({
                 "username": username,
                 "body": body,
@@ -1460,32 +1476,35 @@ def chatmessage_check(request):
                 "created": message_text_created,
                 "updated": message_text_updated,
                 "user_type": user_type,
-                "media_message": media_message
+                "media_message": media_message,
+                "new_status":new_read_status,
+                "all_non_readable_message":all_non_readable_message,
             }) 
     user_type = user_id2.user_type
     username = user_id2.username
 
     if all_messages.exists():
         return HttpResponse(simplejson.dumps(result), content_type='application/json')
-    result2 = ""
+    all_non_readable_message = AdminChatReadMessage.objects.filter(user_for_read=user_id2,is_read=0)
+    all_non_readable_message = len(all_non_readable_message)
+    result2 = []
+    result2.append({
+        "all_non_readable_message":all_non_readable_message,
+        "without_message":"1"
+    })
     return HttpResponse(simplejson.dumps(result2), content_type='application/json')
 
 
-
-# class ProductMediaDelete(PermissionRequiredMixin, View):
-#     permission_required = 'AppOko.admin_permission2'
-#     def get(self,request,*args,**kwargs):
-#         media_id=kwargs["id"]
-#         product_media=ProductMedia.objects.get(id=media_id)
-
-#         string = quote(settings.MEDIA_ROOT+str(product_media.media_content).replace("media","").replace("//","/"))
-#         string = urllib.parse.unquote(string,encoding=('utf-8'))
-#         string = unquote(string)
-#         if not product_media.media_content == "/media/nofoto.jpeg":
-#             productsmedia_with = ProductMedia.objects.filter(media_content=product_media.media_content)
-#             if len(productsmedia_with) == 1:
-#                 os.remove(string)
-        
-#         product_id=product_media.product_id.id
-#         product_media.delete()
-#         return HttpResponseRedirect(reverse("product_edit_media",kwargs={"product_id":product_id}))
+def chatmessage_reading(request):
+    user_id = request.GET['user_id']
+    admin_room_id = request.GET['admin_room_id']
+    room_id2 = AdminChatRooms.objects.get(id=admin_room_id)
+    user_id2 = CustomUser.objects.get(id=user_id)
+    all_messages = AdminChatMessage.objects.filter(room=room_id2).exclude(user_id=user_id)
+    result = ""
+    for message in all_messages:
+        new_reads_status = AdminChatReadMessage.objects.filter(message_id=message, user_for_read=user_id2)
+        for new_read_status in new_reads_status:
+            new_read_status.is_read = 1
+            new_read_status.save()
+    return HttpResponse(simplejson.dumps(result), content_type='application/json')
