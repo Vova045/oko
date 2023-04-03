@@ -113,7 +113,6 @@ def home(request):
                 admin_media_for_messages = AdminChatMessageMedia.objects.filter(message_id__in=admin_messages)
                 admin_readable = AdminChatReadMessage.objects.filter(room_id=room_id, user_for_read=user_for_chat, is_read=0)
                 all_admin_readable = AdminChatReadMessage.objects.filter(user_for_read=user_for_chat, is_read=0)
-    print(all_admin_readable)
     return render (request, 'main_templates/home.html', {'photos':photos, 'first_photo':first_photo, 'categories':categories, 'user':user, 'password':password, 'room':room, 'room_messages':room_messages, 'admin_rooms':admin_rooms, 'admin_messages':admin_messages, "admin_room":admin_room, "admin_media_for_messages":admin_media_for_messages, "admin_readable":admin_readable, "all_admin_readable":all_admin_readable})    
 
 from django.views.generic import ListView
