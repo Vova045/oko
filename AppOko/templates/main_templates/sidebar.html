@@ -471,7 +471,7 @@ function closeNav() {
     admin_room_id = 1
   }
   var user_id = '{{ request.user.id }}'
-  if (document.querySelector('.second_part').style.display == "flex" ){
+  if (document.querySelector('.second_part').style.display == "flex" && document.querySelector('#mySidebar').style.width !== '0px'){
     
     $.ajax({
         url: '/admindashboard/chatmessage_reading',
