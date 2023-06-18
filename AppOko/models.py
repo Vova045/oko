@@ -314,8 +314,8 @@ class AdminChatReadMessage(models.Model):
     message_id=models.ForeignKey(AdminChatMessage,on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     is_read=models.IntegerField(default=0)
-    user_for_read = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    room = models.ForeignKey(AdminChatRooms, on_delete=models.CASCADE)
+    user_for_read = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    room = models.ForeignKey(AdminChatRooms, on_delete=models.SET_NULL)
     
 
 

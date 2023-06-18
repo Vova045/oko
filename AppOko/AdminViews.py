@@ -52,7 +52,7 @@ def int_value_from_ru_month(date_str):
 
 @permission_required('AppOko.admin_permission2')
 def admin_home(request):
-    return render(request,"admin_templates/home.html")
+    return render(request,"main_templates/home.html")
 
 def customer_home(request):
     return render(request,"main_templates/home.html")

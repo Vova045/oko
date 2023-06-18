@@ -357,7 +357,7 @@ def adminLoginProcess(request):
         user = CustomUser.objects.get(username=username)
         if user.user_type == '1':
             login(request=request, user=user, backend = 'django.contrib.auth.backends.ModelBackend')
-            return HttpResponseRedirect(reverse("admin_home"))
+            return HttpResponseRedirect(reverse("home"))
         if user.user_type == '4':
             login(request=request, user=user, backend = 'AppOko.auth_backend.PasswordlessAuthBackend')
             # return render (request, 'main_templates/home.html', {'password': user.password})
